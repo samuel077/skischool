@@ -1,0 +1,17 @@
+{
+  "name": "skischool",
+  "version": "1.0.0",
+  "description": "粉雪道場 — 手稻滑雪學校",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.4"
+  },
+  "devDependencies": {
+    "vite": "^6.3.1"
+  }
+}

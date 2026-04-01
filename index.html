@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>粉雪道場 Powder Dojo — 手稻滑雪學校</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Serif+Display:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0A1628;--navy-mid:#12254A;--blue:#1A5FAD;--blue-light:#3B8BD4;
+  --sky:#85C1E9;--snow:#F4F8FC;--white:#FFFFFF;--gray:#6B7C8E;
+  --gray-light:#B0BEC5;--accent:#E8F4FD;--gold:#D4A017;--red:#E74C3C;
+  --border:#E2EAF0;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--white);color:var(--navy);overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,22,40,0.93);backdrop-filter:blur(12px);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:64px;border-bottom:1px solid rgba(255,255,255,0.08);}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo .cn{font-size:15px;font-weight:700;color:#fff;letter-spacing:.05em;display:block;}
+.nav-logo .en{font-size:10px;color:var(--sky);letter-spacing:.12em;text-transform:uppercase;display:block;}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{color:rgba(255,255,255,.75);text-decoration:none;font-size:13px;letter-spacing:.04em;transition:color .2s;}
+.nav-links a:hover{color:var(--sky);}
+.nav-admin-btn{background:rgba(59,139,212,.2);border:1px solid rgba(59,139,212,.4);color:var(--sky);padding:7px 16px;border-radius:6px;font-size:12px;font-family:inherit;cursor:pointer;transition:all .2s;}
+.nav-admin-btn:hover{background:rgba(59,139,212,.35);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
+.hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;}
+#hero{min-height:100vh;background:linear-gradient(160deg,var(--navy) 0%,var(--navy-mid) 50%,#1A3A6B 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:80px 5% 60px;}
+.hero-bg{position:absolute;inset:0;opacity:.04;background-image:repeating-linear-gradient(45deg,#fff 0,#fff 1px,transparent 0,transparent 50%);background-size:40px 40px;}
+.hero-mountain{position:absolute;bottom:0;left:0;right:0;height:40%;opacity:.06;}
+.hero-content{position:relative;z-index:2;text-align:center;max-width:800px;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(59,139,212,.15);border:1px solid rgba(59,139,212,.3);padding:6px 14px;border-radius:20px;font-size:12px;color:var(--sky);letter-spacing:.08em;margin-bottom:28px;}
+.hero-badge::before{content:'';width:6px;height:6px;background:var(--sky);border-radius:50%;animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.3);}}
+.hero-logo{width:110px;height:110px;margin:0 auto 24px;}
+.hero-title-cn{font-size:clamp(48px,8vw,80px);font-weight:700;color:#fff;letter-spacing:.12em;line-height:1;margin-bottom:8px;}
+.hero-title-en{font-family:'DM Serif Display',serif;font-size:clamp(20px,3.5vw,34px);color:var(--sky);letter-spacing:.15em;margin-bottom:22px;}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.6);line-height:1.8;max-width:460px;margin:0 auto 36px;}
+.hero-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.btn-primary{background:var(--blue-light);color:#fff;padding:13px 28px;border-radius:8px;font-size:14px;font-family:inherit;font-weight:500;text-decoration:none;cursor:pointer;border:none;transition:all .2s;display:inline-block;}
+.btn-primary:hover{background:var(--blue);transform:translateY(-1px);}
+.btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.3);padding:13px 28px;border-radius:8px;font-size:14px;font-family:inherit;text-decoration:none;cursor:pointer;transition:all .2s;display:inline-block;}
+.btn-outline:hover{border-color:rgba(255,255,255,.7);background:rgba(255,255,255,.06);}
+.hero-stats{position:relative;z-index:2;display:flex;gap:48px;margin-top:60px;flex-wrap:wrap;justify-content:center;}
+.hero-stat{text-align:center;}
+.stat-num{font-family:'Space Mono',monospace;font-size:28px;font-weight:700;color:#fff;line-height:1;}
+.stat-lbl{font-size:11px;color:var(--gray-light);letter-spacing:.1em;margin-top:4px;text-transform:uppercase;}
+section{padding:80px 5%;}
+.sec-tag{font-size:11px;letter-spacing:.15em;color:var(--blue-light);text-transform:uppercase;font-weight:500;margin-bottom:12px;}
+.sec-title{font-size:clamp(26px,4vw,38px);font-weight:700;line-height:1.25;margin-bottom:12px;}
+.sec-desc{font-size:15px;color:var(--gray);line-height:1.9;max-width:560px;}
+#about{background:var(--snow);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;max-width:1100px;margin:0 auto;}
+.feature-list{margin-top:28px;display:flex;flex-direction:column;gap:16px;}
+.feature{display:flex;gap:14px;align-items:flex-start;}
+.feature-icon{width:36px;height:36px;flex-shrink:0;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;}
+.feature-text strong{display:block;font-size:14px;font-weight:500;margin-bottom:2px;}
+.feature-text span{font-size:13px;color:var(--gray);line-height:1.6;}
+.about-visual{background:var(--navy);border-radius:16px;overflow:hidden;padding:40px;position:relative;min-height:360px;display:flex;align-items:center;justify-content:center;}
+.ski-badge{display:inline-flex;flex-direction:column;align-items:center;background:rgba(59,139,212,.15);border:1px solid rgba(59,139,212,.3);border-radius:12px;padding:24px 32px;color:#fff;position:relative;z-index:2;}
+.ski-badge .area-cn{font-size:22px;font-weight:700;letter-spacing:.08em;}
+.ski-badge .area-en{font-size:11px;color:var(--sky);letter-spacing:.15em;text-transform:uppercase;margin-top:4px;}
+.ski-badge .area-stats{margin-top:16px;display:flex;gap:20px;}
+.area-stat .val{font-family:'Space Mono',monospace;font-size:18px;font-weight:700;color:var(--sky);}
+.area-stat .lbl{font-size:10px;color:var(--gray-light);letter-spacing:.08em;text-transform:uppercase;margin-top:2px;}
+#coaches{background:var(--white);}
+.coaches-hd{display:flex;justify-content:space-between;align-items:flex-end;max-width:1100px;margin:0 auto 44px;flex-wrap:wrap;gap:16px;}
+.coaches-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;max-width:1100px;margin:0 auto;}
+.coach-card{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--white);transition:all .25s;}
+.coach-card:hover{border-color:var(--blue-light);box-shadow:0 8px 32px rgba(26,95,173,.1);transform:translateY(-2px);}
+.card-head{padding:22px 22px 16px;display:flex;gap:14px;align-items:center;background:var(--snow);border-bottom:1px solid var(--border);}
+.avatar{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--navy-mid),var(--blue));display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#fff;flex-shrink:0;font-family:'Space Mono',monospace;overflow:hidden;}
+.coach-name{font-size:16px;font-weight:700;color:var(--navy);}
+.coach-en{font-size:12px;color:var(--gray);letter-spacing:.04em;margin-top:2px;}
+.coach-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px;}
+.tag{font-size:11px;padding:3px 8px;border-radius:4px;font-weight:500;}
+.tag-ski{background:#E3F2FD;color:#1565C0;}
+.tag-snowboard{background:#E8F5E9;color:#2E7D32;}
+.tag-beginner{background:#FFF3E0;color:#E65100;}
+.tag-advanced{background:#F3E5F5;color:#6A1B9A;}
+.tag-kids{background:#FCE4EC;color:#AD1457;}
+.tag-race{background:#E0F7FA;color:#006064;}
+.card-body{padding:16px 22px 20px;}
+.info-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:9px;font-size:13px;}
+.info-icon{width:16px;height:16px;flex-shrink:0;color:var(--blue-light);margin-top:1px;}
+.info-lbl{color:var(--gray);min-width:40px;flex-shrink:0;}
+.info-val{color:var(--navy);line-height:1.5;}
+.cert-badge{display:inline-flex;align-items:center;gap:3px;font-size:11px;color:var(--gold);background:#FFF9E6;padding:2px 8px;border-radius:4px;border:1px solid #F0D060;}
+.coach-bio{margin-top:10px;font-size:13px;color:var(--gray);line-height:1.7;border-top:1px solid #F0F4F8;padding-top:10px;}
+#services{background:var(--navy);color:#fff;}
+#services .sec-title{color:#fff;}
+#services .sec-desc{color:rgba(255,255,255,.6);}
+#services .sec-tag{color:var(--sky);}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;max-width:1100px;margin:44px auto 0;}
+.svc-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:26px;transition:all .25s;}
+.svc-card:hover{background:rgba(59,139,212,.15);border-color:rgba(59,139,212,.4);transform:translateY(-2px);}
+.svc-icon{font-size:26px;margin-bottom:12px;}
+.svc-name{font-size:15px;font-weight:700;color:#fff;margin-bottom:7px;}
+.svc-desc{font-size:13px;color:rgba(255,255,255,.55);line-height:1.7;}
+.svc-price{margin-top:14px;font-family:'Space Mono',monospace;font-size:14px;color:var(--sky);}
+#contact{background:var(--snow);}
+.contact-wrap{max-width:680px;margin:0 auto;background:var(--white);border:1px solid var(--border);border-radius:16px;padding:44px;}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px;}
+.contact-item{padding:16px;border:1px solid var(--border);border-radius:10px;background:var(--snow);}
+.contact-item .lbl{font-size:11px;color:var(--gray);letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px;}
+.contact-item .val{font-size:14px;font-weight:500;color:var(--navy);line-height:1.5;}
+footer{background:var(--navy);padding:36px 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;border-top:1px solid rgba(255,255,255,.08);}
+.foot-logo{display:flex;align-items:center;gap:10px;}
+.foot-text{font-size:12px;color:rgba(255,255,255,.4);line-height:1.7;}
+.foot-copy{font-size:12px;color:rgba(255,255,255,.3);}
+
+/* ADMIN */
+#admin-overlay{display:none;position:fixed;inset:0;z-index:999;background:rgba(10,22,40,.88);backdrop-filter:blur(6px);align-items:flex-start;justify-content:center;padding:48px 16px 32px;overflow-y:auto;}
+#admin-overlay.active{display:flex;}
+.admin-panel{background:#fff;border-radius:16px;width:100%;max-width:780px;}
+.admin-hd{background:var(--navy);padding:18px 26px;display:flex;align-items:center;justify-content:space-between;border-radius:16px 16px 0 0;}
+.admin-hd h2{color:#fff;font-size:15px;font-weight:700;letter-spacing:.05em;}
+.admin-close{background:rgba(255,255,255,.1);border:none;color:#fff;width:32px;height:32px;border-radius:6px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:background .2s;line-height:1;}
+.admin-close:hover{background:rgba(255,255,255,.2);}
+.admin-body{padding:26px;}
+.login-wrap{max-width:300px;margin:0 auto;text-align:center;}
+.login-hint{font-size:14px;color:var(--gray);line-height:1.7;margin-bottom:20px;}
+.form-group{margin-bottom:14px;text-align:left;}
+.form-group label{display:block;font-size:11px;font-weight:500;color:var(--gray);letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px;}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:9px 12px;border:1px solid #D0DCE8;border-radius:7px;font-family:inherit;font-size:14px;color:var(--navy);background:var(--snow);outline:none;transition:border-color .2s;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--blue-light);background:#fff;}
+.form-group textarea{height:76px;resize:vertical;}
+.form-err{font-size:12px;color:var(--red);margin-top:5px;display:none;}
+.tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:20px;}
+.tab-btn{padding:9px 18px;font-size:13px;cursor:pointer;border:none;background:none;color:var(--gray);font-family:inherit;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .2s;}
+.tab-btn.active{color:var(--blue);border-bottom-color:var(--blue);font-weight:500;}
+.pane{display:none;}
+.pane.active{display:block;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.form-grid .full{grid-column:1/-1;}
+.tag-checks{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px;}
+.tc{display:none;}
+.tc+label{padding:4px 11px;border-radius:5px;font-size:12px;font-weight:500;cursor:pointer;border:1px solid #D0DCE8;color:var(--gray);background:var(--snow);transition:all .15s;}
+.tc:checked+label.tag-ski{background:#E3F2FD;border-color:#90CAF9;color:#1565C0;}
+.tc:checked+label.tag-snowboard{background:#E8F5E9;border-color:#A5D6A7;color:#2E7D32;}
+.tc:checked+label.tag-beginner{background:#FFF3E0;border-color:#FFCC80;color:#E65100;}
+.tc:checked+label.tag-advanced{background:#F3E5F5;border-color:#CE93D8;color:#6A1B9A;}
+.tc:checked+label.tag-kids{background:#FCE4EC;border-color:#F48FB1;color:#AD1457;}
+.tc:checked+label.tag-race{background:#E0F7FA;border-color:#80DEEA;color:#006064;}
+.btn-row{display:flex;gap:10px;margin-top:16px;}
+.btn-sec{background:transparent;color:var(--navy);border:1px solid #D0DCE8;padding:10px 20px;border-radius:8px;font-size:13px;font-family:inherit;cursor:pointer;transition:all .2s;}
+.btn-sec:hover{background:var(--snow);}
+.list-items{display:flex;flex-direction:column;gap:9px;}
+.list-item{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;border:1px solid var(--border);border-radius:10px;background:var(--snow);}
+.list-item-info .name{font-size:14px;font-weight:500;}
+.list-item-info .sub{font-size:12px;color:var(--gray);margin-top:2px;}
+.btn-del{background:#FEF0F0;border:1px solid #FBBFBF;color:#C0392B;padding:5px 12px;border-radius:6px;font-size:12px;cursor:pointer;font-family:inherit;transition:all .15s;}
+.btn-del:hover{background:#FDDADA;}
+.photo-zone{border:2px dashed #D0DCE8;border-radius:10px;padding:16px;text-align:center;cursor:pointer;transition:all .2s;background:var(--snow);position:relative;overflow:hidden;}
+.photo-zone:hover{border-color:var(--blue-light);background:var(--accent);}
+.photo-zone.has-photo{border-style:solid;border-color:var(--blue-light);padding:10px;}
+.photo-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.photo-hint{font-size:12px;color:var(--gray);line-height:1.6;margin-top:4px;}
+.photo-hint strong{color:var(--blue);font-weight:500;}
+.photo-preview{width:68px;height:68px;border-radius:50%;object-fit:cover;border:2px solid var(--blue-light);display:block;margin:0 auto 6px;}
+.photo-remove{background:none;border:none;color:var(--red);font-size:11px;cursor:pointer;font-family:inherit;text-decoration:underline;margin-top:4px;display:inline-block;position:relative;z-index:2;}
+
+.toast{position:fixed;bottom:24px;right:24px;background:var(--navy);color:#fff;padding:12px 20px;border-radius:8px;font-size:13px;font-weight:500;transform:translateY(80px);opacity:0;transition:all .3s;z-index:9999;pointer-events:none;}
+.toast.show{transform:translateY(0);opacity:1;}
+
+#line-float{position:fixed;bottom:28px;right:28px;z-index:500;display:flex;align-items:center;gap:8px;background:#06C755;color:#fff;padding:12px 18px 12px 14px;border-radius:50px;text-decoration:none;font-family:'Noto Sans TC',sans-serif;font-size:14px;font-weight:500;box-shadow:0 4px 20px rgba(6,199,85,.45);transition:all .2s;}
+#line-float:hover{background:#05b34c;transform:translateY(-2px);}
+
+@media(max-width:768px){
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .nav-links.open{display:flex;flex-direction:column;position:fixed;top:64px;left:0;right:0;background:var(--navy);padding:20px 5%;gap:18px;border-bottom:1px solid rgba(255,255,255,.1);}
+  .about-grid{grid-template-columns:1fr;}
+  .about-visual{min-height:240px;}
+  .contact-grid{grid-template-columns:1fr;}
+  .contact-wrap{padding:24px 18px;}
+  .form-grid{grid-template-columns:1fr;}
+  .hero-stats{gap:28px;}
+  .admin-body{padding:18px;}
+}
+@media(max-width:480px){
+  #line-float span{display:none;}
+  #line-float{padding:14px;border-radius:50%;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo">
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <circle cx="18" cy="18" r="18" fill="#1A5FAD" opacity=".3"/>
+      <path d="M9 27L18 9L27 27" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <path d="M12 22L24 22" stroke="#85C1E9" stroke-width="1.8" stroke-linecap="round"/>
+      <circle cx="18" cy="7.5" r="2.5" fill="#85C1E9"/>
+    </svg>
+    <span>
+      <span class="cn">粉雪道場</span>
+      <span class="en">Powder Dojo</span>
+    </span>
+  </a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#about">關於我們</a></li>
+    <li><a href="#coaches">教練團隊</a></li>
+    <li><a href="#services">課程資訊</a></li>
+    <li><a href="#contact">聯絡我們</a></li>
+  </ul>
+  <button class="nav-admin-btn" id="admin-btn">管理後台</button>
+  <button class="hamburger" id="hamburger" aria-label="選單">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <svg class="hero-mountain" viewBox="0 0 1440 300" preserveAspectRatio="none" fill="none">
+    <path d="M0 300L360 60L540 160L720 20L900 120L1080 40L1260 140L1440 80L1440 300Z" fill="white"/>
+  </svg>
+  <div class="hero-content">
+    <div class="hero-badge">手稻滑雪場 · 北海道 · 即日起接受預約</div>
+    <svg class="hero-logo" viewBox="0 0 110 110" fill="none">
+      <circle cx="55" cy="55" r="53" stroke="rgba(133,193,233,.25)" stroke-width="1.5"/>
+      <circle cx="55" cy="55" r="43" stroke="rgba(133,193,233,.15)" stroke-width="1"/>
+      <path d="M18 84L55 20L92 84Z" stroke="#85C1E9" stroke-width="2.5" fill="rgba(26,95,173,.3)" stroke-linejoin="round"/>
+      <path d="M34 84L55 44L76 84Z" fill="rgba(59,139,212,.4)" stroke="rgba(133,193,233,.5)" stroke-width="1.2" stroke-linejoin="round"/>
+      <path d="M46 38L55 20L64 38Z" fill="white" opacity=".9"/>
+      <circle cx="55" cy="15" r="4" fill="#85C1E9"/>
+    </svg>
+    <div class="hero-title-cn">粉雪道場</div>
+    <div class="hero-title-en">Powder Dojo</div>
+    <p class="hero-sub">在北海道最純淨的粉雪中，<br>由專業教練引領你踏上滑雪之道。</p>
+    <div class="hero-cta">
+      <a href="#coaches" class="btn-primary">認識我們的教練</a>
+      <a href="#services" class="btn-outline">查看課程</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="stat-num" id="stat-count">—</div><div class="stat-lbl">專業教練</div></div>
+    <div class="hero-stat"><div class="stat-num">1,000+</div><div class="stat-lbl">學員累計</div></div>
+    <div class="hero-stat"><div class="stat-num">10+</div><div class="stat-lbl">滑雪年資</div></div>
+    <div class="hero-stat"><div class="stat-num">4</div><div class="stat-lbl">服務語言</div></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-grid">
+    <div>
+      <div class="sec-tag">關於粉雪道場</div>
+      <h2 class="sec-title">手稻山腳下，<br>屬於你的雪道</h2>
+      <p class="sec-desc">粉雪道場由一群熱愛北海道粉雪的專業教練創立，主要在手稻滑雪場提供中文、英文、日文教學服務。無論你是第一次踩上雪板，或想突破技術瓶頸，我們都能為你量身打造課程。</p>
+      <div class="feature-list">
+        <div class="feature"><div class="feature-icon">🏔️</div><div class="feature-text"><strong>手稻滑雪場 — 本道場主場地</strong><span>距離札幌市中心僅40分鐘，粉雪品質絕佳。</span></div></div>
+        <div class="feature"><div class="feature-icon">🗣️</div><div class="feature-text"><strong>多語教學</strong><span>繁體中文、簡體中文、英文、日文課程。</span></div></div>
+        <div class="feature"><div class="feature-icon">🎿</div><div class="feature-text"><strong>雙板 &amp; 單板</strong><span>Ski 與 Snowboard 各級別專業教學。</span></div></div>
+        <div class="feature"><div class="feature-icon">👦</div><div class="feature-text"><strong>兒童友善</strong><span>兒童專項課程，安全又有趣。</span></div></div>
+      </div>
+    </div>
+    <div class="about-visual">
+      <svg style="position:absolute;inset:0;opacity:.05" viewBox="0 0 400 360" fill="none"><path d="M-20 360L200 20L420 360Z" fill="white"/></svg>
+      <div class="ski-badge">
+        <div style="font-size:26px;margin-bottom:10px;">🏔️</div>
+        <div class="area-cn">手稻滑雪場</div>
+        <div class="area-en">Sapporo Teine Ski Area</div>
+        <div class="area-stats">
+          <div class="area-stat"><div class="val">1,024m</div><div class="lbl">最高海拔</div></div>
+          <div class="area-stat"><div class="val">23條</div><div class="lbl">雪道數量</div></div>
+          <div class="area-stat"><div class="val">12–3月</div><div class="lbl">雪季</div></div>
+        </div>
+        <div style="margin-top:14px;font-size:11px;color:rgba(133,193,233,.7);letter-spacing:.05em;">札幌市西區手稻山頂</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="coaches">
+  <div class="coaches-hd">
+    <div>
+      <div class="sec-tag">教練團隊</div>
+      <h2 class="sec-title">認識我們的教練</h2>
+    </div>
+  </div>
+  <div class="coaches-grid" id="coaches-grid">
+    <div style="color:var(--gray);font-size:14px;padding:40px 0;text-align:center;grid-column:1/-1;">載入教練資料中...</div>
+  </div>
+</section>
+
+<section id="services">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="sec-tag">課程資訊</div>
+    <h2 class="sec-title">找到最適合你的課程</h2>
+    <p class="sec-desc">所有課程均在手稻滑雪場進行，依程度與需求靈活安排，私教與小班皆可。</p>
+    <div class="services-grid">
+      <div class="svc-card"><div class="svc-icon">🎿</div><div class="svc-name">滑雪初學者課程</div><div class="svc-desc">從零開始，學習基本滑行、剎車與轉向。教練耐心引導，讓你第一天就愛上滑雪。</div><div class="svc-price">半天 / 全天課程</div></div>
+      <div class="svc-card"><div class="svc-icon">🏂</div><div class="svc-name">滑雪板入門</div><div class="svc-desc">Snowboard 專項教學，掌握邊緣控制與基礎技術，快速克服入門障礙。</div><div class="svc-price">半天 / 全天課程</div></div>
+      <div class="svc-card"><div class="svc-icon">⚡</div><div class="svc-name">進階技術精進</div><div class="svc-desc">針對有基礎的滑者，深入精進刻滑、大回轉、粉雪操控等高階技術。</div><div class="svc-price">私教 / 小班</div></div>
+      <div class="svc-card"><div class="svc-icon">👧</div><div class="svc-name">兒童滑雪課</div><div class="svc-desc">專為5歲以上兒童設計，用遊戲化方式建立雪感，安全且充滿樂趣。</div><div class="svc-price">半天課程（含陪護）</div></div>
+      <div class="svc-card"><div class="svc-icon">👥</div><div class="svc-name">家庭 / 團體課</div><div class="svc-desc">2–6人小班制，適合家庭或朋友同行，在雪山上共同學習留下美好回憶。</div><div class="svc-price">依人數彈性報價</div></div>
+      <div class="svc-card"><div class="svc-icon">🏆</div><div class="svc-name">競技訓練</div><div class="svc-desc">針對有競技目標的學員，進行系統化的大回轉（GS）或回轉（SL）訓練。</div><div class="svc-price">需事先評估程度</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div style="text-align:center;margin-bottom:36px;">
+    <div class="sec-tag" style="display:inline-block;">聯絡我們</div>
+    <h2 class="sec-title">準備出發了嗎？</h2>
+    <p class="sec-desc" style="margin:0 auto;">有任何問題或預約需求，歡迎透過以下方式聯絡我們。</p>
+  </div>
+  <div class="contact-wrap">
+    <div style="font-size:14px;color:var(--gray);line-height:1.8;text-align:center;">粉雪道場目前接受 LINE / Email 預約，我們將於24小時內回覆確認課程時間與費用。</div>
+    <div class="contact-grid">
+      <div class="contact-item"><div class="lbl">📍 主要雪場</div><div class="val">手稻滑雪場<br>（Sapporo Teine）</div></div>
+      <div class="contact-item"><div class="lbl">🗓️ 雪季時間</div><div class="val">12月上旬 — 3月下旬<br>每日滑雪授課</div></div>
+      <div class="contact-item"><div class="lbl">✉️ Email</div><div class="val">info@powderdojo.jp</div></div>
+      <div class="contact-item"><div class="lbl">🌐 服務語言</div><div class="val">繁中・簡中・English・日本語</div></div>
+    </div>
+    <div style="text-align:center;margin-top:26px;">
+      <a href="mailto:info@powderdojo.jp" class="btn-primary">發送 Email 預約</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-logo">
+    <svg width="30" height="30" viewBox="0 0 36 36" fill="none">
+      <circle cx="18" cy="18" r="18" fill="#1A5FAD" opacity=".3"/>
+      <path d="M9 27L18 9L27 27" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <path d="M12 22L24 22" stroke="#85C1E9" stroke-width="1.8" stroke-linecap="round"/>
+      <circle cx="18" cy="7.5" r="2.5" fill="#85C1E9"/>
+    </svg>
+    <div class="foot-text"><strong style="color:rgba(255,255,255,.8);font-size:14px;">粉雪道場 Powder Dojo</strong><br>北海道 手稻滑雪場 滑雪學校</div>
+  </div>
+  <div class="foot-copy">© 2025 Powder Dojo. All rights reserved.</div>
+</footer>
+
+<a id="line-float" href="https://line.me/R/ti/p/@YOUR-LINE-ID" target="_blank" rel="noopener" aria-label="LINE 客服">
+  <svg width="26" height="26" viewBox="0 0 28 28" fill="none">
+    <path d="M14 3C8.477 3 4 7.03 4 12c0 3.468 2.077 6.497 5.2 8.23-.2.74-.74 2.68-.85 3.09-.13.49.18.48.38.35.16-.1 2.56-1.69 3.6-2.38.54.08 1.1.12 1.67.12 5.523 0 10-4.03 10-9s-4.477-9-10-9z" fill="white"/>
+    <path d="M11.5 14.5h-2v-5h1.2v3.9l1.8-3.9H14l-1.9 3.8 2.1 1.2h-2.7zm3.2 0v-5h1.2v5h-1.2zm5.3 0h-3.5v-5h1.2v3.9h2.3v1.1z" fill="#06C755"/>
+  </svg>
+  <span>LINE 諮詢</span>
+</a>
+
+<!-- ADMIN OVERLAY -->
+<div id="admin-overlay">
+  <div class="admin-panel">
+    <div class="admin-hd">
+      <h2>管理後台 — 粉雪道場</h2>
+      <button class="admin-close" id="admin-close">✕</button>
+    </div>
+    <div class="admin-body">
+
+      <!-- LOGIN -->
+      <div id="pane-login">
+        <div class="login-wrap">
+          <div class="login-hint">請輸入管理員帳號密碼</div>
+          <div class="form-group"><label>Email</label><input type="email" id="login-email" placeholder="admin@example.com" autocomplete="username"></div>
+          <div class="form-group"><label>密碼</label><input type="password" id="pw-input" placeholder="輸入密碼" autocomplete="current-password"></div>
+          <div class="form-err" id="pw-err">帳號或密碼錯誤，請重試</div>
+          <button class="btn-primary" style="width:100%;margin-top:4px;" id="login-btn">登入</button>
+        </div>
+      </div>
+
+      <!-- MANAGE -->
+      <div id="pane-manage" style="display:none;">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:12px;">
+          <button class="btn-sec" id="logout-btn" style="font-size:12px;padding:5px 12px;">登出</button>
+        </div>
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="tab-add">＋ 新增教練</button>
+          <button class="tab-btn" data-tab="tab-list">目前教練</button>
+        </div>
+
+        <!-- ADD TAB -->
+        <div class="pane active" id="tab-add">
+          <div class="form-grid">
+            <div class="form-group"><label>中文姓名 *</label><input type="text" id="f-cn" placeholder="例：王大明"></div>
+            <div class="form-group"><label>英文名</label><input type="text" id="f-en" placeholder="例：Da-Ming Wang"></div>
+            <div class="form-group"><label>雪場</label><input type="text" id="f-resort" value="手稻滑雪場"></div>
+            <div class="form-group"><label>教學語言</label><input type="text" id="f-lang" placeholder="例：繁中、英文"></div>
+            <div class="form-group"><label>資歷</label><input type="text" id="f-exp" placeholder="例：滑雪資歷15年"></div>
+            <div class="form-group"><label>執照 / 認證</label><input type="text" id="f-cert" placeholder="例：SAJ Level 2"></div>
+            <div class="form-group full"><label>教練簡介</label><textarea id="f-bio" placeholder="簡短介紹背景與教學風格..."></textarea></div>
+            <div class="form-group full">
+              <label>專長標籤</label>
+              <div class="tag-checks">
+                <input type="checkbox" class="tc" id="tc-ski" value="ski"><label for="tc-ski" class="tag tag-ski">雙板 Ski</label>
+                <input type="checkbox" class="tc" id="tc-sb" value="snowboard"><label for="tc-sb" class="tag tag-snowboard">單板 Snowboard</label>
+                <input type="checkbox" class="tc" id="tc-bg" value="beginner"><label for="tc-bg" class="tag tag-beginner">初學者</label>
+                <input type="checkbox" class="tc" id="tc-adv" value="advanced"><label for="tc-adv" class="tag tag-advanced">進階</label>
+                <input type="checkbox" class="tc" id="tc-kid" value="kids"><label for="tc-kid" class="tag tag-kids">兒童</label>
+                <input type="checkbox" class="tc" id="tc-race" value="race"><label for="tc-race" class="tag tag-race">競技</label>
+              </div>
+            </div>
+            <div class="form-group full">
+              <label>教練照片 <span style="font-weight:400;color:var(--gray);">（選填）</span></label>
+              <div class="photo-zone" id="photo-zone">
+                <input type="file" id="f-photo" accept="image/*">
+                <div id="photo-empty"><div style="font-size:24px;">📷</div><div class="photo-hint"><strong>點擊選擇照片</strong><br>JPG / PNG / WEBP，上限 3MB</div></div>
+                <div id="photo-filled" style="display:none;">
+                  <img id="photo-preview" class="photo-preview" src="" alt="">
+                  <div class="photo-hint" id="photo-name"></div>
+                  <button type="button" class="photo-remove" id="photo-remove">✕ 移除照片</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="btn-row">
+            <button class="btn-primary" id="add-btn">新增教練</button>
+            <button class="btn-sec" id="clear-btn">清除</button>
+          </div>
+        </div>
+
+        <!-- LIST TAB -->
+        <div class="pane" id="tab-list">
+          <div class="list-items" id="list-items"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
