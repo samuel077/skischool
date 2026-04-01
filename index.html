@@ -160,6 +160,57 @@ footer{background:var(--navy);padding:36px 5%;display:flex;align-items:center;ju
 .photo-preview{width:68px;height:68px;border-radius:50%;object-fit:cover;border:2px solid var(--blue-light);display:block;margin:0 auto 6px;}
 .photo-remove{background:none;border:none;color:var(--red);font-size:11px;cursor:pointer;font-family:inherit;text-decoration:underline;margin-top:4px;display:inline-block;position:relative;z-index:2;}
 
+/* EDIT MODE BAR */
+.edit-mode-bar{background:#FFF8E6;border:1px solid #FFCC80;border-radius:8px;padding:10px 14px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;font-size:13px;color:#8B6914;}
+
+/* LIST EDIT BTN */
+.btn-edit{background:#EBF5FB;border:1px solid #AED6F1;color:#1A5FAD;padding:5px 12px;border-radius:6px;font-size:12px;cursor:pointer;font-family:inherit;transition:all .15s;}
+.btn-edit:hover{background:#D6EAF8;}
+
+/* SKIING PHOTO ZONE */
+.skiing-preview-img{width:100%;max-height:110px;object-fit:cover;border-radius:6px;display:block;}
+
+/* COACH MODAL */
+#coach-modal{display:none;position:fixed;inset:0;z-index:1000;background:rgba(10,22,40,.85);backdrop-filter:blur(8px);align-items:flex-start;justify-content:center;padding:32px 16px 40px;overflow-y:auto;}
+#coach-modal.active{display:flex;}
+.cm-panel{background:#fff;border-radius:20px;width:100%;max-width:500px;overflow:hidden;position:relative;box-shadow:0 24px 80px rgba(0,0,0,.3);margin:auto;}
+.cm-close{position:absolute;top:12px;right:12px;z-index:10;background:rgba(0,0,0,.28);border:none;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;transition:background .2s;line-height:1;}
+.cm-close:hover{background:rgba(0,0,0,.45);}
+.cm-banner{height:200px;background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 60%,#1A3A6B 100%);position:relative;overflow:hidden;}
+.cm-banner-img{width:100%;height:100%;object-fit:cover;display:none;}
+.cm-banner-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(10,22,40,.55) 100%);}
+.cm-avatar-wrap{display:flex;justify-content:center;margin-top:-46px;position:relative;z-index:2;}
+.cm-avatar-lg{width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,var(--navy-mid),var(--blue-light));display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:700;color:#fff;font-family:'Space Mono',monospace;overflow:hidden;border:4px solid #fff;box-shadow:0 4px 20px rgba(0,0,0,.18);flex-shrink:0;}
+.cm-body{padding:14px 28px 32px;text-align:center;}
+.cm-name-cn{font-size:22px;font-weight:700;color:var(--navy);}
+.cm-name-en{font-size:13px;color:var(--gray);margin-top:4px;letter-spacing:.05em;}
+.cm-tags-row{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:12px 0 20px;}
+.cm-stats{display:grid;gap:1px;background:var(--border);border-radius:12px;overflow:hidden;margin-bottom:16px;text-align:left;}
+.cm-stat{background:var(--snow);padding:12px 14px;}
+.cm-stat-lbl{font-size:10px;color:var(--gray);letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px;}
+.cm-stat-val{font-size:13px;font-weight:500;color:var(--navy);line-height:1.4;}
+.cm-cert{margin-bottom:16px;text-align:left;}
+.cm-bio-section{text-align:left;margin-bottom:24px;}
+.cm-bio-label{font-size:11px;font-weight:500;color:var(--gray);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;}
+.cm-bio-text{font-size:14px;color:var(--gray);line-height:1.8;}
+
+/* RESORT SECTION */
+.resort-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:1100px;margin:36px auto 0;}
+.resort-card{display:block;text-decoration:none;border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--white);transition:all .25s;color:var(--navy);}
+.resort-card:hover{border-color:var(--blue-light);box-shadow:0 8px 32px rgba(26,95,173,.1);transform:translateY(-2px);}
+.resort-card-hd{padding:22px 24px 16px;display:flex;gap:14px;align-items:center;background:var(--navy);}
+.resort-icon{font-size:28px;flex-shrink:0;}
+.resort-name-cn{font-size:17px;font-weight:700;color:#fff;}
+.resort-name-en{font-size:11px;color:var(--sky);letter-spacing:.08em;margin-top:3px;}
+.resort-card-body{padding:18px 24px 22px;}
+.resort-stat-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:10px;}
+.resort-stat-row span{font-size:12px;color:var(--gray);}
+.resort-card-desc{font-size:13px;color:var(--gray);line-height:1.7;margin-bottom:12px;}
+.resort-link{font-size:13px;color:var(--blue-light);font-weight:500;}
+/* RESORT CHECKBOXES */
+.rc{display:none;}
+.rc+label{padding:4px 11px;border-radius:5px;font-size:12px;font-weight:500;cursor:pointer;border:1px solid #D0DCE8;color:var(--gray);background:var(--snow);transition:all .15s;}
+.rc:checked+label{background:#E3F2FD;border-color:#90CAF9;color:#1565C0;}
 .toast{position:fixed;bottom:24px;right:24px;background:var(--navy);color:#fff;padding:12px 20px;border-radius:8px;font-size:13px;font-weight:500;transform:translateY(80px);opacity:0;transition:all .3s;z-index:9999;pointer-events:none;}
 .toast.show{transform:translateY(0);opacity:1;}
 
@@ -177,6 +228,7 @@ footer{background:var(--navy);padding:36px 5%;display:flex;align-items:center;ju
   .form-grid{grid-template-columns:1fr;}
   .hero-stats{gap:28px;}
   .admin-body{padding:18px;}
+  .resort-grid{grid-template-columns:1fr;}
 }
 @media(max-width:480px){
   #line-float span{display:none;}
@@ -202,6 +254,7 @@ footer{background:var(--navy);padding:36px 5%;display:flex;align-items:center;ju
   <ul class="nav-links" id="nav-links">
     <li><a href="#about">關於我們</a></li>
     <li><a href="#coaches">教練團隊</a></li>
+    <li><a href="#resorts">雪場介紹</a></li>
     <li><a href="#services">課程資訊</a></li>
     <li><a href="#contact">聯絡我們</a></li>
   </ul>
@@ -281,6 +334,52 @@ footer{background:var(--navy);padding:36px 5%;display:flex;align-items:center;ju
   </div>
   <div class="coaches-grid" id="coaches-grid">
     <div style="color:var(--gray);font-size:14px;padding:40px 0;text-align:center;grid-column:1/-1;">載入教練資料中...</div>
+  </div>
+</section>
+
+<section id="resorts" style="background:var(--snow);">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="sec-tag">雪場介紹</div>
+    <h2 class="sec-title">我們服務的雪場</h2>
+    <p class="sec-desc">粉雪道場目前在以下兩個北海道知名雪場提供教學服務，點擊查看詳細交通資訊。</p>
+    <div class="resort-grid">
+      <a href="teine.html" class="resort-card">
+        <div class="resort-card-hd">
+          <div class="resort-icon">🏔️</div>
+          <div>
+            <div class="resort-name-cn">手稻滑雪場</div>
+            <div class="resort-name-en">Sapporo Teine Ski Area</div>
+          </div>
+        </div>
+        <div class="resort-card-body">
+          <div class="resort-stat-row">
+            <span>📍 札幌市西區</span>
+            <span>⛷️ 23 條雪道</span>
+            <span>🏔️ 1,024m</span>
+          </div>
+          <p class="resort-card-desc">距市中心約40分鐘，1972年冬季奧運主場地，粉雪品質絕佳，是粉雪道場的主要教學場地。</p>
+          <div class="resort-link">查看詳細交通資訊 →</div>
+        </div>
+      </a>
+      <a href="kokusai.html" class="resort-card">
+        <div class="resort-card-hd">
+          <div class="resort-icon">🌨️</div>
+          <div>
+            <div class="resort-name-cn">札幌國際滑雪場</div>
+            <div class="resort-name-en">Sapporo Kokusai Ski Resort</div>
+          </div>
+        </div>
+        <div class="resort-card-body">
+          <div class="resort-stat-row">
+            <span>📍 小樽市朝里川</span>
+            <span>⛷️ 7 條雪道</span>
+            <span>🏔️ 1,100m</span>
+          </div>
+          <p class="resort-card-desc">以超深粉雪聞名，年積雪量超過15m，適合進階玩家體驗純粹粉雪樂趣，亦設有天然溫泉。</p>
+          <div class="resort-link">查看詳細交通資訊 →</div>
+        </div>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -366,6 +465,10 @@ footer{background:var(--navy);padding:36px 5%;display:flex;align-items:center;ju
         <div style="display:flex;justify-content:flex-end;margin-bottom:12px;">
           <button class="btn-sec" id="logout-btn" style="font-size:12px;padding:5px 12px;">登出</button>
         </div>
+        <div class="edit-mode-bar" id="edit-mode-bar" style="display:none;">
+          <span>✏️ 編輯模式：<strong id="editing-coach-name"></strong></span>
+          <button type="button" class="btn-sec" id="cancel-edit-btn" style="font-size:12px;padding:4px 10px;">取消</button>
+        </div>
         <div class="tabs">
           <button class="tab-btn active" data-tab="tab-add">＋ 新增教練</button>
           <button class="tab-btn" data-tab="tab-list">目前教練</button>
@@ -376,7 +479,12 @@ footer{background:var(--navy);padding:36px 5%;display:flex;align-items:center;ju
           <div class="form-grid">
             <div class="form-group"><label>中文姓名 *</label><input type="text" id="f-cn" placeholder="例：王大明"></div>
             <div class="form-group"><label>英文名</label><input type="text" id="f-en" placeholder="例：Da-Ming Wang"></div>
-            <div class="form-group"><label>雪場</label><input type="text" id="f-resort" value="手稻滑雪場"></div>
+            <div class="form-group full"><label>服務雪場</label>
+              <div class="tag-checks">
+                <input type="checkbox" class="rc" id="rc-teine" value="手稻滑雪場"><label for="rc-teine">手稻滑雪場</label>
+                <input type="checkbox" class="rc" id="rc-kokusai" value="札幌國際滑雪場"><label for="rc-kokusai">札幌國際滑雪場</label>
+              </div>
+            </div>
             <div class="form-group"><label>教學語言</label><input type="text" id="f-lang" placeholder="例：繁中、英文"></div>
             <div class="form-group"><label>資歷</label><input type="text" id="f-exp" placeholder="例：滑雪資歷15年"></div>
             <div class="form-group"><label>執照 / 認證</label><input type="text" id="f-cert" placeholder="例：SAJ Level 2"></div>
@@ -404,6 +512,18 @@ footer{background:var(--navy);padding:36px 5%;display:flex;align-items:center;ju
                 </div>
               </div>
             </div>
+            <div class="form-group full">
+              <label>滑雪照片 <span style="font-weight:400;color:var(--gray);">（選填，用於教練詳細頁橫幅）</span></label>
+              <div class="photo-zone" id="skiing-photo-zone">
+                <input type="file" id="f-skiing-photo" accept="image/*">
+                <div id="skiing-photo-empty"><div style="font-size:24px;">🎿</div><div class="photo-hint"><strong>點擊選擇滑雪照片</strong><br>建議橫向，JPG / PNG，上限 5MB</div></div>
+                <div id="skiing-photo-filled" style="display:none;">
+                  <img id="skiing-photo-preview" class="skiing-preview-img" src="" alt="">
+                  <div class="photo-hint" id="skiing-photo-name" style="margin-top:6px;"></div>
+                  <button type="button" class="photo-remove" id="skiing-photo-remove">✕ 移除照片</button>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="btn-row">
             <button class="btn-primary" id="add-btn">新增教練</button>
@@ -417,6 +537,32 @@ footer{background:var(--navy);padding:36px 5%;display:flex;align-items:center;ju
         </div>
       </div>
 
+    </div>
+  </div>
+</div>
+
+<!-- COACH MODAL -->
+<div id="coach-modal">
+  <div class="cm-panel">
+    <button class="cm-close" id="cm-close">✕</button>
+    <div class="cm-banner">
+      <img class="cm-banner-img" id="cm-banner-img" src="" alt="">
+      <div class="cm-banner-overlay"></div>
+    </div>
+    <div class="cm-avatar-wrap">
+      <div class="cm-avatar-lg" id="cm-avatar-lg"></div>
+    </div>
+    <div class="cm-body">
+      <div class="cm-name-cn" id="cm-name-cn"></div>
+      <div class="cm-name-en" id="cm-name-en"></div>
+      <div class="cm-tags-row" id="cm-tags-row"></div>
+      <div class="cm-stats" id="cm-stats"></div>
+      <div class="cm-cert" id="cm-cert" style="display:none;"></div>
+      <div class="cm-bio-section" id="cm-bio-section" style="display:none;">
+        <div class="cm-bio-label">關於教練</div>
+        <div class="cm-bio-text" id="cm-bio-text"></div>
+      </div>
+      <button class="btn-primary" id="cm-cta" style="width:100%;border:none;cursor:pointer;">預約諮詢</button>
     </div>
   </div>
 </div>

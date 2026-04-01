@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>手稻滑雪場 — 粉雪道場</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Serif+Display:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0A1628;--navy-mid:#12254A;--blue:#1A5FAD;--blue-light:#3B8BD4;
+  --sky:#85C1E9;--snow:#F4F8FC;--white:#FFFFFF;--gray:#6B7C8E;
+  --gray-light:#B0BEC5;--accent:#E8F4FD;--gold:#D4A017;--border:#E2EAF0;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--white);color:var(--navy);overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,22,40,0.93);backdrop-filter:blur(12px);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:64px;border-bottom:1px solid rgba(255,255,255,0.08);}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo .cn{font-size:15px;font-weight:700;color:#fff;letter-spacing:.05em;display:block;}
+.nav-logo .en{font-size:10px;color:var(--sky);letter-spacing:.12em;text-transform:uppercase;display:block;}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{color:rgba(255,255,255,.75);text-decoration:none;font-size:13px;letter-spacing:.04em;transition:color .2s;}
+.nav-links a:hover{color:var(--sky);}
+.nav-back{background:rgba(59,139,212,.2);border:1px solid rgba(59,139,212,.4);color:var(--sky);padding:7px 16px;border-radius:6px;font-size:12px;text-decoration:none;transition:all .2s;}
+.nav-back:hover{background:rgba(59,139,212,.35);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
+.hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;}
+
+/* HERO */
+#hero{min-height:60vh;background:linear-gradient(160deg,var(--navy) 0%,var(--navy-mid) 50%,#1A3A6B 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:100px 5% 60px;text-align:center;}
+.hero-bg{position:absolute;inset:0;opacity:.04;background-image:repeating-linear-gradient(45deg,#fff 0,#fff 1px,transparent 0,transparent 50%);background-size:40px 40px;}
+.hero-mountain{position:absolute;bottom:0;left:0;right:0;height:35%;opacity:.07;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(59,139,212,.15);border:1px solid rgba(59,139,212,.3);padding:6px 14px;border-radius:20px;font-size:12px;color:var(--sky);letter-spacing:.08em;margin-bottom:24px;}
+.hero-title{font-size:clamp(36px,6vw,64px);font-weight:700;color:#fff;letter-spacing:.1em;line-height:1.1;margin-bottom:8px;}
+.hero-sub{font-family:'DM Serif Display',serif;font-size:clamp(14px,2.5vw,20px);color:var(--sky);letter-spacing:.12em;margin-bottom:32px;}
+.hero-stats{display:flex;gap:40px;flex-wrap:wrap;justify-content:center;position:relative;z-index:2;}
+.hero-stat{text-align:center;}
+.stat-num{font-family:'Space Mono',monospace;font-size:26px;font-weight:700;color:#fff;}
+.stat-lbl{font-size:11px;color:var(--gray-light);letter-spacing:.1em;margin-top:4px;text-transform:uppercase;}
+
+/* SECTIONS */
+section{padding:72px 5%;}
+.container{max-width:1000px;margin:0 auto;}
+.sec-tag{font-size:11px;letter-spacing:.15em;color:var(--blue-light);text-transform:uppercase;font-weight:500;margin-bottom:10px;}
+.sec-title{font-size:clamp(24px,4vw,34px);font-weight:700;line-height:1.25;margin-bottom:14px;}
+.sec-desc{font-size:15px;color:var(--gray);line-height:1.9;}
+
+/* OVERVIEW */
+#overview{background:var(--snow);}
+.overview-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+.overview-text p{margin-bottom:14px;}
+.zone-cards{display:flex;flex-direction:column;gap:12px;}
+.zone-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:18px 20px;}
+.zone-card-title{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:6px;display:flex;align-items:center;gap:8px;}
+.zone-badge{font-size:10px;padding:2px 8px;border-radius:4px;font-weight:500;}
+.zone-highland{background:#E3F2FD;color:#1565C0;}
+.zone-olympia{background:#E8F5E9;color:#2E7D32;}
+.zone-card p{font-size:13px;color:var(--gray);line-height:1.7;}
+
+/* STATS GRID */
+#stats{background:var(--white);}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px;}
+.stat-card{background:var(--snow);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center;}
+.stat-card-icon{font-size:22px;margin-bottom:8px;}
+.stat-card-val{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:var(--blue);line-height:1.1;}
+.stat-card-lbl{font-size:11px;color:var(--gray);letter-spacing:.08em;text-transform:uppercase;margin-top:5px;}
+
+/* TRANSPORT */
+#transport{background:var(--snow);}
+.transport-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;}
+.transport-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:22px;transition:all .2s;}
+.transport-card:hover{border-color:var(--blue-light);box-shadow:0 6px 24px rgba(26,95,173,.08);}
+.transport-icon{font-size:28px;margin-bottom:12px;}
+.transport-title{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:10px;}
+.transport-steps{display:flex;flex-direction:column;gap:7px;}
+.transport-step{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--gray);line-height:1.6;}
+.step-dot{width:6px;height:6px;border-radius:50%;background:var(--blue-light);flex-shrink:0;margin-top:6px;}
+.transport-note{margin-top:12px;padding:10px 12px;background:var(--accent);border-radius:8px;font-size:12px;color:var(--blue);line-height:1.6;}
+
+/* OLYMPIC BANNER */
+#olympic{background:var(--navy);color:#fff;padding:56px 5%;}
+.olympic-inner{max-width:700px;margin:0 auto;text-align:center;}
+.olympic-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(212,160,23,.15);border:1px solid rgba(212,160,23,.4);padding:6px 16px;border-radius:20px;font-size:12px;color:var(--gold);letter-spacing:.08em;margin-bottom:20px;}
+.olympic-title{font-size:clamp(20px,3.5vw,30px);font-weight:700;line-height:1.3;margin-bottom:14px;}
+.olympic-desc{font-size:14px;color:rgba(255,255,255,.65);line-height:1.9;}
+
+/* CTA */
+#cta-section{background:var(--white);padding:56px 5%;text-align:center;}
+.cta-inner{max-width:540px;margin:0 auto;}
+.cta-inner p{font-size:15px;color:var(--gray);line-height:1.8;margin-bottom:24px;}
+.btn-primary{background:var(--blue-light);color:#fff;padding:13px 28px;border-radius:8px;font-size:14px;font-family:inherit;font-weight:500;text-decoration:none;cursor:pointer;border:none;transition:all .2s;display:inline-block;}
+.btn-primary:hover{background:var(--blue);transform:translateY(-1px);}
+.btn-outline{background:transparent;color:var(--navy);border:1px solid var(--border);padding:13px 28px;border-radius:8px;font-size:14px;font-family:inherit;text-decoration:none;transition:all .2s;display:inline-block;margin-left:12px;}
+.btn-outline:hover{border-color:var(--blue-light);color:var(--blue);}
+
+footer{background:var(--navy);padding:36px 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;border-top:1px solid rgba(255,255,255,.08);}
+.foot-text{font-size:12px;color:rgba(255,255,255,.4);line-height:1.7;}
+.foot-copy{font-size:12px;color:rgba(255,255,255,.3);}
+
+@media(max-width:768px){
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .nav-links.open{display:flex;flex-direction:column;position:fixed;top:64px;left:0;right:0;background:var(--navy);padding:20px 5%;gap:18px;border-bottom:1px solid rgba(255,255,255,.1);}
+  .overview-grid{grid-template-columns:1fr;}
+  .hero-stats{gap:24px;}
+  .btn-outline{margin-left:0;margin-top:10px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <circle cx="18" cy="18" r="18" fill="#1A5FAD" opacity=".3"/>
+      <path d="M9 27L18 9L27 27" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <path d="M12 22L24 22" stroke="#85C1E9" stroke-width="1.8" stroke-linecap="round"/>
+      <circle cx="18" cy="7.5" r="2.5" fill="#85C1E9"/>
+    </svg>
+    <span>
+      <span class="cn">粉雪道場</span>
+      <span class="en">Powder Dojo</span>
+    </span>
+  </a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="/#coaches">教練團隊</a></li>
+    <li><a href="/#resorts">合作雪場</a></li>
+    <li><a href="/#services">課程資訊</a></li>
+    <li><a href="/#contact">聯絡我們</a></li>
+  </ul>
+  <a href="/" class="nav-back">← 回主頁</a>
+  <button class="hamburger" id="hamburger" aria-label="選單">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <svg class="hero-mountain" viewBox="0 0 1440 300" preserveAspectRatio="none" fill="none">
+    <path d="M0 300L360 60L540 160L720 20L900 120L1080 40L1260 140L1440 80L1440 300Z" fill="white"/>
+  </svg>
+  <div style="position:relative;z-index:2;">
+    <div class="hero-badge">札幌市西區 · 手稻山</div>
+    <div class="hero-title">手稻滑雪場</div>
+    <div class="hero-sub">Sapporo Teine Ski Area</div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="stat-num">1,023m</div><div class="stat-lbl">最高海拔</div></div>
+      <div class="hero-stat"><div class="stat-num">15</div><div class="stat-lbl">雪道數量</div></div>
+      <div class="hero-stat"><div class="stat-num">683m</div><div class="stat-lbl">垂直落差</div></div>
+      <div class="hero-stat"><div class="stat-num">12月–5月</div><div class="stat-lbl">雪季</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="olympic">
+  <div class="olympic-inner">
+    <div class="olympic-badge">⭐ 1972年札幌冬季奧運會場</div>
+    <div class="olympic-title">北海道最便利的奧運級滑雪場</div>
+    <div class="olympic-desc">手稻滑雪場是1972年札幌冬季奧運會的高山滑雪及回轉競技場地，歷史意義深遠。距離札幌市中心僅40分鐘車程，是粉雪道場的主要教學基地，適合所有程度的滑雪愛好者。</div>
+  </div>
+</section>
+
+<section id="overview">
+  <div class="container">
+    <div class="overview-grid">
+      <div class="overview-text">
+        <div class="sec-tag">雪場介紹</div>
+        <h2 class="sec-title">兩大區域，<br>滿足所有需求</h2>
+        <p class="sec-desc">手稻滑雪場分為 Highland（高地）與 Olympia（奧林匹亞）兩大區域，兩區之間可透過纜車與6公里長的滑道相互連接，從新手到高手都能找到適合自己的雪道。</p>
+        <p class="sec-desc" style="margin-top:12px;">位處海拔千米以上的 Highland 區享有絕佳的粉雪品質，站在山頂天氣晴朗時更可遠眺石狩灣與日本海，景色令人嘆為觀止。</p>
+      </div>
+      <div class="zone-cards">
+        <div class="zone-card">
+          <div class="zone-card-title">
+            <span class="zone-badge zone-highland">Highland 高地區</span>
+          </div>
+          <p>最高海拔1,023m，以高難度滑道與 off-piste 北坡路線聞名。設有雪地公園（跳台、障礙物），挑戰性十足。曾為奧運回轉男女組競技場地。</p>
+        </div>
+        <div class="zone-card">
+          <div class="zone-card-title">
+            <span class="zone-badge zone-olympia">Olympia 奧林匹亞區</span>
+          </div>
+          <p>寬闊平緩的初學者友善雪道，設有兒童滑雪樂園（雪橇、充氣滑道），適合家庭出遊。初次滑雪的最佳起點。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="stats">
+  <div class="container">
+    <div class="sec-tag" style="text-align:center;">雪場數據</div>
+    <h2 class="sec-title" style="text-align:center;margin-bottom:32px;">一眼掌握手稻</h2>
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-card-icon">⛰️</div><div class="stat-card-val">1,023m</div><div class="stat-card-lbl">山頂海拔</div></div>
+      <div class="stat-card"><div class="stat-card-icon">📏</div><div class="stat-card-val">683m</div><div class="stat-card-lbl">垂直落差</div></div>
+      <div class="stat-card"><div class="stat-card-icon">🎿</div><div class="stat-card-val">15條</div><div class="stat-card-lbl">雪道總數</div></div>
+      <div class="stat-card"><div class="stat-card-icon">📐</div><div class="stat-card-val">38°</div><div class="stat-card-lbl">最大坡度</div></div>
+      <div class="stat-card"><div class="stat-card-icon">🏁</div><div class="stat-card-val">6km</div><div class="stat-card-lbl">最長滑道</div></div>
+      <div class="stat-card"><div class="stat-card-icon">📅</div><div class="stat-card-val">12月–5月</div><div class="stat-card-lbl">雪季期間</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="transport">
+  <div class="container">
+    <div class="sec-tag">交通方式</div>
+    <h2 class="sec-title" style="margin-bottom:8px;">如何前往手稻</h2>
+    <p class="sec-desc" style="margin-bottom:32px;">手稻是距離札幌市中心最近的大型滑雪場，多種交通方式可選擇。</p>
+    <div class="transport-grid">
+      <div class="transport-card">
+        <div class="transport-icon">🚃</div>
+        <div class="transport-title">電車 ＋ 巴士（推薦）</div>
+        <div class="transport-steps">
+          <div class="transport-step"><div class="step-dot"></div><span>JR 札幌站搭乘函館本線，約11–18分鐘抵達 JR 手稻站（¥360）</span></div>
+          <div class="transport-step"><div class="step-dot"></div><span>於手稻站南口3號公車站搭乘北海道中央巴士</span></div>
+          <div class="transport-step"><div class="step-dot"></div><span>往 Olympia 區約15分鐘 / 往 Highland 區約27分鐘（¥1,000）</span></div>
+        </div>
+      </div>
+      <div class="transport-card">
+        <div class="transport-icon">🚗</div>
+        <div class="transport-title">自駕</div>
+        <div class="transport-steps">
+          <div class="transport-step"><div class="step-dot"></div><span>從札幌市中心出發，車程約40–45分鐘</span></div>
+          <div class="transport-step"><div class="step-dot"></div><span>雪場設有充足停車場</span></div>
+        </div>
+        <div class="transport-note">⚠️ 冬季山路請務必使用雪地輪胎</div>
+      </div>
+      <div class="transport-card">
+        <div class="transport-icon">🚌</div>
+        <div class="transport-title">飯店直達接駁巴士</div>
+        <div class="transport-steps">
+          <div class="transport-step"><div class="step-dot"></div><span>從札幌市區主要飯店出發，車程約50–100分鐘</span></div>
+          <div class="transport-step"><div class="step-dot"></div><span>Big Runs 套票（含7小時纜車票）：¥10,500</span></div>
+          <div class="transport-step"><div class="step-dot"></div><span>運行期間：12月上旬至3月下旬，需事先預約</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cta-section">
+  <div class="cta-inner">
+    <div class="sec-tag" style="text-align:center;">想在手稻滑雪？</div>
+    <h2 class="sec-title" style="text-align:center;">讓粉雪道場陪你征服手稻</h2>
+    <p>我們的教練在手稻長大、對每條雪道瞭若指掌。不論是初學體驗或進階技術精進，都能為你量身安排。</p>
+    <div>
+      <a href="/#coaches" class="btn-primary">認識我們的教練</a>
+      <a href="/#contact" class="btn-outline">預約諮詢</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <svg width="30" height="30" viewBox="0 0 36 36" fill="none">
+      <circle cx="18" cy="18" r="18" fill="#1A5FAD" opacity=".3"/>
+      <path d="M9 27L18 9L27 27" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <path d="M12 22L24 22" stroke="#85C1E9" stroke-width="1.8" stroke-linecap="round"/>
+      <circle cx="18" cy="7.5" r="2.5" fill="#85C1E9"/>
+    </svg>
+    <div class="foot-text"><strong style="color:rgba(255,255,255,.8);font-size:14px;">粉雪道場 Powder Dojo</strong><br>北海道 手稻滑雪場 滑雪學校</div>
+  </div>
+  <div class="foot-copy">© 2025 Powder Dojo. All rights reserved.</div>
+</footer>
+
+<script>
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('nav-links').classList.toggle('open')
+})
+</script>
+</body>
+</html>

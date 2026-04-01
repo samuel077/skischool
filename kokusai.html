@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>札幌國際滑雪場 — 粉雪道場</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Serif+Display:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0A1628;--navy-mid:#12254A;--blue:#1A5FAD;--blue-light:#3B8BD4;
+  --sky:#85C1E9;--snow:#F4F8FC;--white:#FFFFFF;--gray:#6B7C8E;
+  --gray-light:#B0BEC5;--accent:#E8F4FD;--gold:#D4A017;--border:#E2EAF0;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--white);color:var(--navy);overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,22,40,0.93);backdrop-filter:blur(12px);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:64px;border-bottom:1px solid rgba(255,255,255,0.08);}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo .cn{font-size:15px;font-weight:700;color:#fff;letter-spacing:.05em;display:block;}
+.nav-logo .en{font-size:10px;color:var(--sky);letter-spacing:.12em;text-transform:uppercase;display:block;}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{color:rgba(255,255,255,.75);text-decoration:none;font-size:13px;letter-spacing:.04em;transition:color .2s;}
+.nav-links a:hover{color:var(--sky);}
+.nav-back{background:rgba(59,139,212,.2);border:1px solid rgba(59,139,212,.4);color:var(--sky);padding:7px 16px;border-radius:6px;font-size:12px;text-decoration:none;transition:all .2s;}
+.nav-back:hover{background:rgba(59,139,212,.35);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
+.hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;}
+
+#hero{min-height:60vh;background:linear-gradient(160deg,#061020 0%,#0A1628 40%,#0D2040 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:100px 5% 60px;text-align:center;}
+.hero-bg{position:absolute;inset:0;opacity:.04;background-image:repeating-linear-gradient(45deg,#fff 0,#fff 1px,transparent 0,transparent 50%);background-size:40px 40px;}
+.hero-mountain{position:absolute;bottom:0;left:0;right:0;height:35%;opacity:.07;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(59,139,212,.15);border:1px solid rgba(59,139,212,.3);padding:6px 14px;border-radius:20px;font-size:12px;color:var(--sky);letter-spacing:.08em;margin-bottom:24px;}
+.hero-title{font-size:clamp(32px,5.5vw,58px);font-weight:700;color:#fff;letter-spacing:.08em;line-height:1.1;margin-bottom:8px;}
+.hero-sub{font-family:'DM Serif Display',serif;font-size:clamp(14px,2.5vw,20px);color:var(--sky);letter-spacing:.12em;margin-bottom:32px;}
+.hero-stats{display:flex;gap:40px;flex-wrap:wrap;justify-content:center;position:relative;z-index:2;}
+.hero-stat{text-align:center;}
+.stat-num{font-family:'Space Mono',monospace;font-size:26px;font-weight:700;color:#fff;}
+.stat-lbl{font-size:11px;color:var(--gray-light);letter-spacing:.1em;margin-top:4px;text-transform:uppercase;}
+
+section{padding:72px 5%;}
+.container{max-width:1000px;margin:0 auto;}
+.sec-tag{font-size:11px;letter-spacing:.15em;color:var(--blue-light);text-transform:uppercase;font-weight:500;margin-bottom:10px;}
+.sec-title{font-size:clamp(24px,4vw,34px);font-weight:700;line-height:1.25;margin-bottom:14px;}
+.sec-desc{font-size:15px;color:var(--gray);line-height:1.9;}
+
+#highlight{background:var(--navy);color:#fff;padding:56px 5%;}
+.highlight-inner{max-width:700px;margin:0 auto;text-align:center;}
+.highlight-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(133,193,233,.12);border:1px solid rgba(133,193,233,.3);padding:6px 16px;border-radius:20px;font-size:12px;color:var(--sky);letter-spacing:.08em;margin-bottom:20px;}
+.highlight-title{font-size:clamp(20px,3.5vw,30px);font-weight:700;line-height:1.3;margin-bottom:14px;}
+.highlight-desc{font-size:14px;color:rgba(255,255,255,.65);line-height:1.9;}
+
+#overview{background:var(--snow);}
+.overview-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+.feature-cards{display:flex;flex-direction:column;gap:12px;}
+.feature-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:18px 20px;}
+.feature-card-title{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:6px;}
+.feature-card p{font-size:13px;color:var(--gray);line-height:1.7;}
+
+#stats{background:var(--white);}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px;}
+.stat-card{background:var(--snow);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center;}
+.stat-card-icon{font-size:22px;margin-bottom:8px;}
+.stat-card-val{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:var(--blue);line-height:1.1;}
+.stat-card-lbl{font-size:11px;color:var(--gray);letter-spacing:.08em;text-transform:uppercase;margin-top:5px;}
+
+#transport{background:var(--snow);}
+.transport-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;}
+.transport-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:22px;transition:all .2s;}
+.transport-card:hover{border-color:var(--blue-light);box-shadow:0 6px 24px rgba(26,95,173,.08);}
+.transport-icon{font-size:28px;margin-bottom:12px;}
+.transport-title{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:10px;}
+.transport-steps{display:flex;flex-direction:column;gap:7px;}
+.transport-step{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--gray);line-height:1.6;}
+.step-dot{width:6px;height:6px;border-radius:50%;background:var(--blue-light);flex-shrink:0;margin-top:6px;}
+.transport-note{margin-top:12px;padding:10px 12px;background:var(--accent);border-radius:8px;font-size:12px;color:var(--blue);line-height:1.6;}
+.transport-warn{margin-top:12px;padding:10px 12px;background:#FFF8E6;border-radius:8px;font-size:12px;color:#8B6914;line-height:1.6;}
+
+#onsen{background:var(--white);padding:56px 5%;}
+.onsen-inner{max-width:640px;margin:0 auto;text-align:center;}
+.onsen-icon{font-size:40px;margin-bottom:16px;}
+.onsen-title{font-size:clamp(20px,3vw,26px);font-weight:700;color:var(--navy);margin-bottom:12px;}
+.onsen-desc{font-size:14px;color:var(--gray);line-height:1.9;}
+
+#cta-section{background:var(--snow);padding:56px 5%;text-align:center;}
+.cta-inner{max-width:540px;margin:0 auto;}
+.cta-inner p{font-size:15px;color:var(--gray);line-height:1.8;margin-bottom:24px;}
+.btn-primary{background:var(--blue-light);color:#fff;padding:13px 28px;border-radius:8px;font-size:14px;font-family:inherit;font-weight:500;text-decoration:none;cursor:pointer;border:none;transition:all .2s;display:inline-block;}
+.btn-primary:hover{background:var(--blue);transform:translateY(-1px);}
+.btn-outline{background:transparent;color:var(--navy);border:1px solid var(--border);padding:13px 28px;border-radius:8px;font-size:14px;font-family:inherit;text-decoration:none;transition:all .2s;display:inline-block;margin-left:12px;}
+.btn-outline:hover{border-color:var(--blue-light);color:var(--blue);}
+
+footer{background:var(--navy);padding:36px 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;border-top:1px solid rgba(255,255,255,.08);}
+.foot-text{font-size:12px;color:rgba(255,255,255,.4);line-height:1.7;}
+.foot-copy{font-size:12px;color:rgba(255,255,255,.3);}
+
+@media(max-width:768px){
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .nav-links.open{display:flex;flex-direction:column;position:fixed;top:64px;left:0;right:0;background:var(--navy);padding:20px 5%;gap:18px;border-bottom:1px solid rgba(255,255,255,.1);}
+  .overview-grid{grid-template-columns:1fr;}
+  .hero-stats{gap:24px;}
+  .btn-outline{margin-left:0;margin-top:10px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <circle cx="18" cy="18" r="18" fill="#1A5FAD" opacity=".3"/>
+      <path d="M9 27L18 9L27 27" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <path d="M12 22L24 22" stroke="#85C1E9" stroke-width="1.8" stroke-linecap="round"/>
+      <circle cx="18" cy="7.5" r="2.5" fill="#85C1E9"/>
+    </svg>
+    <span>
+      <span class="cn">粉雪道場</span>
+      <span class="en">Powder Dojo</span>
+    </span>
+  </a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="/#coaches">教練團隊</a></li>
+    <li><a href="/#resorts">合作雪場</a></li>
+    <li><a href="/#services">課程資訊</a></li>
+    <li><a href="/#contact">聯絡我們</a></li>
+  </ul>
+  <a href="/" class="nav-back">← 回主頁</a>
+  <button class="hamburger" id="hamburger" aria-label="選單">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <svg class="hero-mountain" viewBox="0 0 1440 300" preserveAspectRatio="none" fill="none">
+    <path d="M0 300L480 80L720 180L960 40L1200 140L1440 60L1440 300Z" fill="white"/>
+  </svg>
+  <div style="position:relative;z-index:2;">
+    <div class="hero-badge">札幌市南區 · 定山渓</div>
+    <div class="hero-title">札幌國際滑雪場</div>
+    <div class="hero-sub">Sapporo Kokusai Ski Resort</div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="stat-num">1,100m</div><div class="stat-lbl">最高海拔</div></div>
+      <div class="hero-stat"><div class="stat-num">7</div><div class="stat-lbl">雪道數量</div></div>
+      <div class="hero-stat"><div class="stat-num">470m</div><div class="stat-lbl">垂直落差</div></div>
+      <div class="hero-stat"><div class="stat-num">11月–5月</div><div class="stat-lbl">雪季</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="highlight">
+  <div class="highlight-inner">
+    <div class="highlight-badge">❄️ 媲美 Niseko 的頂級粉雪</div>
+    <div class="highlight-title">北海道最長雪季的粉雪天堂</div>
+    <div class="highlight-desc">札幌國際滑雪場坐擁獨特地形微氣候，能同時接收多個方向的降雪，雪質輕盈乾燥，媲美聞名全球的Niseko。通常是劄幌地區最早開放的滑雪場之一，雪季從11月延續至翌年5月，是粉雪追求者的夢幻場地。</div>
+  </div>
+</section>
+
+<section id="overview">
+  <div class="container">
+    <div class="overview-grid">
+      <div>
+        <div class="sec-tag">雪場介紹</div>
+        <h2 class="sec-title">深雪、長坡、<br>絕美山景</h2>
+        <p class="sec-desc">全山以8人座天空艙（Sky Cabin）纜車為核心，直達各條滑道入口。東向、受山體遮蔽的盆地地形，即使其他山頭因大風關閉，這裡仍常保良好雪況。</p>
+        <p class="sec-desc" style="margin-top:12px;">最長滑道 Woody Trail 長達3.6公里，特別適合大弧度刻滑練習。Off-piste 深雪區（Deep Snow Zone）就在纜車旁，全天都能找到未被破壞的鬆粉雪。</p>
+      </div>
+      <div class="feature-cards">
+        <div class="feature-card">
+          <div class="feature-card-title">❄️ Deep Snow Zone 深雪區</div>
+          <p>纜車沿線的官方 Off-piste 區域，有多條溝壑地形可探索，全天都有未被踩過的粉雪，是進階滑雪者的最愛。</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card-title">🚡 Sky Cabin 天空艙</div>
+          <p>長達2,000公尺的8人座gondola，直送山頂滑道入口，大幅縮短等待時間，讓你把時間都留在雪道上。</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card-title">🏔️ 獨特微氣候</div>
+          <p>受多個方向山嶺圍繞，能在不同天氣系統下接收降雪，比鄰近其他滑雪場更穩定的優質粉雪。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="stats">
+  <div class="container">
+    <div class="sec-tag" style="text-align:center;">雪場數據</div>
+    <h2 class="sec-title" style="text-align:center;margin-bottom:32px;">一眼掌握札幌國際</h2>
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-card-icon">⛰️</div><div class="stat-card-val">1,100m</div><div class="stat-card-lbl">山頂海拔</div></div>
+      <div class="stat-card"><div class="stat-card-icon">📏</div><div class="stat-card-val">470m</div><div class="stat-card-lbl">垂直落差</div></div>
+      <div class="stat-card"><div class="stat-card-icon">🎿</div><div class="stat-card-val">7條</div><div class="stat-card-lbl">雪道總數</div></div>
+      <div class="stat-card"><div class="stat-card-icon">🏁</div><div class="stat-card-val">3.6km</div><div class="stat-card-lbl">最長滑道</div></div>
+      <div class="stat-card"><div class="stat-card-icon">🚡</div><div class="stat-card-val">5座</div><div class="stat-card-lbl">纜車數量</div></div>
+      <div class="stat-card"><div class="stat-card-icon">📅</div><div class="stat-card-val">11月–5月</div><div class="stat-card-lbl">雪季期間</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="transport">
+  <div class="container">
+    <div class="sec-tag">交通方式</div>
+    <h2 class="sec-title" style="margin-bottom:8px;">如何前往札幌國際</h2>
+    <p class="sec-desc" style="margin-bottom:32px;">從札幌市區搭巴士或自駕前往，沿途穿越定山溪溫泉鄉，風景優美。</p>
+    <div class="transport-grid">
+      <div class="transport-card">
+        <div class="transport-icon">🚌</div>
+        <div class="transport-title">滑雪直達巴士（推薦）</div>
+        <div class="transport-steps">
+          <div class="transport-step"><div class="step-dot"></div><span>從 JR 札幌站巴士總站（ESTA 1F 17號站）出發</span></div>
+          <div class="transport-step"><div class="step-dot"></div><span>北海道中央巴士 或 城電巴士（滑雪場線）</span></div>
+          <div class="transport-step"><div class="step-dot"></div><span>車程約90分鐘，單程¥1,800</span></div>
+          <div class="transport-step"><div class="step-dot"></div><span>巴士＋一日纜車套票：¥8,800</span></div>
+        </div>
+        <div class="transport-note">💡 建議提前預約，出發前一天下午5點截止網路訂位</div>
+      </div>
+      <div class="transport-card">
+        <div class="transport-icon">🚃</div>
+        <div class="transport-title">地下鐵 ＋ 巴士</div>
+        <div class="transport-steps">
+          <div class="transport-step"><div class="step-dot"></div><span>搭乘札幌市營地下鐵南北線至真駒內站</span></div>
+          <div class="transport-step"><div class="step-dot"></div><span>於真駒內站轉乘往札幌國際滑雪場的巴士</span></div>
+          <div class="transport-step"><div class="step-dot"></div><span>車程較札幌站出發縮短約30分鐘</span></div>
+        </div>
+      </div>
+      <div class="transport-card">
+        <div class="transport-icon">🚗</div>
+        <div class="transport-title">自駕</div>
+        <div class="transport-steps">
+          <div class="transport-step"><div class="step-dot"></div><span>從札幌市中心出發，沿國道230號行駛，車程約60分鐘</span></div>
+          <div class="transport-step"><div class="step-dot"></div><span>免費停車場可容納1,850輛</span></div>
+          <div class="transport-step"><div class="step-dot"></div><span>從新千歲機場出發約100分鐘</span></div>
+        </div>
+        <div class="transport-warn">⚠️ 國道230號夜間（19:00–07:00）部分路段封閉，請注意出發時間</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="onsen">
+  <div class="onsen-inner">
+    <div class="onsen-icon">♨️</div>
+    <div class="sec-tag" style="text-align:center;">滑雪後的享受</div>
+    <div class="onsen-title">緊鄰定山渓溫泉</div>
+    <div class="onsen-desc">札幌國際滑雪場緊鄰北海道著名的定山渓溫泉（じょうざんけい），一日滑雪結束後可輕鬆前往泡湯，讓疲憊的肌肉在溫泉中徹底放鬆，享受道地的北海道溫泉體驗。</div>
+  </div>
+</section>
+
+<section id="cta-section">
+  <div class="cta-inner">
+    <div class="sec-tag" style="text-align:center;">想在札幌國際滑雪？</div>
+    <h2 class="sec-title" style="text-align:center;">讓粉雪道場帶你征服深雪</h2>
+    <p>我們的教練熟悉札幌國際的每條雪道與深雪地形，能帶你安全探索 off-piste 區域，體驗北海道頂級粉雪的魅力。</p>
+    <div>
+      <a href="/#coaches" class="btn-primary">認識我們的教練</a>
+      <a href="/#contact" class="btn-outline">預約諮詢</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <svg width="30" height="30" viewBox="0 0 36 36" fill="none">
+      <circle cx="18" cy="18" r="18" fill="#1A5FAD" opacity=".3"/>
+      <path d="M9 27L18 9L27 27" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <path d="M12 22L24 22" stroke="#85C1E9" stroke-width="1.8" stroke-linecap="round"/>
+      <circle cx="18" cy="7.5" r="2.5" fill="#85C1E9"/>
+    </svg>
+    <div class="foot-text"><strong style="color:rgba(255,255,255,.8);font-size:14px;">粉雪道場 Powder Dojo</strong><br>北海道 滑雪學校</div>
+  </div>
+  <div class="foot-copy">© 2025 Powder Dojo. All rights reserved.</div>
+</footer>
+
+<script>
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('nav-links').classList.toggle('open')
+})
+</script>
+</body>
+</html>
