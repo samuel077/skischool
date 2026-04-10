@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>手稻滑雪場 — 粉雪道場</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Serif+Display:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Oswald:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --navy:#0A1628;--navy-mid:#12254A;--blue:#1A5FAD;--blue-light:#3B8BD4;
@@ -26,12 +26,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,22,40,0.9
 .hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;}
 
 /* HERO */
-#hero{min-height:60vh;background:linear-gradient(160deg,var(--navy) 0%,var(--navy-mid) 50%,#1A3A6B 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:100px 5% 60px;text-align:center;}
-.hero-bg{position:absolute;inset:0;opacity:.04;background-image:repeating-linear-gradient(45deg,#fff 0,#fff 1px,transparent 0,transparent 50%);background-size:40px 40px;}
-.hero-mountain{position:absolute;bottom:0;left:0;right:0;height:35%;opacity:.07;}
-.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(59,139,212,.15);border:1px solid rgba(59,139,212,.3);padding:6px 14px;border-radius:20px;font-size:12px;color:var(--sky);letter-spacing:.08em;margin-bottom:24px;}
-.hero-title{font-size:clamp(36px,6vw,64px);font-weight:700;color:#fff;letter-spacing:.1em;line-height:1.1;margin-bottom:8px;}
-.hero-sub{font-family:'DM Serif Display',serif;font-size:clamp(14px,2.5vw,20px);color:var(--sky);letter-spacing:.12em;margin-bottom:32px;}
+#hero{min-height:65vh;
+  background:
+    linear-gradient(to bottom, rgba(10,14,20,.55) 0%, rgba(10,14,20,.35) 45%, rgba(10,14,20,.72) 100%),
+    url('/images/hero-teine.jpg') center 40%/cover no-repeat;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:100px 5% 60px;text-align:center;}
+.hero-bg{display:none;}
+.hero-mountain{display:none;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:#FF5C00;padding:5px 20px 5px 14px;border-radius:2px;font-size:11px;font-weight:700;color:#fff;letter-spacing:.12em;text-transform:uppercase;margin-bottom:24px;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 50%,calc(100% - 8px) 100%,0 100%);}
+.hero-title{font-family:'Oswald',sans-serif;font-size:clamp(54px,9vw,96px);font-weight:700;color:#fff;letter-spacing:.12em;line-height:1.1;margin-bottom:8px;-webkit-text-stroke:1px rgba(255,255,255,.2);text-shadow:2px 2px 0 rgba(0,0,0,.2);}
+.hero-sub{font-family:'Oswald',sans-serif;font-weight:400;font-size:clamp(14px,2.2vw,20px);color:rgba(255,255,255,.65);letter-spacing:.2em;margin-bottom:32px;}
 .hero-stats{display:flex;gap:40px;flex-wrap:wrap;justify-content:center;position:relative;z-index:2;}
 .hero-stat{text-align:center;}
 .stat-num{font-family:'Space Mono',monospace;font-size:26px;font-weight:700;color:#fff;}
@@ -111,14 +115,21 @@ footer{background:var(--navy);padding:36px 5%;display:flex;align-items:center;ju
 <nav>
   <a href="/" class="nav-logo">
     <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-      <circle cx="18" cy="18" r="18" fill="#1A5FAD" opacity=".3"/>
-      <path d="M9 27L18 9L27 27" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      <path d="M12 22L24 22" stroke="#85C1E9" stroke-width="1.8" stroke-linecap="round"/>
-      <circle cx="18" cy="7.5" r="2.5" fill="#85C1E9"/>
+      <circle cx="18" cy="18" r="16.5" stroke="#FF5C00" stroke-width="1.2"/>
+      <circle cx="18" cy="18" r="12.5" stroke="rgba(37,99,235,.55)" stroke-width="1" stroke-dasharray="2 2"/>
+      <circle cx="18" cy="18" r="8" fill="rgba(37,99,235,.22)"/>
+      <path d="M9 26L18 9L27 26Z" fill="rgba(37,99,235,.45)" stroke="#2563EB" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M13 26L18 15L23 26Z" fill="rgba(37,99,235,.75)" stroke="#4A6FE8" stroke-width="1" stroke-linejoin="round"/>
+      <path d="M15.5 13.5L18 9L20.5 13.5Z" fill="white" opacity=".95"/>
+      <circle cx="18" cy="8" r="2.5" fill="#FF5C00"/>
+      <line x1="18" y1="1.5" x2="18" y2="4.5" stroke="rgba(255,92,0,.4)" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="18" y1="31.5" x2="18" y2="34.5" stroke="rgba(255,92,0,.4)" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="1.5" y1="18" x2="4.5" y2="18" stroke="rgba(255,92,0,.4)" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="31.5" y1="18" x2="34.5" y2="18" stroke="rgba(255,92,0,.4)" stroke-width="1.2" stroke-linecap="round"/>
     </svg>
     <span>
       <span class="cn">粉雪道場</span>
-      <span class="en">Powder Dojo</span>
+      <span class="en" style="color:#FF5C00;font-family:'Oswald',sans-serif;font-size:10px;letter-spacing:.18em;">Powder Dojo</span>
     </span>
   </a>
   <ul class="nav-links" id="nav-links">

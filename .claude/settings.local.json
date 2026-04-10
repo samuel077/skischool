@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(open:*)",
+      "WebFetch(domain:cpapmachinescanada.ca)",
+      "WebSearch",
+      "WebFetch(domain:unsplash.com)",
+      "Bash(find /Users/shuyulin/code/skischool -name *.jpg -o -name *.jpeg -o -name *.png -o -name *.webp -o -name *.avif)"
+    ]
+  }
+}
