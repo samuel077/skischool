@@ -4,417 +4,940 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>粉雪道場 Powder Dojo — 手稻滑雪學校</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Oswald:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Antique+B1&family=Bebas+Neue&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
-/* ═══════════════════════════════════════════════════════════════════
-   POWDER DOJO v2 — Cobalt × Orange × Charcoal
-   ═══════════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════
+   粉雪道場 — 昭和海報風
+   Cream × Vermillion × Mustard × Sumi Ink
+   ═══════════════════════════════════════════════════════════ */
 :root {
-  --cobalt:      #2563EB;
-  --cobalt-dark: #1D4ED8;
-  --cobalt-glow: rgba(37,99,235,.22);
-  --orange:      #FF5C00;
-  --orange-lt:   #FF7A30;
-  --orange-glow: rgba(255,92,0,.2);
-  --char:        #0C0E14;
-  --char-mid:    #161922;
-  --char-lt:     #1E2233;
-  --ice:         #F4F7FF;
-  --white:       #FFFFFF;
-  --text:        #12151C;
-  --gray:        #6B7585;
-  --gray-light:  #B8BEC8;
-  --border:      #D8DFF0;
-  --gold:        #F0B420;
-  --red:         #E63333;
+  --cream:   #EFE5CC;
+  --paper:   #F7F0E0;
+  --aged:    #DDD0B0;
+  --ink:     #1C130A;
+  --red:     #C3342A;
+  --red-dk:  #9E2B22;
+  --mustard: #D4961A;
+  --fog:     #7A6856;
+  --border:  #C0AB88;
+  --white:   #FFFFFF;
+  --form-bg: #FBF7EE;
 }
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Noto Sans TC',sans-serif;background:var(--white);color:var(--text);overflow-x:hidden;}
-::-webkit-scrollbar{width:5px;}
-::-webkit-scrollbar-track{background:var(--char);}
-::-webkit-scrollbar-thumb{background:var(--cobalt);border-radius:3px;}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'Noto Sans TC',sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  overflow-x:hidden;
+}
+::-webkit-scrollbar { width:4px; }
+::-webkit-scrollbar-track { background:var(--ink); }
+::-webkit-scrollbar-thumb { background:var(--red); }
 
-/* ── Nav ──────────────────────────────────────────────────────────── */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;
-  background:rgba(12,14,20,.96);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  padding:0 5%;display:flex;align-items:center;justify-content:space-between;
-  height:64px;border-bottom:2px solid transparent;transition:border-color .3s,box-shadow .3s;}
-nav.scrolled{border-bottom-color:var(--orange);box-shadow:0 4px 32px rgba(0,0,0,.5);}
-.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
-.nav-logo .cn{font-size:15px;font-weight:700;color:#fff;letter-spacing:.06em;display:block;}
-.nav-logo .en{font-family:'Oswald',sans-serif;font-size:11px;color:var(--orange);letter-spacing:.22em;display:block;}
-.nav-links{display:flex;gap:28px;list-style:none;}
-.nav-links a{color:rgba(255,255,255,.6);text-decoration:none;font-size:13px;letter-spacing:.04em;
-  position:relative;padding-bottom:3px;transition:color .2s;}
-.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;
-  background:var(--orange);transition:width .25s cubic-bezier(.4,0,.2,1);}
-.nav-links a:hover{color:#fff;}
-.nav-links a:hover::after{width:100%;}
-.nav-admin-btn{background:transparent;border:1.5px solid var(--orange);color:var(--orange);
-  padding:7px 16px;border-radius:5px;font-size:12px;font-weight:700;letter-spacing:.04em;
-  font-family:inherit;cursor:pointer;transition:all .2s;}
-.nav-admin-btn:hover{background:var(--orange);color:#fff;}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
-.hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:all .2s;}
+/* ── Dot texture overlay ─────────────────────────────────── */
+body::before {
+  content:'';
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  background-image:radial-gradient(circle,rgba(28,19,10,.045) 1px,transparent 1px);
+  background-size:14px 14px;
+}
 
-/* ── Hero ─────────────────────────────────────────────────────────── */
-#hero{min-height:100vh;
-  background:
-    linear-gradient(to bottom, rgba(10,14,20,.65) 0%, rgba(10,14,20,.4) 45%, rgba(10,14,20,.78) 100%),
-    url('/images/hero-main.jpg') center/cover no-repeat;
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;position:relative;overflow:hidden;padding:80px 5% 60px;}
-#hero::before{content:'';position:absolute;top:0;left:-10%;width:52%;height:100%;
-  background:linear-gradient(160deg,var(--cobalt-dark) 0%,var(--cobalt) 45%,transparent 100%);
-  opacity:.18;clip-path:polygon(0 0,80% 0,55% 100%,0 100%);pointer-events:none;}
-#hero::after{content:'';position:absolute;inset:0;
-  background:repeating-linear-gradient(-45deg,transparent,transparent 40px,
-    rgba(255,255,255,.012) 40px,rgba(255,255,255,.012) 41px);pointer-events:none;}
-.hero-bg{position:absolute;inset:0;opacity:.025;
-  background-image:repeating-linear-gradient(0deg,#fff 0,#fff 1px,transparent 0,transparent 64px),
-    repeating-linear-gradient(90deg,#fff 0,#fff 1px,transparent 0,transparent 64px);
-  background-size:64px 64px;pointer-events:none;}
-.hero-mountain{position:absolute;bottom:0;left:0;right:0;height:48%;opacity:.22;}
-.hero-content{position:relative;z-index:2;text-align:center;max-width:840px;}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:#fff;
-  padding:6px 24px 6px 16px;border-radius:2px;font-size:11px;font-weight:700;
-  letter-spacing:.14em;text-transform:uppercase;margin-bottom:30px;
-  clip-path:polygon(0 0,calc(100% - 10px) 0,100% 50%,calc(100% - 10px) 100%,0 100%);}
-.hero-badge::before{content:'';width:7px;height:7px;background:rgba(255,255,255,.75);
-  border-radius:50%;animation:pulse 2s ease-in-out infinite;}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.5);}}
-.hero-logo{width:96px;height:96px;margin:0 auto 18px;animation:float 4s ease-in-out infinite;}
-@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-9px);}}
-.hero-title-cn{font-family:'Oswald',sans-serif;
-  font-size:clamp(68px,10.5vw,116px);font-weight:700;color:#fff;letter-spacing:.16em;line-height:1;
-  margin-bottom:2px;
-  -webkit-text-stroke:1.5px rgba(255,255,255,.25);
-  text-shadow:0 0 80px rgba(37,99,235,.7),2px 2px 0 rgba(0,0,0,.25);}
-.hero-title-en{font-family:'Oswald',sans-serif;font-size:clamp(20px,3.2vw,34px);
-  color:var(--orange);letter-spacing:.3em;margin-bottom:18px;}
-.hero-sub{font-size:15px;color:rgba(255,255,255,.5);line-height:2;max-width:440px;margin:0 auto 36px;}
-.hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
-.btn-primary{background:var(--orange);color:#fff;padding:14px 30px;border-radius:4px;
-  font-size:14px;font-family:inherit;font-weight:700;text-decoration:none;cursor:pointer;
-  border:none;letter-spacing:.05em;transition:all .2s;display:inline-block;}
-.btn-primary:hover{background:var(--orange-lt);transform:translateY(-2px);
-  box-shadow:0 8px 28px rgba(255,92,0,.45);}
-.btn-outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.3);
-  padding:14px 30px;border-radius:4px;font-size:14px;font-family:inherit;
-  text-decoration:none;cursor:pointer;letter-spacing:.05em;transition:all .2s;display:inline-block;}
-.btn-outline:hover{border-color:#fff;background:rgba(255,255,255,.07);}
-.hero-stats{position:relative;z-index:2;display:flex;margin-top:64px;
-  border:1px solid rgba(255,255,255,.08);border-radius:4px;overflow:hidden;flex-wrap:wrap;}
-.hero-stat{text-align:center;padding:20px 44px;border-right:1px solid rgba(255,255,255,.07);}
-.hero-stat:last-child{border-right:none;}
-.stat-num{font-family:'Space Mono',monospace;font-size:30px;font-weight:700;color:#fff;line-height:1;}
-.stat-lbl{font-size:10px;color:var(--gray-light);letter-spacing:.12em;margin-top:6px;text-transform:uppercase;}
+/* ── Nav ─────────────────────────────────────────────────── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  padding:0 5%;
+  display:flex; align-items:center; justify-content:space-between;
+  height:64px;
+  transition:background .35s, border-color .35s;
+  border-bottom:2px solid transparent;
+}
+nav.scrolled {
+  background:rgba(247,240,224,.97);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-bottom-color:var(--red);
+}
+.nav-logo {
+  display:flex; align-items:center; gap:12px;
+  text-decoration:none;
+}
+.nav-logo-stamp {
+  width:38px; height:38px;
+  border:2px solid var(--red);
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  transition:transform .4s;
+}
+.nav-logo:hover .nav-logo-stamp { transform:rotate(15deg); }
+.nav-logo-stamp span {
+  font-family:'Shippori Antique B1',serif;
+  font-size:16px; color:var(--red);
+}
+.nav-logo .cn {
+  font-family:'Shippori Antique B1',serif;
+  font-size:15px; color:var(--ink); letter-spacing:.06em; display:block;
+}
+.nav-logo .en {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:10px; color:var(--fog); letter-spacing:.24em; display:block;
+}
+.nav-links { display:flex; gap:30px; list-style:none; }
+.nav-links a {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:14px; letter-spacing:.14em;
+  color:var(--fog); text-decoration:none; transition:color .2s;
+}
+.nav-links a:hover { color:var(--red); }
+.nav-admin-btn {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:12px; letter-spacing:.16em;
+  background:transparent; border:1.5px solid var(--red);
+  color:var(--red); padding:6px 16px;
+  cursor:pointer; transition:all .2s;
+}
+.nav-admin-btn:hover { background:var(--red); color:var(--paper); }
+.hamburger {
+  display:none; flex-direction:column; gap:5px;
+  cursor:pointer; background:none; border:none; padding:4px;
+}
+.hamburger span { display:block; width:22px; height:2px; background:var(--ink); }
 
-/* ── Sections ─────────────────────────────────────────────────────── */
-section{padding:90px 5%;}
-.sec-tag{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.2em;
-  color:var(--orange);text-transform:uppercase;font-weight:700;margin-bottom:14px;}
-.sec-tag::before{content:'';width:20px;height:2px;background:var(--orange);display:block;}
-.sec-title{font-size:clamp(28px,4vw,42px);font-weight:700;line-height:1.2;margin-bottom:14px;}
-.sec-desc{font-size:15px;color:var(--gray);line-height:1.9;max-width:560px;}
+/* ── Hero ─────────────────────────────────────────────────── */
+#hero {
+  min-height:100vh;
+  background:var(--cream);
+  position:relative; overflow:hidden;
+  display:flex; flex-direction:column;
+}
+.hero-mountain {
+  position:absolute; bottom:0; left:0; right:0;
+  width:100%; height:72%;
+  pointer-events:none;
+}
+.hero-dots-overlay {
+  position:absolute; inset:0; pointer-events:none; z-index:1;
+  background-image:radial-gradient(circle,rgba(28,19,10,.04) 1px,transparent 1px);
+  background-size:10px 10px;
+}
+.hero-inner {
+  position:relative; z-index:2;
+  flex:1;
+  display:grid; grid-template-columns:1fr 1fr;
+  align-items:center;
+  padding:100px 5% 80px;
+  gap:40px;
+  max-width:1200px; margin:0 auto; width:100%;
+}
+.hero-eyebrow {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:12px; letter-spacing:.3em; color:var(--fog);
+  display:flex; align-items:center; gap:12px;
+  margin-bottom:22px;
+}
+.hero-eyebrow::before { content:''; width:28px; height:1.5px; background:var(--red); flex-shrink:0; }
+.hero-title {
+  font-family:'Shippori Antique B1',serif;
+  color:var(--ink); line-height:1;
+}
+.hero-title .kanji {
+  font-size:clamp(72px,11vw,136px);
+  display:block; letter-spacing:.08em;
+  line-height:.95;
+}
+.hero-title .romaji {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(18px,2.8vw,32px);
+  letter-spacing:.38em; color:var(--fog);
+  display:block; margin-top:10px;
+}
+.hero-rule {
+  display:flex; align-items:center; gap:12px;
+  margin:24px 0;
+}
+.hero-rule::before,.hero-rule::after {
+  content:''; flex:1; height:1.5px; background:var(--border);
+}
+.hero-rule span {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:11px; letter-spacing:.22em; color:var(--fog);
+  white-space:nowrap;
+}
+.hero-sub {
+  font-size:14px; color:var(--fog); line-height:2; max-width:360px;
+}
+.hero-cta { display:flex; gap:14px; margin-top:30px; flex-wrap:wrap; }
 
-/* ── About ────────────────────────────────────────────────────────── */
-#about{background:var(--ice);}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;max-width:1100px;margin:0 auto;}
-.feature-list{margin-top:32px;display:flex;flex-direction:column;gap:18px;}
-.feature{display:flex;gap:16px;align-items:flex-start;}
-.feature-icon{width:40px;height:40px;flex-shrink:0;background:var(--cobalt);border-radius:7px;
-  display:flex;align-items:center;justify-content:center;font-size:17px;}
-.feature-text strong{display:block;font-size:14px;font-weight:700;margin-bottom:3px;}
-.feature-text span{font-size:13px;color:var(--gray);line-height:1.7;}
-.about-visual{background:var(--char);border-radius:16px;overflow:hidden;padding:44px;
-  position:relative;min-height:380px;display:flex;align-items:center;justify-content:center;}
-.about-visual::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;
-  background:linear-gradient(90deg,var(--cobalt),var(--orange));}
-.ski-badge{display:inline-flex;flex-direction:column;align-items:center;
-  background:rgba(37,99,235,.18);border:1px solid rgba(37,99,235,.4);
-  border-radius:12px;padding:28px 36px;color:#fff;position:relative;z-index:2;text-align:center;}
-.ski-badge .area-cn{font-family:'Oswald',sans-serif;font-size:28px;letter-spacing:.1em;}
-.ski-badge .area-en{font-size:10px;color:rgba(133,193,233,.8);letter-spacing:.15em;text-transform:uppercase;margin-top:4px;}
-.ski-badge .area-stats{margin-top:20px;display:flex;gap:24px;
-  border-top:1px solid rgba(255,255,255,.1);padding-top:18px;}
-.area-stat .val{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:var(--orange);}
-.area-stat .lbl{font-size:10px;color:var(--gray-light);letter-spacing:.08em;text-transform:uppercase;margin-top:2px;}
+.btn-primary {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:14px; letter-spacing:.18em;
+  background:var(--red); color:var(--paper);
+  padding:13px 28px;
+  border:none; cursor:pointer;
+  text-decoration:none; display:inline-block;
+  transition:all .22s;
+  position:relative;
+}
+.btn-primary::after {
+  content:'';
+  position:absolute; bottom:-3px; right:-3px;
+  width:100%; height:100%;
+  border:1.5px solid var(--red); pointer-events:none;
+  transition:all .22s;
+}
+.btn-primary:hover { background:var(--red-dk); transform:translate(-2px,-2px); }
+.btn-primary:hover::after { bottom:-5px; right:-5px; }
 
-/* ── Coaches ──────────────────────────────────────────────────────── */
-#coaches{background:var(--white);}
-.coaches-hd{display:flex;justify-content:space-between;align-items:flex-end;
-  max-width:1100px;margin:0 auto 48px;flex-wrap:wrap;gap:16px;}
-.coaches-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
-  gap:24px;max-width:1100px;margin:0 auto;}
-.coach-card{border:1.5px solid var(--border);border-radius:14px;overflow:hidden;
-  background:var(--white);transition:all .3s cubic-bezier(.4,0,.2,1);cursor:pointer;}
-.coach-card:hover{border-color:var(--orange);
-  box-shadow:0 14px 44px rgba(255,92,0,.14);transform:translateY(-5px);}
-.card-head{padding:24px 22px 18px;display:flex;gap:14px;align-items:center;
-  background:linear-gradient(135deg,var(--cobalt-dark) 0%,var(--cobalt) 60%,#2A57E8 100%);
-  position:relative;overflow:hidden;}
-.card-head::after{content:'';position:absolute;right:-24px;top:-24px;width:88px;height:88px;
-  border-radius:50%;background:rgba(255,255,255,.05);}
-.avatar{width:56px;height:56px;border-radius:50%;
-  background:linear-gradient(135deg,var(--char),var(--cobalt-dark));
-  display:flex;align-items:center;justify-content:center;
-  font-size:18px;font-weight:700;color:#fff;flex-shrink:0;
-  font-family:'Space Mono',monospace;overflow:hidden;
-  border:2.5px solid rgba(255,255,255,.25);transition:border-color .3s,box-shadow .3s;}
-.coach-card:hover .avatar{border-color:var(--orange);box-shadow:0 0 0 3px var(--orange-glow);}
-.coach-name{font-size:16px;font-weight:700;color:#fff;}
-.coach-en{font-size:12px;color:rgba(255,255,255,.58);letter-spacing:.04em;margin-top:2px;}
-.coach-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px;}
-.tag{font-size:10px;padding:3px 9px;border-radius:3px;font-weight:700;letter-spacing:.04em;}
-.tag-ski      {background:rgba(59,130,246,.25);color:#93C5FD;border:1px solid rgba(59,130,246,.3);}
-.tag-snowboard{background:rgba(52,211,153,.2);color:#6EE7B7;border:1px solid rgba(52,211,153,.3);}
-.tag-beginner {background:rgba(251,191,36,.2);color:#FCD34D;border:1px solid rgba(251,191,36,.3);}
-.tag-advanced {background:rgba(167,139,250,.2);color:#C4B5FD;border:1px solid rgba(167,139,250,.3);}
-.tag-kids     {background:rgba(251,113,133,.2);color:#FDA4AF;border:1px solid rgba(251,113,133,.3);}
-.tag-race     {background:rgba(255,92,0,.2);color:#FFA07A;border:1px solid rgba(255,92,0,.3);}
-.card-body{padding:16px 22px 22px;}
-.info-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:9px;font-size:13px;}
-.info-icon{width:15px;height:15px;flex-shrink:0;color:var(--cobalt);margin-top:1px;}
-.info-lbl{color:var(--gray);min-width:40px;flex-shrink:0;font-size:12px;}
-.info-val{color:var(--text);line-height:1.5;}
-.cert-badge{display:inline-flex;align-items:center;gap:3px;font-size:11px;color:var(--gold);
-  background:rgba(240,180,32,.1);padding:3px 10px;border-radius:4px;
-  border:1px solid rgba(240,180,32,.3);font-weight:600;}
-.coach-bio{margin-top:10px;font-size:13px;color:var(--gray);line-height:1.7;
-  border-top:1px solid var(--border);padding-top:10px;}
+.btn-outline {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:14px; letter-spacing:.18em;
+  background:transparent; color:var(--ink);
+  padding:12px 26px;
+  border:1.5px solid var(--border);
+  cursor:pointer; text-decoration:none;
+  display:inline-block; transition:all .22s;
+}
+.btn-outline:hover { border-color:var(--ink); color:var(--red); }
 
-/* ── Resorts ──────────────────────────────────────────────────────── */
-#resorts{background:var(--ice);}
-.resort-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:1100px;margin:36px auto 0;}
-.resort-card{display:block;text-decoration:none;border:1.5px solid var(--border);border-radius:14px;
-  overflow:hidden;background:var(--white);transition:all .3s;color:var(--text);}
-.resort-card:hover{border-color:var(--cobalt);
-  box-shadow:0 10px 36px var(--cobalt-glow);transform:translateY(-3px);}
-.resort-card-hd{padding:24px;display:flex;gap:14px;align-items:center;
-  background:var(--char);position:relative;overflow:hidden;}
-.resort-card-hd::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,var(--cobalt),var(--orange));}
-.resort-icon{font-size:28px;flex-shrink:0;}
-.resort-name-cn{font-size:17px;font-weight:700;color:#fff;}
-.resort-name-en{font-size:11px;color:rgba(133,193,233,.7);letter-spacing:.08em;margin-top:3px;}
-.resort-card-body{padding:20px 24px 24px;}
-.resort-stat-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
-.resort-stat-row span{font-size:12px;color:var(--gray);
-  background:var(--ice);padding:3px 9px;border-radius:4px;}
-.resort-card-desc{font-size:13px;color:var(--gray);line-height:1.75;margin-bottom:14px;}
-.resort-link{font-size:13px;color:var(--cobalt);font-weight:700;letter-spacing:.03em;}
-.resort-card:hover .resort-link{color:var(--orange);}
+/* Hero right: stamp + stats */
+.hero-right {
+  display:flex; flex-direction:column; align-items:center; gap:32px;
+}
+.hero-stamp {
+  width:160px; height:160px; position:relative;
+}
+.hero-stamp svg { width:100%; height:100%; }
+.hero-stats {
+  width:100%;
+  display:grid; grid-template-columns:1fr 1fr;
+  border:1.5px solid var(--border);
+  background:rgba(239,229,204,.6);
+}
+.hero-stat {
+  padding:18px 14px; text-align:center;
+  border-right:1.5px solid var(--border);
+  border-bottom:1.5px solid var(--border);
+}
+.hero-stat:nth-child(2n) { border-right:none; }
+.hero-stat:nth-child(3),.hero-stat:nth-child(4) { border-bottom:none; }
+.stat-num {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:38px; color:var(--red); line-height:1; display:block;
+}
+.stat-lbl {
+  font-family:'Noto Sans TC',sans-serif;
+  font-size:11px; color:var(--fog); letter-spacing:.06em; margin-top:4px; display:block;
+}
 
-/* ── Services ─────────────────────────────────────────────────────── */
-#services{background:var(--char);position:relative;}
-#services::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,var(--cobalt),var(--orange),var(--cobalt));}
-#services .sec-title{color:#fff;}
-#services .sec-desc{color:rgba(255,255,255,.48);}
-.services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
-  gap:20px;max-width:1100px;margin:48px auto 0;}
-.svc-card{background:var(--char-lt);border:1.5px solid rgba(255,255,255,.06);
-  border-top:3px solid var(--cobalt);border-radius:10px;padding:28px;
-  transition:all .28s cubic-bezier(.4,0,.2,1);}
-.svc-card:hover{border-top-color:var(--orange);border-color:rgba(255,92,0,.3);
-  transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.4);}
-.svc-icon{font-size:28px;margin-bottom:14px;}
-.svc-name{font-size:15px;font-weight:700;color:#fff;margin-bottom:8px;}
-.svc-desc{font-size:13px;color:rgba(255,255,255,.48);line-height:1.75;}
-.svc-price{margin-top:16px;font-family:'Space Mono',monospace;font-size:12px;color:var(--orange);
-  letter-spacing:.06em;padding-top:12px;border-top:1px solid rgba(255,255,255,.07);}
+/* ── Retro section divider ───────────────────────────────── */
+.retro-divider {
+  display:flex; align-items:center; gap:0;
+  height:16px; overflow:hidden;
+}
+.retro-divider::before,.retro-divider::after {
+  content:''; flex:1; height:4px; background:var(--ink);
+}
+.retro-divider span {
+  width:16px; height:16px; background:var(--red); transform:rotate(45deg);
+  flex-shrink:0; margin:0 10px;
+}
 
-/* ── Contact ──────────────────────────────────────────────────────── */
-#contact{background:var(--ice);}
-.contact-wrap{max-width:680px;margin:0 auto;background:var(--white);
-  border:1.5px solid var(--border);border-radius:16px;padding:44px;
-  position:relative;overflow:hidden;}
-.contact-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;
-  background:linear-gradient(90deg,var(--cobalt),var(--orange));}
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px;}
-.contact-item{padding:16px;border:1.5px solid var(--border);border-radius:10px;
-  background:var(--ice);transition:border-color .2s;}
-.contact-item:hover{border-color:var(--cobalt);}
-.contact-item .lbl{font-size:11px;color:var(--gray);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;}
-.contact-item .val{font-size:14px;font-weight:500;color:var(--text);line-height:1.6;}
+/* ── Sections shared ─────────────────────────────────────── */
+section { position:relative; z-index:1; }
 
-/* ── Footer ───────────────────────────────────────────────────────── */
-footer{background:var(--char);padding:36px 5%;display:flex;align-items:center;
-  justify-content:space-between;flex-wrap:wrap;gap:16px;
-  border-top:1px solid rgba(255,255,255,.05);}
-.foot-logo{display:flex;align-items:center;gap:12px;}
-.foot-text{font-size:13px;color:rgba(255,255,255,.5);line-height:1.7;}
-.foot-copy{font-size:12px;color:rgba(255,255,255,.25);}
+.sec-tag {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:12px; letter-spacing:.3em; color:var(--red);
+  display:flex; align-items:center; gap:12px;
+  margin-bottom:14px;
+}
+.sec-tag::before { content:''; width:20px; height:2px; background:var(--red); flex-shrink:0; }
+.sec-title {
+  font-family:'Shippori Antique B1',serif;
+  font-size:clamp(26px,3.5vw,42px);
+  color:var(--ink); line-height:1.25; margin-bottom:14px;
+}
+.sec-desc { font-size:14px; line-height:2; color:var(--fog); max-width:480px; }
 
-/* ── LINE Float ───────────────────────────────────────────────────── */
-#line-float{position:fixed;bottom:28px;right:28px;z-index:500;
-  display:flex;align-items:center;gap:10px;background:#06C755;color:#fff;
-  padding:14px 22px 14px 18px;border-radius:50px;text-decoration:none;
-  font-family:'Noto Sans TC',sans-serif;font-size:14px;font-weight:700;
-  box-shadow:0 6px 28px rgba(6,199,85,.55);transition:all .25s;}
-#line-float:hover{background:#04a844;transform:translateY(-3px);
-  box-shadow:0 10px 36px rgba(6,199,85,.65);}
+/* ── About ───────────────────────────────────────────────── */
+#about {
+  background:var(--paper);
+  padding:90px 5% 100px;
+  border-top:4px solid var(--ink);
+  border-bottom:4px solid var(--ink);
+}
+.about-inner {
+  max-width:1100px; margin:0 auto;
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:72px; align-items:center;
+}
+.feature-list { margin-top:36px; display:flex; flex-direction:column; gap:0; }
+.feature {
+  display:flex; gap:16px; align-items:flex-start;
+  padding:16px 0;
+  border-bottom:1px solid var(--border);
+}
+.feature:first-child { border-top:1px solid var(--border); }
+.feature-icon { font-size:20px; flex-shrink:0; margin-top:2px; }
+.feature-text strong {
+  font-family:'Shippori Antique B1',serif;
+  font-size:14px; color:var(--ink); display:block; margin-bottom:3px;
+}
+.feature-text span { font-size:12px; color:var(--fog); line-height:1.75; }
+.about-visual { position:relative; }
+.ski-badge {
+  border:2px solid var(--ink);
+  padding:36px;
+  position:relative;
+  background:var(--cream);
+}
+.ski-badge::before {
+  content:'';
+  position:absolute; inset:6px;
+  border:1px solid var(--border);
+  pointer-events:none;
+}
+.ski-badge-label {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:11px; letter-spacing:.26em; color:var(--red);
+  margin-bottom:18px;
+}
+.area-cn {
+  font-family:'Shippori Antique B1',serif;
+  font-size:30px; color:var(--ink); letter-spacing:.06em;
+}
+.area-en {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:11px; letter-spacing:.18em;
+  color:var(--fog); margin-top:5px;
+}
+.area-stats {
+  display:flex; gap:0;
+  margin-top:28px; border-top:2px solid var(--ink); padding-top:24px;
+}
+.area-stat { flex:1; }
+.area-stat:not(:last-child) { padding-right:20px; border-right:1px solid var(--border); }
+.area-stat:not(:first-child) { padding-left:20px; }
+.area-stat .val {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:26px; color:var(--red);
+}
+.area-stat .lbl {
+  font-size:10px; color:var(--fog); letter-spacing:.08em; margin-top:4px;
+}
+.about-bg-num {
+  position:absolute; bottom:-20px; right:-20px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:180px; color:rgba(28,19,10,.04);
+  line-height:1; pointer-events:none; user-select:none; z-index:0;
+}
 
-/* ── Back to top ──────────────────────────────────────────────────── */
-#back-top{position:fixed;bottom:90px;right:28px;z-index:499;
-  width:44px;height:44px;border-radius:50%;background:var(--cobalt);
-  color:#fff;border:none;cursor:pointer;font-size:16px;
-  display:flex;align-items:center;justify-content:center;
-  opacity:0;transform:translateY(12px);
-  transition:all .3s;box-shadow:0 4px 16px var(--cobalt-glow);}
-#back-top.visible{opacity:1;transform:translateY(0);}
-#back-top:hover{background:var(--cobalt-dark);transform:translateY(-2px);}
+/* ── Coaches — Polaroid ──────────────────────────────────── */
+#coaches {
+  background:var(--aged);
+  padding:90px 5% 100px;
+  border-bottom:4px solid var(--ink);
+}
+#coaches::before {
+  content:'';
+  position:absolute; inset:0;
+  background-image:radial-gradient(circle,rgba(28,19,10,.05) 1px,transparent 1px);
+  background-size:12px 12px;
+  pointer-events:none;
+}
+.coaches-hd {
+  max-width:1100px; margin:0 auto 48px;
+  display:flex; align-items:flex-end; justify-content:space-between;
+  flex-wrap:wrap; gap:16px;
+  position:relative; z-index:1;
+}
+.coaches-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+  gap:36px;
+  max-width:1100px; margin:0 auto;
+  position:relative; z-index:1;
+}
 
-/* ── ADMIN ────────────────────────────────────────────────────────── */
-#admin-overlay{display:none;position:fixed;inset:0;z-index:999;
-  background:rgba(8,10,16,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-  align-items:flex-start;justify-content:center;padding:48px 16px 32px;overflow-y:auto;}
-#admin-overlay.active{display:flex;}
-.admin-panel{background:#fff;border-radius:16px;width:100%;max-width:780px;overflow:hidden;}
-.admin-hd{background:var(--char);padding:18px 26px;
-  display:flex;align-items:center;justify-content:space-between;}
-.admin-hd h2{color:#fff;font-size:15px;font-weight:700;letter-spacing:.05em;}
-.admin-close{background:rgba(255,255,255,.1);border:none;color:#fff;width:32px;height:32px;
-  border-radius:6px;cursor:pointer;font-size:16px;
-  display:flex;align-items:center;justify-content:center;transition:background .2s;line-height:1;}
-.admin-close:hover{background:rgba(255,255,255,.22);}
-.admin-body{padding:26px;}
-.login-wrap{max-width:300px;margin:0 auto;text-align:center;}
-.login-hint{font-size:14px;color:var(--gray);line-height:1.7;margin-bottom:20px;}
-.form-group{margin-bottom:14px;text-align:left;}
-.form-group label{display:block;font-size:11px;font-weight:600;color:var(--gray);
-  letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px;}
-.form-group input,.form-group select,.form-group textarea{width:100%;padding:10px 13px;
-  border:1.5px solid #D8DFF0;border-radius:7px;font-family:inherit;font-size:14px;
-  color:var(--text);background:#F8FAFC;outline:none;transition:border-color .2s;}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
-  border-color:var(--cobalt);background:#fff;}
-.form-group textarea{height:76px;resize:vertical;}
-.form-err{font-size:12px;color:var(--red);margin-top:5px;display:none;}
-.tabs{display:flex;border-bottom:2px solid var(--border);margin-bottom:20px;}
-.tab-btn{padding:9px 18px;font-size:13px;cursor:pointer;border:none;background:none;
-  color:var(--gray);font-family:inherit;border-bottom:3px solid transparent;
-  margin-bottom:-2px;transition:all .2s;}
-.tab-btn.active{color:var(--cobalt);border-bottom-color:var(--cobalt);font-weight:600;}
-.pane{display:none;}
-.pane.active{display:block;}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.form-grid .full{grid-column:1/-1;}
-.tag-checks{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px;}
-.tc{display:none;}
-.tc+label{padding:4px 11px;border-radius:5px;font-size:12px;font-weight:500;cursor:pointer;
-  border:1.5px solid #D8DFF0;color:var(--gray);background:#F8FAFC;transition:all .15s;}
-.tc:checked+label.tag-ski      {background:#EFF6FF;border-color:#93C5FD;color:#1D4ED8;}
-.tc:checked+label.tag-snowboard{background:#ECFDF5;border-color:#6EE7B7;color:#065F46;}
-.tc:checked+label.tag-beginner {background:#FFFBEB;border-color:#FCD34D;color:#92400E;}
-.tc:checked+label.tag-advanced {background:#F5F3FF;border-color:#C4B5FD;color:#5B21B6;}
-.tc:checked+label.tag-kids     {background:#FFF1F2;border-color:#FDA4AF;color:#9F1239;}
-.tc:checked+label.tag-race     {background:#FFF7ED;border-color:#FDBA74;color:#C2410C;}
-.btn-row{display:flex;gap:10px;margin-top:16px;}
-.btn-sec{background:transparent;color:var(--text);border:1.5px solid #D8DFF0;
-  padding:10px 20px;border-radius:8px;font-size:13px;font-family:inherit;cursor:pointer;transition:all .2s;}
-.btn-sec:hover{background:var(--ice);}
-.list-items{display:flex;flex-direction:column;gap:9px;}
-.list-item{display:flex;align-items:center;justify-content:space-between;
-  padding:12px 15px;border:1.5px solid var(--border);border-radius:10px;background:#F8FAFC;}
-.list-item-info .name{font-size:14px;font-weight:600;}
-.list-item-info .sub{font-size:12px;color:var(--gray);margin-top:2px;}
-.btn-del{background:#FEF2F2;border:1px solid #FECACA;color:#B91C1C;padding:5px 12px;
-  border-radius:6px;font-size:12px;cursor:pointer;font-family:inherit;transition:all .15s;}
-.btn-del:hover{background:#FEE2E2;}
-.photo-zone{border:2px dashed #D8DFF0;border-radius:10px;padding:18px;text-align:center;
-  cursor:pointer;transition:all .2s;background:#F8FAFC;position:relative;overflow:hidden;}
-.photo-zone:hover{border-color:var(--cobalt);background:#EFF6FF;}
-.photo-zone.has-photo{border-style:solid;border-color:var(--cobalt);padding:12px;}
-.photo-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
-.photo-hint{font-size:12px;color:var(--gray);line-height:1.6;margin-top:4px;}
-.photo-hint strong{color:var(--cobalt);font-weight:600;}
-.photo-preview{width:68px;height:68px;border-radius:50%;object-fit:cover;
-  border:2px solid var(--cobalt);display:block;margin:0 auto 6px;}
-.photo-remove{background:none;border:none;color:var(--red);font-size:11px;cursor:pointer;
-  font-family:inherit;text-decoration:underline;margin-top:4px;display:inline-block;
-  position:relative;z-index:2;}
-.edit-mode-bar{background:#FFFBEB;border:1px solid #FDE68A;border-radius:8px;
-  padding:10px 14px;margin-bottom:16px;display:flex;align-items:center;
-  justify-content:space-between;font-size:13px;color:#92400E;}
-.btn-edit{background:#EFF6FF;border:1px solid #BFDBFE;color:#1D4ED8;padding:5px 12px;
-  border-radius:6px;font-size:12px;cursor:pointer;font-family:inherit;transition:all .15s;}
-.btn-edit:hover{background:#DBEAFE;}
-.skiing-preview-img{width:100%;max-height:110px;object-fit:cover;border-radius:6px;display:block;}
+/* ── Polaroid Card ───────────────────────────────────────── */
+.coach-card {
+  background:var(--white);
+  padding:10px 10px 38px;
+  box-shadow:3px 5px 16px rgba(28,19,10,.22),
+             0 1px 4px rgba(28,19,10,.1);
+  cursor:pointer;
+  position:relative;
+  transition:transform .35s cubic-bezier(.4,0,.2,1),
+             box-shadow .35s;
+  transform:rotate(-1.5deg);
+}
+.coach-card:nth-child(2n) { transform:rotate(1.2deg); }
+.coach-card:nth-child(3n) { transform:rotate(-0.6deg); }
+.coach-card:nth-child(4n) { transform:rotate(1.8deg); }
+.coach-card:hover {
+  transform:rotate(0deg) translateY(-8px) scale(1.02);
+  box-shadow:8px 18px 40px rgba(28,19,10,.28),
+             0 4px 8px rgba(28,19,10,.12);
+  z-index:10;
+}
+/* The "photo" area */
+.card-head {
+  background:var(--aged);
+  min-height:190px;
+  padding:24px 16px 18px;
+  display:flex; flex-direction:column; align-items:center;
+  gap:10px;
+  border-bottom:none;
+  position:relative; overflow:hidden;
+}
+.card-head::after {
+  content:'';
+  position:absolute; inset:0;
+  box-shadow:inset 0 0 20px rgba(28,19,10,.07);
+  pointer-events:none;
+}
+.avatar {
+  width:80px; height:80px; border-radius:50%;
+  background:var(--cream);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Shippori Antique B1',serif;
+  font-size:20px; color:var(--red);
+  overflow:hidden; flex-shrink:0;
+  border:2px solid var(--border);
+}
+.coach-name {
+  font-family:'Shippori Antique B1',serif;
+  font-size:15px; color:var(--ink);
+  text-align:center; letter-spacing:.06em;
+}
+.coach-en {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:11px; letter-spacing:.12em; color:var(--fog);
+  text-align:center; margin-top:-4px;
+}
+.coach-tags {
+  display:flex; gap:4px; flex-wrap:wrap; justify-content:center; margin-top:2px;
+}
+/* The "caption strip" (white area below photo) */
+.card-body { padding:12px 8px 0; }
+.info-row {
+  display:flex; align-items:flex-start; gap:8px;
+  margin-bottom:6px; font-size:12px;
+}
+.info-icon { width:13px; height:13px; flex-shrink:0; color:var(--red); margin-top:2px; }
+.info-lbl {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:11px; letter-spacing:.06em; color:var(--fog);
+  min-width:32px; flex-shrink:0; padding-top:1px;
+}
+.info-val { color:var(--ink); line-height:1.5; }
+.cert-badge {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:11px; letter-spacing:.06em; color:var(--mustard);
+  background:rgba(212,150,26,.08);
+  border:1px solid rgba(212,150,26,.3);
+  padding:2px 8px;
+  display:inline-flex; align-items:center; gap:3px;
+}
+.coach-bio {
+  margin-top:10px; padding-top:10px;
+  font-size:11px; line-height:1.75; color:var(--fog);
+  border-top:1px dashed var(--border);
+  display:-webkit-box;
+  -webkit-line-clamp:3;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
 
-/* ── Coach Modal ──────────────────────────────────────────────────── */
-#coach-modal{display:none;position:fixed;inset:0;z-index:1000;
-  background:rgba(8,10,16,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-  align-items:flex-start;justify-content:center;padding:32px 16px 40px;overflow-y:auto;}
-#coach-modal.active{display:flex;}
-.cm-panel{background:#fff;border-radius:20px;width:100%;max-width:500px;overflow:hidden;
-  position:relative;box-shadow:0 32px 80px rgba(0,0,0,.45);margin:auto;}
-.cm-close{position:absolute;top:12px;right:12px;z-index:10;background:rgba(0,0,0,.35);
-  border:none;color:#fff;width:34px;height:34px;border-radius:50%;cursor:pointer;
-  font-size:15px;display:flex;align-items:center;justify-content:center;transition:background .2s;line-height:1;}
-.cm-close:hover{background:rgba(0,0,0,.55);}
-.cm-banner{height:200px;
-  background:linear-gradient(135deg,var(--cobalt-dark) 0%,var(--cobalt) 60%,#2A57E8 100%);
-  position:relative;overflow:hidden;}
-.cm-banner::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,var(--orange),var(--cobalt));}
-.cm-banner-img{width:100%;height:100%;object-fit:cover;display:none;}
-.cm-banner-overlay{position:absolute;inset:0;
-  background:linear-gradient(to bottom,transparent 40%,rgba(0,0,0,.4) 100%);}
-.cm-avatar-wrap{display:flex;justify-content:center;margin-top:-48px;position:relative;z-index:2;}
-.cm-avatar-lg{width:94px;height:94px;border-radius:50%;
-  background:linear-gradient(135deg,var(--char),var(--cobalt));
-  display:flex;align-items:center;justify-content:center;
-  font-size:26px;font-weight:700;color:#fff;font-family:'Space Mono',monospace;
-  overflow:hidden;border:4px solid #fff;
-  box-shadow:0 6px 24px rgba(0,0,0,.25),0 0 0 3px var(--cobalt-glow);flex-shrink:0;}
-.cm-body{padding:16px 28px 32px;text-align:center;}
-.cm-name-cn{font-size:24px;font-weight:700;color:var(--text);}
-.cm-name-en{font-size:13px;color:var(--gray);margin-top:4px;letter-spacing:.05em;}
-.cm-tags-row{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:14px 0 22px;}
-.cm-stats{display:grid;gap:1px;background:var(--border);
-  border-radius:12px;overflow:hidden;margin-bottom:18px;text-align:left;}
-.cm-stat{background:#F8FAFC;padding:13px 15px;}
-.cm-stat-lbl{font-size:10px;color:var(--gray);letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px;}
-.cm-stat-val{font-size:13px;font-weight:600;color:var(--text);line-height:1.4;}
-.cm-cert{margin-bottom:16px;text-align:left;}
-.cm-bio-section{text-align:left;margin-bottom:26px;}
-.cm-bio-label{font-size:11px;font-weight:700;color:var(--gray);
-  letter-spacing:.12em;text-transform:uppercase;margin-bottom:9px;}
-.cm-bio-text{font-size:14px;color:var(--gray);line-height:1.85;}
-.rc{display:none;}
-.rc+label{padding:4px 11px;border-radius:5px;font-size:12px;font-weight:500;cursor:pointer;
-  border:1.5px solid #D8DFF0;color:var(--gray);background:#F8FAFC;transition:all .15s;}
-.rc:checked+label{background:#EFF6FF;border-color:#93C5FD;color:#1D4ED8;}
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);
-  background:var(--char);color:#fff;padding:12px 24px;border-radius:8px;font-size:13px;font-weight:500;
-  border-left:3px solid var(--orange);opacity:0;transition:all .3s;z-index:9999;pointer-events:none;white-space:nowrap;}
-.toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
+/* Tags */
+.tag {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:10px; letter-spacing:.06em;
+  padding:2px 7px;
+}
+.tag-ski       { background:rgba(37,99,235,.08);  color:#2563EB; border:1px solid rgba(37,99,235,.2);  }
+.tag-snowboard { background:rgba(5,150,105,.08);  color:#059669; border:1px solid rgba(5,150,105,.2);  }
+.tag-beginner  { background:rgba(212,150,26,.1);  color:#B7791F; border:1px solid rgba(212,150,26,.25);}
+.tag-advanced  { background:rgba(124,58,237,.08); color:#7C3AED; border:1px solid rgba(124,58,237,.2); }
+.tag-kids      { background:rgba(219,39,119,.08); color:#C02670; border:1px solid rgba(219,39,119,.2); }
+.tag-race      { background:rgba(195,52,42,.1);   color:var(--red); border:1px solid rgba(195,52,42,.25);}
 
-/* ── Responsive ───────────────────────────────────────────────────── */
+/* ── Resorts ─────────────────────────────────────────────── */
+#resorts { background:var(--paper); padding:90px 5%; }
+.resorts-inner { max-width:1100px; margin:0 auto; }
+.resort-grid {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:24px; margin-top:44px;
+}
+.resort-card {
+  display:block; text-decoration:none; color:var(--ink);
+  border:2px solid var(--ink);
+  transition:transform .25s, box-shadow .25s;
+  position:relative; overflow:hidden;
+  background:var(--cream);
+}
+.resort-card:hover {
+  transform:translate(-3px,-3px);
+  box-shadow:6px 6px 0 var(--ink);
+}
+.resort-card-hd {
+  background:var(--ink);
+  padding:24px;
+  display:flex; gap:14px; align-items:center;
+  border-bottom:3px solid var(--red);
+}
+.resort-icon { font-size:24px; flex-shrink:0; }
+.resort-name-cn {
+  font-family:'Shippori Antique B1',serif;
+  font-size:18px; color:var(--paper);
+}
+.resort-name-en {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:10px; letter-spacing:.18em;
+  color:rgba(239,229,204,.4); margin-top:4px;
+}
+.resort-card-body { padding:22px 24px 26px; }
+.resort-stat-row { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px; }
+.resort-stat-row span {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:11px; letter-spacing:.1em;
+  color:var(--fog); background:var(--aged); padding:3px 10px;
+}
+.resort-card-desc { font-size:13px; color:var(--fog); line-height:1.85; margin-bottom:14px; }
+.resort-link {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:12px; letter-spacing:.14em; color:var(--red);
+  display:inline-flex; align-items:center; gap:6px;
+}
+.resort-link::after { content:'→'; transition:transform .2s; }
+.resort-card:hover .resort-link::after { transform:translateX(4px); }
+
+/* ── Services ─────────────────────────────────────────────── */
+#services {
+  background:var(--ink);
+  padding:90px 5%;
+  border-top:4px solid var(--ink);
+}
+.services-inner { max-width:1100px; margin:0 auto; }
+#services .sec-tag { color:var(--mustard); }
+#services .sec-tag::before { background:var(--mustard); }
+#services .sec-title { color:var(--paper); }
+#services .sec-desc { color:rgba(239,229,204,.45); }
+.services-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:2px;
+  margin-top:48px;
+  background:rgba(239,229,204,.06);
+}
+.svc-card {
+  background:var(--ink);
+  padding:34px;
+  position:relative; overflow:hidden;
+  transition:background .25s;
+  border-top:3px solid transparent;
+}
+.svc-card:hover { background:#271E11; border-top-color:var(--red); }
+.svc-num {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:88px; font-weight:400;
+  color:rgba(239,229,204,.05);
+  line-height:1;
+  position:absolute; top:10px; right:16px;
+  pointer-events:none; user-select:none;
+  transition:color .25s;
+}
+.svc-card:hover .svc-num { color:rgba(195,52,42,.12); }
+.svc-icon { font-size:24px; margin-bottom:16px; display:block; }
+.svc-name {
+  font-family:'Shippori Antique B1',serif;
+  font-size:16px; color:var(--paper);
+  margin-bottom:10px; letter-spacing:.04em;
+}
+.svc-desc { font-size:13px; color:rgba(239,229,204,.42); line-height:1.9; }
+.svc-price {
+  margin-top:20px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:11px; letter-spacing:.16em;
+  color:var(--mustard); opacity:.7;
+  padding-top:14px;
+  border-top:1px solid rgba(239,229,204,.07);
+}
+
+/* ── Contact ─────────────────────────────────────────────── */
+#contact {
+  background:var(--paper);
+  padding:90px 5%;
+  border-top:4px solid var(--ink);
+  border-bottom:4px solid var(--ink);
+}
+.contact-inner {
+  max-width:1100px; margin:0 auto;
+  display:grid; grid-template-columns:1fr 1.1fr;
+  gap:72px; align-items:start;
+}
+.contact-headline {
+  font-family:'Shippori Antique B1',serif;
+  font-size:clamp(26px,3.2vw,42px); color:var(--ink);
+  line-height:1.25; margin-bottom:16px;
+}
+.contact-sub { font-size:14px; color:var(--fog); line-height:2; margin-bottom:30px; }
+.contact-wrap {
+  border:2px solid var(--ink);
+  padding:36px;
+  background:var(--cream);
+  position:relative;
+}
+.contact-wrap::before {
+  content:'';
+  position:absolute; top:5px; left:5px; right:-5px; bottom:-5px;
+  border:1px solid var(--border);
+  z-index:-1; pointer-events:none;
+}
+.contact-lede { font-size:13px; color:var(--fog); line-height:1.9; margin-bottom:24px; }
+.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.contact-item {
+  padding:14px;
+  border:1px solid var(--border);
+  background:var(--paper);
+  transition:border-color .2s;
+}
+.contact-item:hover { border-color:var(--red); }
+.contact-item .lbl {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:10px; letter-spacing:.2em;
+  color:var(--fog); margin-bottom:6px;
+}
+.contact-item .val { font-size:13px; color:var(--ink); line-height:1.65; }
+.contact-cta { margin-top:22px; }
+
+/* ── Footer ──────────────────────────────────────────────── */
+footer {
+  background:var(--ink);
+  padding:36px 5%;
+  display:flex; align-items:center;
+  justify-content:space-between; flex-wrap:wrap; gap:20px;
+  border-top:4px solid var(--red);
+}
+.foot-logo { display:flex; align-items:center; gap:14px; }
+.foot-stamp {
+  width:44px; height:44px;
+  border:1.5px solid var(--red);
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.foot-stamp span {
+  font-family:'Shippori Antique B1',serif;
+  font-size:16px; color:var(--red);
+}
+.foot-text { font-size:13px; color:rgba(239,229,204,.4); line-height:1.7; }
+.foot-text strong { color:rgba(239,229,204,.7); }
+.foot-copy {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:11px; letter-spacing:.12em; color:rgba(239,229,204,.2);
+}
+
+/* ── LINE Float ──────────────────────────────────────────── */
+#line-float {
+  position:fixed; bottom:28px; right:28px; z-index:500;
+  display:flex; align-items:center; gap:10px;
+  background:#06C755; color:#fff;
+  padding:12px 20px 12px 16px;
+  text-decoration:none;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:13px; letter-spacing:.08em;
+  box-shadow:3px 4px 0 rgba(0,0,0,.25);
+  transition:all .22s;
+}
+#line-float:hover { background:#04a844; transform:translate(-2px,-2px); box-shadow:5px 6px 0 rgba(0,0,0,.25); }
+
+/* ── Back to top ─────────────────────────────────────────── */
+#back-top {
+  position:fixed; bottom:88px; right:28px; z-index:499;
+  width:42px; height:42px;
+  background:var(--red); color:var(--paper);
+  border:none; cursor:pointer; font-size:15px;
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; transform:translateY(12px);
+  transition:all .3s;
+  box-shadow:2px 3px 0 var(--red-dk);
+}
+#back-top.visible { opacity:1; transform:translateY(0); }
+#back-top:hover { transform:translateY(-2px); box-shadow:2px 5px 0 var(--red-dk); }
+
+/* ── Admin ───────────────────────────────────────────────── */
+#admin-overlay {
+  display:none; position:fixed; inset:0; z-index:999;
+  background:rgba(28,19,10,.92);
+  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+  align-items:flex-start; justify-content:center;
+  padding:48px 16px 32px; overflow-y:auto;
+}
+#admin-overlay.active { display:flex; }
+.admin-panel { background:var(--form-bg); width:100%; max-width:780px; overflow:hidden; }
+.admin-hd {
+  background:var(--ink); padding:18px 26px;
+  display:flex; align-items:center; justify-content:space-between;
+  border-bottom:3px solid var(--red);
+}
+.admin-hd h2 {
+  font-family:'Bebas Neue',sans-serif;
+  color:var(--paper); font-size:14px; letter-spacing:.14em;
+}
+.admin-close {
+  background:rgba(239,229,204,.08); border:none; color:var(--paper);
+  width:32px; height:32px; cursor:pointer; font-size:14px;
+  display:flex; align-items:center; justify-content:center; transition:background .2s;
+}
+.admin-close:hover { background:rgba(239,229,204,.2); }
+.admin-body { padding:28px; }
+.login-wrap { max-width:300px; margin:0 auto; text-align:center; }
+.login-hint { font-size:14px; color:var(--fog); line-height:1.7; margin-bottom:20px; }
+.form-group { margin-bottom:14px; text-align:left; }
+.form-group label {
+  display:block;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:11px; letter-spacing:.12em; color:var(--fog); margin-bottom:5px;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width:100%; padding:10px 13px;
+  border:1.5px solid var(--border);
+  font-family:'Noto Sans TC',sans-serif; font-size:14px;
+  color:var(--ink); background:#fff; outline:none;
+  transition:border-color .2s;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus { border-color:var(--red); }
+.form-group textarea { height:76px; resize:vertical; }
+.form-err { font-size:12px; color:var(--red); margin-top:5px; display:none; }
+.tabs { display:flex; border-bottom:2px solid var(--border); margin-bottom:20px; }
+.tab-btn {
+  padding:9px 18px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:12px; letter-spacing:.12em;
+  cursor:pointer; border:none; background:none; color:var(--fog);
+  border-bottom:2px solid transparent; margin-bottom:-2px; transition:all .2s;
+}
+.tab-btn.active { color:var(--red); border-bottom-color:var(--red); }
+.pane { display:none; }
+.pane.active { display:block; }
+.form-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.form-grid .full { grid-column:1/-1; }
+.tag-checks { display:flex; flex-wrap:wrap; gap:7px; margin-top:4px; }
+.tc { display:none; }
+.tc+label {
+  padding:4px 10px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:11px; letter-spacing:.06em;
+  cursor:pointer; border:1px solid var(--border);
+  color:var(--fog); background:var(--form-bg); transition:all .15s;
+}
+.tc:checked+label.tag-ski       { background:rgba(37,99,235,.08);  border-color:#93C5FD; color:#1D4ED8; }
+.tc:checked+label.tag-snowboard { background:rgba(5,150,105,.08);  border-color:#6EE7B7; color:#065F46; }
+.tc:checked+label.tag-beginner  { background:rgba(212,150,26,.1);  border-color:#FCD34D; color:#92400E; }
+.tc:checked+label.tag-advanced  { background:rgba(124,58,237,.08); border-color:#C4B5FD; color:#5B21B6; }
+.tc:checked+label.tag-kids      { background:rgba(219,39,119,.08); border-color:#FDA4AF; color:#9F1239; }
+.tc:checked+label.tag-race      { background:rgba(195,52,42,.1);   border-color:var(--red); color:var(--red); }
+.btn-row { display:flex; gap:10px; margin-top:16px; }
+.btn-sec {
+  background:transparent; color:var(--ink); border:1.5px solid var(--border);
+  padding:10px 20px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:12px; letter-spacing:.12em;
+  cursor:pointer; transition:all .2s;
+}
+.btn-sec:hover { background:var(--aged); border-color:var(--ink); }
+.list-items { display:flex; flex-direction:column; gap:8px; }
+.list-item {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px 16px; border:1.5px solid var(--border); background:#fff;
+}
+.list-item-info .name { font-size:14px; font-weight:600; }
+.list-item-info .sub { font-size:12px; color:var(--fog); margin-top:2px; }
+.btn-del {
+  background:#FEF2F2; border:1px solid #FECACA; color:#B91C1C;
+  padding:5px 12px; font-size:12px; cursor:pointer;
+  font-family:'Bebas Neue',sans-serif; letter-spacing:.06em; transition:all .15s;
+}
+.btn-del:hover { background:#FEE2E2; }
+.photo-zone {
+  border:1.5px dashed var(--border); padding:18px; text-align:center;
+  cursor:pointer; transition:all .2s;
+  background:#fff; position:relative; overflow:hidden;
+}
+.photo-zone:hover { border-color:var(--red); background:rgba(195,52,42,.03); }
+.photo-zone.has-photo { border-style:solid; border-color:var(--red); padding:12px; }
+.photo-zone input[type=file] {
+  position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%;
+}
+.photo-hint { font-size:12px; color:var(--fog); line-height:1.6; margin-top:4px; }
+.photo-hint strong { color:var(--red); font-weight:600; }
+.photo-preview {
+  width:68px; height:68px; border-radius:50%; object-fit:cover;
+  border:2px solid var(--red); display:block; margin:0 auto 6px;
+}
+.photo-remove {
+  background:none; border:none; color:var(--red); font-size:11px;
+  cursor:pointer; font-family:inherit; text-decoration:underline;
+  margin-top:4px; display:inline-block; position:relative; z-index:2;
+}
+.edit-mode-bar {
+  background:#FFFBEB; border:1px solid #FDE68A; padding:10px 14px;
+  margin-bottom:16px;
+  display:flex; align-items:center; justify-content:space-between;
+  font-size:13px; color:#92400E;
+}
+.btn-edit {
+  background:rgba(212,150,26,.08); border:1px solid rgba(212,150,26,.3);
+  color:var(--mustard); padding:5px 12px;
+  font-family:'Bebas Neue',sans-serif; font-size:11px; letter-spacing:.06em;
+  cursor:pointer; transition:all .15s;
+}
+.btn-edit:hover { background:rgba(212,150,26,.15); }
+.skiing-preview-img { width:100%; max-height:110px; object-fit:cover; display:block; }
+.rc { display:none; }
+.rc+label {
+  padding:4px 10px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:11px; letter-spacing:.06em;
+  cursor:pointer; border:1px solid var(--border);
+  color:var(--fog); background:var(--form-bg); transition:all .15s;
+}
+.rc:checked+label { background:rgba(28,19,10,.06); border-color:var(--ink); color:var(--ink); }
+
+/* ── Coach Modal ─────────────────────────────────────────── */
+#coach-modal {
+  display:none; position:fixed; inset:0; z-index:1000;
+  background:rgba(28,19,10,.9);
+  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  align-items:flex-start; justify-content:center;
+  padding:32px 16px 40px; overflow-y:auto;
+}
+#coach-modal.active { display:flex; }
+.cm-panel {
+  background:#fff; width:100%; max-width:500px;
+  position:relative; overflow:hidden;
+  box-shadow:8px 8px 0 var(--ink); margin:auto;
+}
+.cm-close {
+  position:absolute; top:12px; right:12px; z-index:10;
+  background:rgba(0,0,0,.4); border:none; color:#fff;
+  width:34px; height:34px; cursor:pointer; font-size:14px;
+  display:flex; align-items:center; justify-content:center; transition:background .2s;
+}
+.cm-close:hover { background:rgba(0,0,0,.6); }
+.cm-banner {
+  height:200px; background:var(--ink);
+  position:relative; overflow:hidden;
+}
+.cm-banner::after {
+  content:'';
+  position:absolute; bottom:0; left:0; right:0; height:3px;
+  background:var(--red);
+}
+.cm-banner-img { width:100%; height:100%; object-fit:cover; display:none; }
+.cm-banner-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(to bottom,transparent 40%,rgba(28,19,10,.4) 100%);
+}
+.cm-avatar-wrap {
+  display:flex; justify-content:center;
+  margin-top:-48px; position:relative; z-index:2;
+}
+.cm-avatar-lg {
+  width:94px; height:94px; background:var(--cream);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Shippori Antique B1',serif;
+  font-size:26px; color:var(--red);
+  overflow:hidden;
+  border:4px solid #fff;
+  box-shadow:3px 3px 0 var(--ink); flex-shrink:0;
+}
+.cm-body { padding:16px 28px 32px; text-align:center; }
+.cm-name-cn {
+  font-family:'Shippori Antique B1',serif;
+  font-size:26px; color:var(--ink);
+}
+.cm-name-en {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:13px; letter-spacing:.14em; color:var(--fog); margin-top:5px;
+}
+.cm-tags-row {
+  display:flex; flex-wrap:wrap; gap:6px;
+  justify-content:center; margin:14px 0 22px;
+}
+.cm-stats {
+  display:grid; gap:1px; background:var(--border);
+  overflow:hidden; margin-bottom:18px; text-align:left;
+}
+.cm-stat { background:var(--paper); padding:12px 16px; }
+.cm-stat-lbl {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:10px; letter-spacing:.16em; color:var(--fog); margin-bottom:4px;
+}
+.cm-stat-val { font-size:13px; font-weight:600; color:var(--ink); line-height:1.4; }
+.cm-cert { margin-bottom:16px; text-align:left; }
+.cm-bio-section { text-align:left; margin-bottom:26px; }
+.cm-bio-label {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:11px; letter-spacing:.18em; color:var(--fog); margin-bottom:9px;
+}
+.cm-bio-text { font-size:14px; color:var(--fog); line-height:1.85; }
+
+/* ── Toast ───────────────────────────────────────────────── */
+.toast {
+  position:fixed; bottom:24px; left:50%;
+  transform:translateX(-50%) translateY(80px);
+  background:var(--ink); color:var(--paper);
+  padding:12px 24px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:13px; letter-spacing:.08em;
+  border-left:3px solid var(--red);
+  opacity:0; transition:all .3s; z-index:9999;
+  pointer-events:none; white-space:nowrap;
+}
+.toast.show { transform:translateX(-50%) translateY(0); opacity:1; }
+
+/* ── Scroll Reveal ───────────────────────────────────────── */
+.sr { opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1); }
+.sr.visible { opacity:1; transform:translateY(0); }
+.sr-delay-1 { transition-delay:.1s; }
+.sr-delay-2 { transition-delay:.2s; }
+.sr-delay-3 { transition-delay:.3s; }
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media(max-width:900px){
+  .hero-inner { grid-template-columns:1fr; padding:100px 5% 72px; }
+  .hero-right { flex-direction:row; flex-wrap:wrap; justify-content:center; }
+  .hero-stamp { width:120px; height:120px; }
+  .hero-stats { max-width:320px; }
+  .about-inner { grid-template-columns:1fr; gap:48px; }
+  .resort-grid { grid-template-columns:1fr; }
+  .contact-inner { grid-template-columns:1fr; gap:48px; }
+}
 @media(max-width:768px){
-  .nav-links{display:none;}
-  .hamburger{display:flex;}
-  .nav-links.open{display:flex;flex-direction:column;position:fixed;top:64px;left:0;right:0;
-    background:rgba(12,14,20,.98);padding:24px 5%;gap:20px;
-    border-bottom:2px solid var(--orange);}
-  .about-grid{grid-template-columns:1fr;}
-  .about-visual{min-height:260px;}
-  .contact-grid{grid-template-columns:1fr;}
-  .contact-wrap{padding:28px 20px;}
-  .form-grid{grid-template-columns:1fr;}
-  .hero-stats{width:100%;}
-  .hero-stat{flex:1;padding:16px 12px;}
-  .admin-body{padding:18px;}
-  .resort-grid{grid-template-columns:1fr;}
+  .nav-links { display:none; }
+  .hamburger { display:flex; }
+  .nav-links.open {
+    display:flex; flex-direction:column;
+    position:fixed; top:64px; left:0; right:0;
+    background:rgba(247,240,224,.98);
+    padding:24px 5%; gap:20px;
+    border-bottom:3px solid var(--red);
+  }
+  .contact-grid { grid-template-columns:1fr; }
+  .contact-wrap { padding:24px; }
+  .admin-body { padding:18px; }
+  .form-grid { grid-template-columns:1fr; }
 }
 @media(max-width:480px){
-  #line-float span{display:none;}
-  #line-float{padding:15px;border-radius:50%;}
-  .hero-title-cn{font-size:clamp(52px,14vw,80px);}
-  .stat-num{font-size:24px;}
-  .hero-stat{padding:14px 10px;}
+  #line-float span { display:none; }
+  #line-float { padding:14px; }
+  .hero-title .kanji { font-size:clamp(58px,17vw,90px); }
+  .coaches-grid { grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:24px; }
 }
 </style>
 </head>
@@ -422,24 +945,7 @@ footer{background:var(--char);padding:36px 5%;display:flex;align-items:center;
 
 <nav id="nav">
   <a href="#hero" class="nav-logo">
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-      <!-- Bond-seal outer rings -->
-      <circle cx="18" cy="18" r="16.5" stroke="#FF5C00" stroke-width="1.2"/>
-      <circle cx="18" cy="18" r="12.5" stroke="rgba(37,99,235,.55)" stroke-width="1" stroke-dasharray="2 2"/>
-      <circle cx="18" cy="18" r="8" fill="rgba(37,99,235,.22)"/>
-      <!-- Mountain -->
-      <path d="M9 26L18 9L27 26Z" fill="rgba(37,99,235,.45)" stroke="#2563EB" stroke-width="1.5" stroke-linejoin="round"/>
-      <path d="M13 26L18 15L23 26Z" fill="rgba(37,99,235,.75)" stroke="#4A6FE8" stroke-width="1" stroke-linejoin="round"/>
-      <!-- Snow cap -->
-      <path d="M15.5 13.5L18 9L20.5 13.5Z" fill="white" opacity=".95"/>
-      <!-- Summit beacon -->
-      <circle cx="18" cy="8" r="2.5" fill="#FF5C00"/>
-      <!-- Crosshair ticks -->
-      <line x1="18" y1="1.5" x2="18" y2="4.5" stroke="rgba(255,92,0,.4)" stroke-width="1.2" stroke-linecap="round"/>
-      <line x1="18" y1="31.5" x2="18" y2="34.5" stroke="rgba(255,92,0,.4)" stroke-width="1.2" stroke-linecap="round"/>
-      <line x1="1.5" y1="18" x2="4.5" y2="18" stroke="rgba(255,92,0,.4)" stroke-width="1.2" stroke-linecap="round"/>
-      <line x1="31.5" y1="18" x2="34.5" y2="18" stroke="rgba(255,92,0,.4)" stroke-width="1.2" stroke-linecap="round"/>
-    </svg>
+    <div class="nav-logo-stamp"><span>粉</span></div>
     <span>
       <span class="cn">粉雪道場</span>
       <span class="en">Powder Dojo</span>
@@ -458,96 +964,149 @@ footer{background:var(--char);padding:36px 5%;display:flex;align-items:center;
   </button>
 </nav>
 
+<!-- ── Hero ─────────────────────────────────────────────── -->
 <section id="hero">
-  <div class="hero-bg"></div>
-  <svg class="hero-mountain" viewBox="0 0 1440 320" preserveAspectRatio="none" fill="none">
-    <defs>
-      <linearGradient id="mtn1" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#2563EB" stop-opacity=".7"/>
-        <stop offset="100%" stop-color="#2563EB" stop-opacity="0"/>
-      </linearGradient>
-      <linearGradient id="mtn2" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#FF5C00" stop-opacity=".3"/>
-        <stop offset="100%" stop-color="#FF5C00" stop-opacity="0"/>
-      </linearGradient>
-    </defs>
-    <path d="M0 320L240 60L480 170L720 10L960 110L1200 30L1440 90L1440 320Z" fill="url(#mtn1)"/>
-    <path d="M0 320L360 130L600 210L720 90L840 170L1080 70L1300 170L1440 120L1440 320Z" fill="url(#mtn2)"/>
-    <path d="M0 320L200 200L440 260L640 170L860 230L1100 150L1300 210L1440 180L1440 320Z" fill="rgba(255,255,255,.025)"/>
+  <!-- Flat geometric mountain illustration -->
+  <svg class="hero-mountain" viewBox="0 0 1440 520" preserveAspectRatio="xMidYMax slice" fill="none">
+    <!-- Back mountains -->
+    <polygon points="300,520 720,40 1140,520" fill="#C3342A"/>
+    <polygon points="0,520 380,150 660,520" fill="#D4961A"/>
+    <polygon points="800,520 1010,175 1300,520" fill="#9E2B22"/>
+    <!-- Snow caps -->
+    <polygon points="683,102 720,40 757,102" fill="#F7F0E0" opacity=".9"/>
+    <polygon points="355,190 380,150 405,190" fill="#F7F0E0" opacity=".7"/>
+    <polygon points="985,210 1010,175 1035,210" fill="#F7F0E0" opacity=".7"/>
+    <!-- Front ink ridge -->
+    <path d="M0,520 L0,430 C120,395 230,450 380,400 C500,358 600,415 720,385 C840,355 950,410 1090,378 C1230,346 1360,405 1440,388 L1440,520 Z" fill="#1C130A"/>
+    <!-- Subtle valley detail -->
+    <path d="M0,520 L0,480 C80,468 160,478 280,465 C400,452 500,470 600,462 C700,454 800,472 920,460 C1040,448 1160,466 1280,458 C1360,452 1410,462 1440,458 L1440,520 Z" fill="#1C130A" opacity=".5"/>
   </svg>
-  <div class="hero-content">
-    <div class="hero-badge">手稻滑雪場 · 北海道 · 即日起接受預約</div>
-    <svg class="hero-logo" viewBox="0 0 110 110" fill="none">
-      <!-- Bond gun-barrel concentric rings -->
-      <circle cx="55" cy="55" r="53" stroke="rgba(255,92,0,.5)" stroke-width="1.5"/>
-      <circle cx="55" cy="55" r="46" stroke="rgba(255,92,0,.22)" stroke-width="1"/>
-      <circle cx="55" cy="55" r="38" stroke="rgba(37,99,235,.7)" stroke-width="2"/>
-      <circle cx="55" cy="55" r="37" fill="rgba(37,99,235,.12)"/>
-      <!-- Crosshair ticks at 12/3/6/9 -->
-      <line x1="55" y1="2"  x2="55" y2="16" stroke="rgba(255,92,0,.5)" stroke-width="1.5" stroke-linecap="round"/>
-      <line x1="55" y1="94" x2="55" y2="108" stroke="rgba(255,92,0,.5)" stroke-width="1.5" stroke-linecap="round"/>
-      <line x1="2"  y1="55" x2="16" y2="55" stroke="rgba(255,92,0,.5)" stroke-width="1.5" stroke-linecap="round"/>
-      <line x1="94" y1="55" x2="108" y2="55" stroke="rgba(255,92,0,.5)" stroke-width="1.5" stroke-linecap="round"/>
-      <!-- Diagonal tick marks at 45° -->
-      <line x1="12" y1="12" x2="20" y2="20" stroke="rgba(255,92,0,.2)" stroke-width="1" stroke-linecap="round"/>
-      <line x1="90" y1="12" x2="98" y2="20" stroke="rgba(255,92,0,.2)" stroke-width="1" stroke-linecap="round"/>
-      <line x1="12" y1="98" x2="20" y2="90" stroke="rgba(255,92,0,.2)" stroke-width="1" stroke-linecap="round"/>
-      <line x1="90" y1="98" x2="98" y2="90" stroke="rgba(255,92,0,.2)" stroke-width="1" stroke-linecap="round"/>
-      <!-- Mountain range -->
-      <path d="M18 84L55 18L92 84Z" fill="rgba(37,99,235,.3)" stroke="#2563EB" stroke-width="2" stroke-linejoin="round"/>
-      <path d="M30 84L55 44L80 84Z" fill="rgba(37,99,235,.58)" stroke="#4A6FE8" stroke-width="1.5" stroke-linejoin="round"/>
-      <!-- Snow cap -->
-      <path d="M44 34L55 18L66 34Z" fill="white" opacity=".95"/>
-      <!-- Summit beacon + pulse ring -->
-      <circle cx="55" cy="14" r="9" stroke="#FF5C00" stroke-width="1" opacity=".35"/>
-      <circle cx="55" cy="14" r="5"  fill="#FF5C00"/>
-    </svg>
-    <div class="hero-title-cn">粉雪道場</div>
-    <div class="hero-title-en">Powder Dojo</div>
-    <p class="hero-sub">在北海道最純淨的粉雪中，<br>由專業教練引領你踏上滑雪之道。</p>
-    <div class="hero-cta">
-      <a href="#coaches" class="btn-primary">認識我們的教練</a>
-      <a href="#services" class="btn-outline">查看課程</a>
+  <div class="hero-dots-overlay"></div>
+
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow">北海道 · 手稻滑雪場 · 即日起接受預約</div>
+      <h1 class="hero-title">
+        <span class="kanji">粉雪<br>道場</span>
+        <span class="romaji">POWDER DOJO</span>
+      </h1>
+      <div class="hero-rule"><span>HOKKAIDO SKI SCHOOL</span></div>
+      <p class="hero-sub">在北海道最純淨的粉雪中，<br>由專業教練引領你踏上滑雪之道。</p>
+      <div class="hero-cta">
+        <a href="#coaches" class="btn-primary">認識我們的教練</a>
+        <a href="#services" class="btn-outline">查看課程</a>
+      </div>
     </div>
-  </div>
-  <div class="hero-stats">
-    <div class="hero-stat"><div class="stat-num" id="stat-count">—</div><div class="stat-lbl">專業教練</div></div>
-    <div class="hero-stat"><div class="stat-num">1,000+</div><div class="stat-lbl">學員累計</div></div>
-    <div class="hero-stat"><div class="stat-num">10+</div><div class="stat-lbl">滑雪年資</div></div>
-    <div class="hero-stat"><div class="stat-num">4</div><div class="stat-lbl">服務語言</div></div>
+    <div class="hero-right">
+      <!-- Vintage circular stamp -->
+      <div class="hero-stamp">
+        <svg viewBox="0 0 160 160">
+          <circle cx="80" cy="80" r="76" fill="none" stroke="#C3342A" stroke-width="2.5"/>
+          <circle cx="80" cy="80" r="66" fill="none" stroke="#C3342A" stroke-width="1"/>
+          <circle cx="80" cy="80" r="58" fill="none" stroke="#C3342A" stroke-width=".5" stroke-dasharray="3 3"/>
+          <path id="topText" d="M 18 80 A 62 62 0 0 1 142 80" fill="none"/>
+          <path id="botText" d="M 18 80 A 62 62 0 0 0 142 80" fill="none"/>
+          <text font-family="Bebas Neue,sans-serif" font-size="11" letter-spacing="4" fill="#C3342A">
+            <textPath href="#topText" startOffset="10%">SAPPORO TEINE SKI RESORT</textPath>
+          </text>
+          <text font-family="Bebas Neue,sans-serif" font-size="10" letter-spacing="3" fill="#C3342A">
+            <textPath href="#botText" startOffset="22%">HOKKAIDO · JAPAN</textPath>
+          </text>
+          <text x="80" y="72" text-anchor="middle" font-family="Shippori Antique B1,serif" font-size="22" fill="#C3342A">粉雪</text>
+          <text x="80" y="96" text-anchor="middle" font-family="Shippori Antique B1,serif" font-size="22" fill="#C3342A">道場</text>
+          <line x1="30" y1="108" x2="130" y2="108" stroke="#C3342A" stroke-width=".8" opacity=".4"/>
+          <line x1="30" y1="52" x2="130" y2="52" stroke="#C3342A" stroke-width=".8" opacity=".4"/>
+        </svg>
+      </div>
+      <!-- Stats grid -->
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="stat-num" id="stat-count">—</span>
+          <span class="stat-lbl">專業教練</span>
+        </div>
+        <div class="hero-stat">
+          <span class="stat-num">1,000+</span>
+          <span class="stat-lbl">學員累計</span>
+        </div>
+        <div class="hero-stat">
+          <span class="stat-num">10+</span>
+          <span class="stat-lbl">滑雪年資</span>
+        </div>
+        <div class="hero-stat">
+          <span class="stat-num">4</span>
+          <span class="stat-lbl">服務語言</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
+<!-- ── About ─────────────────────────────────────────────── -->
 <section id="about">
-  <div class="about-grid">
+  <div class="about-inner">
     <div>
       <div class="sec-tag">關於粉雪道場</div>
       <h2 class="sec-title">手稻山腳下，<br>屬於你的雪道</h2>
       <p class="sec-desc">粉雪道場由一群熱愛北海道粉雪的專業教練創立，主要在手稻滑雪場提供中文、英文、日文教學服務。無論你是第一次踩上雪板，或想突破技術瓶頸，我們都能為你量身打造課程。</p>
       <div class="feature-list">
-        <div class="feature"><div class="feature-icon">🏔️</div><div class="feature-text"><strong>手稻滑雪場 — 本道場主場地</strong><span>距離札幌市中心僅40分鐘，粉雪品質絕佳。</span></div></div>
-        <div class="feature"><div class="feature-icon">🗣️</div><div class="feature-text"><strong>多語教學</strong><span>繁體中文、簡體中文、英文、日文課程。</span></div></div>
-        <div class="feature"><div class="feature-icon">🎿</div><div class="feature-text"><strong>雙板 &amp; 單板</strong><span>Ski 與 Snowboard 各級別專業教學。</span></div></div>
-        <div class="feature"><div class="feature-icon">👦</div><div class="feature-text"><strong>兒童友善</strong><span>兒童專項課程，安全又有趣。</span></div></div>
+        <div class="feature">
+          <span class="feature-icon">🏔️</span>
+          <div class="feature-text">
+            <strong>手稻滑雪場 — 主場地</strong>
+            <span>距離札幌市中心僅40分鐘，粉雪品質絕佳。</span>
+          </div>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">🗣️</span>
+          <div class="feature-text">
+            <strong>多語教學</strong>
+            <span>繁中、簡中、英文、日文課程。</span>
+          </div>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">🎿</span>
+          <div class="feature-text">
+            <strong>雙板 &amp; 單板</strong>
+            <span>Ski 與 Snowboard 各級別專業教學。</span>
+          </div>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">👦</span>
+          <div class="feature-text">
+            <strong>兒童友善</strong>
+            <span>兒童專項課程，安全又有趣。</span>
+          </div>
+        </div>
       </div>
     </div>
     <div class="about-visual">
-      <svg style="position:absolute;inset:0;opacity:.06" viewBox="0 0 400 360" fill="none"><path d="M-20 360L200 20L420 360Z" fill="white"/></svg>
       <div class="ski-badge">
-        <div style="font-size:26px;margin-bottom:10px;">🏔️</div>
+        <div class="ski-badge-label">主場雪場</div>
+        <div style="font-size:28px;margin-bottom:14px;">🏔️</div>
         <div class="area-cn">手稻滑雪場</div>
-        <div class="area-en">Sapporo Teine Ski Area</div>
+        <div class="area-en">SAPPORO TEINE SKI AREA</div>
         <div class="area-stats">
-          <div class="area-stat"><div class="val">1,024m</div><div class="lbl">最高海拔</div></div>
-          <div class="area-stat"><div class="val">23條</div><div class="lbl">雪道數量</div></div>
-          <div class="area-stat"><div class="val">12–3月</div><div class="lbl">雪季</div></div>
+          <div class="area-stat">
+            <div class="val">1,024m</div>
+            <div class="lbl">最高海拔</div>
+          </div>
+          <div class="area-stat">
+            <div class="val">23條</div>
+            <div class="lbl">雪道數量</div>
+          </div>
+          <div class="area-stat">
+            <div class="val">12–3月</div>
+            <div class="lbl">雪季</div>
+          </div>
         </div>
-        <div style="margin-top:14px;font-size:11px;color:rgba(133,193,233,.65);letter-spacing:.05em;">札幌市西區手稻山頂</div>
+        <div style="margin-top:18px;font-family:'Bebas Neue',sans-serif;font-size:10px;letter-spacing:.2em;color:var(--border);">札幌市西區手稻山頂</div>
       </div>
+      <div class="about-bg-num">手</div>
     </div>
   </div>
 </section>
 
+<!-- ── Coaches ────────────────────────────────────────────── -->
 <section id="coaches">
   <div class="coaches-hd">
     <div>
@@ -556,32 +1115,31 @@ footer{background:var(--char);padding:36px 5%;display:flex;align-items:center;
     </div>
   </div>
   <div class="coaches-grid" id="coaches-grid">
-    <div style="color:var(--gray);font-size:14px;padding:40px 0;text-align:center;grid-column:1/-1;">載入教練資料中...</div>
+    <div style="color:var(--fog);font-size:14px;padding:48px;text-align:center;grid-column:1/-1;background:transparent;">載入教練資料中...</div>
   </div>
 </section>
 
-<section id="resorts" style="background:var(--ice);">
-  <div style="max-width:1100px;margin:0 auto;">
+<!-- ── Resorts ────────────────────────────────────────────── -->
+<section id="resorts">
+  <div class="resorts-inner">
     <div class="sec-tag">雪場介紹</div>
     <h2 class="sec-title">我們服務的雪場</h2>
-    <p class="sec-desc">粉雪道場目前在以下兩個北海道知名雪場提供教學服務，點擊查看詳細交通資訊。</p>
+    <p class="sec-desc">粉雪道場在以下四個北海道知名雪場提供教學服務，點擊查看詳細資訊。</p>
     <div class="resort-grid">
       <a href="teine.html" class="resort-card">
         <div class="resort-card-hd">
           <div class="resort-icon">🏔️</div>
           <div>
             <div class="resort-name-cn">手稻滑雪場</div>
-            <div class="resort-name-en">Sapporo Teine Ski Area</div>
+            <div class="resort-name-en">SAPPORO TEINE SKI AREA</div>
           </div>
         </div>
         <div class="resort-card-body">
           <div class="resort-stat-row">
-            <span>📍 札幌市西區</span>
-            <span>⛷️ 23 條雪道</span>
-            <span>🏔️ 1,024m</span>
+            <span>📍 札幌市西區</span><span>⛷️ 15 條雪道</span><span>🏔️ 1,023m</span>
           </div>
           <p class="resort-card-desc">距市中心約40分鐘，1972年冬季奧運主場地，粉雪品質絕佳，是粉雪道場的主要教學場地。</p>
-          <div class="resort-link">查看詳細交通資訊 →</div>
+          <div class="resort-link">查看詳細資訊</div>
         </div>
       </a>
       <a href="kokusai.html" class="resort-card">
@@ -589,81 +1147,115 @@ footer{background:var(--char);padding:36px 5%;display:flex;align-items:center;
           <div class="resort-icon">🌨️</div>
           <div>
             <div class="resort-name-cn">札幌國際滑雪場</div>
-            <div class="resort-name-en">Sapporo Kokusai Ski Resort</div>
+            <div class="resort-name-en">SAPPORO KOKUSAI SKI RESORT</div>
           </div>
         </div>
         <div class="resort-card-body">
           <div class="resort-stat-row">
-            <span>📍 小樽市朝里川</span>
-            <span>⛷️ 7 條雪道</span>
-            <span>🏔️ 1,100m</span>
+            <span>📍 小樽市朝里川</span><span>⛷️ 7 條雪道</span><span>🏔️ 1,100m</span>
           </div>
           <p class="resort-card-desc">以超深粉雪聞名，年積雪量超過15m，適合進階玩家體驗純粹粉雪樂趣，亦設有天然溫泉。</p>
-          <div class="resort-link">查看詳細交通資訊 →</div>
+          <div class="resort-link">查看詳細資訊</div>
+        </div>
+      </a>
+      <a href="kiroro.html" class="resort-card">
+        <div class="resort-card-hd">
+          <div class="resort-icon">❄️</div>
+          <div>
+            <div class="resort-name-cn">Kiroro 渡假村</div>
+            <div class="resort-name-en">KIRORO SNOW WORLD</div>
+          </div>
+        </div>
+        <div class="resort-card-body">
+          <div class="resort-stat-row">
+            <span>📍 余市郡赤井川村</span><span>⛷️ 21 條雪道</span><span>🏔️ 1,180m</span>
+          </div>
+          <p class="resort-card-desc">北海道最深粉雪秘境，年積雪超過15m。赤井川盆地天然屏障孕育絕佳粉雪，Sheraton & Marriott 飯店就在雪場內。</p>
+          <div class="resort-link">查看詳細資訊</div>
+        </div>
+      </a>
+      <a href="rusutsu.html" class="resort-card">
+        <div class="resort-card-hd">
+          <div class="resort-icon">🌲</div>
+          <div>
+            <div class="resort-name-cn">留壽都渡假村</div>
+            <div class="resort-name-en">RUSUTSU RESORT</div>
+          </div>
+        </div>
+        <div class="resort-card-body">
+          <div class="resort-stat-row">
+            <span>📍 虻田郡留壽都村</span><span>⛷️ 37 條雪道</span><span>🏔️ 994m</span>
+          </div>
+          <p class="resort-card-desc">北海道規模最大的三山渡假村。西山、東山、イゾラ三峰相連，Westin & InterContinental 飯店就在雪場正中央。</p>
+          <div class="resort-link">查看詳細資訊</div>
         </div>
       </a>
     </div>
   </div>
 </section>
 
+<!-- ── Services ───────────────────────────────────────────── -->
 <section id="services">
-  <div style="max-width:1100px;margin:0 auto;">
+  <div class="services-inner">
     <div class="sec-tag">課程資訊</div>
     <h2 class="sec-title">找到最適合你的課程</h2>
     <p class="sec-desc">所有課程均在手稻滑雪場進行，依程度與需求靈活安排，私教與小班皆可。</p>
     <div class="services-grid">
-      <div class="svc-card"><div class="svc-icon">🎿</div><div class="svc-name">滑雪初學者課程</div><div class="svc-desc">從零開始，學習基本滑行、剎車與轉向。教練耐心引導，讓你第一天就愛上滑雪。</div><div class="svc-price">半天 / 全天課程</div></div>
-      <div class="svc-card"><div class="svc-icon">🏂</div><div class="svc-name">滑雪板入門</div><div class="svc-desc">Snowboard 專項教學，掌握邊緣控制與基礎技術，快速克服入門障礙。</div><div class="svc-price">半天 / 全天課程</div></div>
-      <div class="svc-card"><div class="svc-icon">⚡</div><div class="svc-name">進階技術精進</div><div class="svc-desc">針對有基礎的滑者，深入精進刻滑、大回轉、粉雪操控等高階技術。</div><div class="svc-price">私教 / 小班</div></div>
-      <div class="svc-card"><div class="svc-icon">👧</div><div class="svc-name">兒童滑雪課</div><div class="svc-desc">專為5歲以上兒童設計，用遊戲化方式建立雪感，安全且充滿樂趣。</div><div class="svc-price">半天課程（含陪護）</div></div>
-      <div class="svc-card"><div class="svc-icon">👥</div><div class="svc-name">家庭 / 團體課</div><div class="svc-desc">2–6人小班制，適合家庭或朋友同行，在雪山上共同學習留下美好回憶。</div><div class="svc-price">依人數彈性報價</div></div>
-      <div class="svc-card"><div class="svc-icon">🏆</div><div class="svc-name">競技訓練</div><div class="svc-desc">針對有競技目標的學員，進行系統化的大回轉（GS）或回轉（SL）訓練。</div><div class="svc-price">需事先評估程度</div></div>
+      <div class="svc-card"><div class="svc-num">01</div><div class="svc-icon">🎿</div><div class="svc-name">滑雪初學者課程</div><div class="svc-desc">從零開始，學習基本滑行、剎車與轉向。教練耐心引導，讓你第一天就愛上滑雪。</div><div class="svc-price">半天 / 全天課程</div></div>
+      <div class="svc-card"><div class="svc-num">02</div><div class="svc-icon">🏂</div><div class="svc-name">滑雪板入門</div><div class="svc-desc">Snowboard 專項教學，掌握邊緣控制與基礎技術，快速克服入門障礙。</div><div class="svc-price">半天 / 全天課程</div></div>
+      <div class="svc-card"><div class="svc-num">03</div><div class="svc-icon">⚡</div><div class="svc-name">進階技術精進</div><div class="svc-desc">針對有基礎的滑者，深入精進刻滑、大回轉、粉雪操控等高階技術。</div><div class="svc-price">私教 / 小班</div></div>
+      <div class="svc-card"><div class="svc-num">04</div><div class="svc-icon">👧</div><div class="svc-name">兒童滑雪課</div><div class="svc-desc">專為5歲以上兒童設計，用遊戲化方式建立雪感，安全且充滿樂趣。</div><div class="svc-price">半天課程（含陪護）</div></div>
+      <div class="svc-card"><div class="svc-num">05</div><div class="svc-icon">👥</div><div class="svc-name">家庭 / 團體課</div><div class="svc-desc">2–6人小班制，適合家庭或朋友同行，在雪山上共同學習留下美好回憶。</div><div class="svc-price">依人數彈性報價</div></div>
+      <div class="svc-card"><div class="svc-num">06</div><div class="svc-icon">🏆</div><div class="svc-name">競技訓練</div><div class="svc-desc">針對有競技目標的學員，進行系統化的大回轉（GS）或回轉（SL）訓練。</div><div class="svc-price">需事先評估程度</div></div>
     </div>
   </div>
 </section>
 
+<!-- ── Contact ────────────────────────────────────────────── -->
 <section id="contact">
-  <div style="text-align:center;margin-bottom:36px;">
-    <div class="sec-tag" style="display:inline-flex;">聯絡我們</div>
-    <h2 class="sec-title">準備出發了嗎？</h2>
-    <p class="sec-desc" style="margin:0 auto;">有任何問題或預約需求，歡迎透過以下方式聯絡我們。</p>
-  </div>
-  <div class="contact-wrap">
-    <div style="font-size:14px;color:var(--gray);line-height:1.8;text-align:center;">粉雪道場目前接受 LINE / Email 預約，我們將於24小時內回覆確認課程時間與費用。</div>
-    <div class="contact-grid">
-      <div class="contact-item"><div class="lbl">📍 主要雪場</div><div class="val">手稻滑雪場<br>（Sapporo Teine）</div></div>
-      <div class="contact-item"><div class="lbl">🗓️ 雪季時間</div><div class="val">12月上旬 — 3月下旬<br>每日滑雪授課</div></div>
-      <div class="contact-item"><div class="lbl">✉️ Email</div><div class="val">info@powderdojo.jp</div></div>
-      <div class="contact-item"><div class="lbl">🌐 服務語言</div><div class="val">繁中・簡中・English・日本語</div></div>
-    </div>
-    <div style="text-align:center;margin-top:26px;">
+  <div class="contact-inner">
+    <div>
+      <div class="sec-tag">聯絡我們</div>
+      <h2 class="contact-headline">準備出發了嗎？</h2>
+      <p class="contact-sub">有任何問題或預約需求，歡迎透過以下方式聯絡我們。目前接受 LINE / Email 預約，我們將於24小時內回覆確認課程時間與費用。</p>
       <a href="mailto:info@powderdojo.jp" class="btn-primary">發送 Email 預約</a>
+    </div>
+    <div class="contact-wrap">
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="lbl">📍 主要雪場</div>
+          <div class="val">手稻滑雪場<br>（Sapporo Teine）</div>
+        </div>
+        <div class="contact-item">
+          <div class="lbl">🗓️ 雪季時間</div>
+          <div class="val">12月上旬 — 3月下旬<br>每日滑雪授課</div>
+        </div>
+        <div class="contact-item">
+          <div class="lbl">✉️ Email</div>
+          <div class="val">info@powderdojo.jp</div>
+        </div>
+        <div class="contact-item">
+          <div class="lbl">🌐 服務語言</div>
+          <div class="val">繁中・簡中・English・日本語</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="foot-logo">
-    <svg width="30" height="30" viewBox="0 0 36 36" fill="none">
-      <circle cx="18" cy="18" r="16.5" stroke="#FF5C00" stroke-width="1.2"/>
-      <circle cx="18" cy="18" r="12.5" stroke="rgba(37,99,235,.55)" stroke-width="1" stroke-dasharray="2 2"/>
-      <circle cx="18" cy="18" r="8" fill="rgba(37,99,235,.22)"/>
-      <path d="M9 26L18 9L27 26Z" fill="rgba(37,99,235,.45)" stroke="#2563EB" stroke-width="1.5" stroke-linejoin="round"/>
-      <path d="M13 26L18 15L23 26Z" fill="rgba(37,99,235,.75)" stroke="#4A6FE8" stroke-width="1" stroke-linejoin="round"/>
-      <path d="M15.5 13.5L18 9L20.5 13.5Z" fill="white" opacity=".95"/>
-      <circle cx="18" cy="8" r="2.5" fill="#FF5C00"/>
-      <line x1="18" y1="1.5" x2="18" y2="4.5" stroke="rgba(255,92,0,.4)" stroke-width="1.2" stroke-linecap="round"/>
-      <line x1="18" y1="31.5" x2="18" y2="34.5" stroke="rgba(255,92,0,.4)" stroke-width="1.2" stroke-linecap="round"/>
-      <line x1="1.5" y1="18" x2="4.5" y2="18" stroke="rgba(255,92,0,.4)" stroke-width="1.2" stroke-linecap="round"/>
-      <line x1="31.5" y1="18" x2="34.5" y2="18" stroke="rgba(255,92,0,.4)" stroke-width="1.2" stroke-linecap="round"/>
-    </svg>
-    <div class="foot-text"><strong style="color:rgba(255,255,255,.8);font-size:14px;">粉雪道場 Powder Dojo</strong><br>北海道 手稻滑雪場 滑雪學校</div>
+    <div class="foot-stamp"><span>粉</span></div>
+    <div class="foot-text">
+      <strong>粉雪道場 Powder Dojo</strong><br>
+      北海道 手稻滑雪場 滑雪學校
+    </div>
   </div>
-  <div class="foot-copy">© 2025 Powder Dojo Ski School. All rights reserved.</div>
+  <div class="foot-copy">© 2025 POWDER DOJO SKI SCHOOL. ALL RIGHTS RESERVED.</div>
 </footer>
 
 <a id="line-float" href="https://line.me/R/ti/p/@YOUR-LINE-ID" target="_blank" rel="noopener" aria-label="LINE 客服">
-  <svg width="26" height="26" viewBox="0 0 28 28" fill="none">
+  <svg width="22" height="22" viewBox="0 0 28 28" fill="none">
     <path d="M14 3C8.477 3 4 7.03 4 12c0 3.468 2.077 6.497 5.2 8.23-.2.74-.74 2.68-.85 3.09-.13.49.18.48.38.35.16-.1 2.56-1.69 3.6-2.38.54.08 1.1.12 1.67.12 5.523 0 10-4.03 10-9s-4.477-9-10-9z" fill="white"/>
     <path d="M11.5 14.5h-2v-5h1.2v3.9l1.8-3.9H14l-1.9 3.8 2.1 1.2h-2.7zm3.2 0v-5h1.2v5h-1.2zm5.3 0h-3.5v-5h1.2v3.9h2.3v1.1z" fill="#06C755"/>
   </svg>
@@ -727,7 +1319,7 @@ footer{background:var(--char);padding:36px 5%;display:flex;align-items:center;
               </div>
             </div>
             <div class="form-group full">
-              <label>教練照片 <span style="font-weight:400;color:var(--gray);">（選填）</span></label>
+              <label>教練照片 <span style="font-weight:400;color:var(--fog);">（選填）</span></label>
               <div class="photo-zone" id="photo-zone">
                 <input type="file" id="f-photo" accept="image/*">
                 <div id="photo-empty"><div style="font-size:24px;">📷</div><div class="photo-hint"><strong>點擊選擇照片</strong><br>JPG / PNG / WEBP，上限 3MB</div></div>
@@ -739,7 +1331,7 @@ footer{background:var(--char);padding:36px 5%;display:flex;align-items:center;
               </div>
             </div>
             <div class="form-group full">
-              <label>滑雪照片 <span style="font-weight:400;color:var(--gray);">（選填，用於教練詳細頁橫幅）</span></label>
+              <label>滑雪照片 <span style="font-weight:400;color:var(--fog);">（選填）</span></label>
               <div class="photo-zone" id="skiing-photo-zone">
                 <input type="file" id="f-skiing-photo" accept="image/*">
                 <div id="skiing-photo-empty"><div style="font-size:24px;">🎿</div><div class="photo-hint"><strong>點擊選擇滑雪照片</strong><br>建議橫向，JPG / PNG，上限 5MB</div></div>
@@ -794,70 +1386,38 @@ footer{background:var(--char);padding:36px 5%;display:flex;align-items:center;
 
 <script>
 (function(){
-  // ── Navbar scroll + back-to-top ───────────────────────────────
   var nav = document.getElementById('nav');
   var bt  = document.getElementById('back-top');
   window.addEventListener('scroll', function(){
-    nav.classList.toggle('scrolled', window.scrollY > 10);
+    nav.classList.toggle('scrolled', window.scrollY > 40);
     bt.classList.toggle('visible',   window.scrollY > 400);
-  }, { passive: true });
-  bt.addEventListener('click', function(){
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+  }, { passive:true });
+  bt.addEventListener('click', function(){ window.scrollTo({ top:0, behavior:'smooth' }); });
 
-  // ── Scroll-reveal：section 進入視窗時淡入 ─────────────────────
-  var style = document.createElement('style');
-  style.textContent = [
-    '.sr{opacity:0;transform:translateY(40px);transition:opacity .75s cubic-bezier(.4,0,.2,1),transform .75s cubic-bezier(.4,0,.2,1);}',
-    '.sr.visible{opacity:1;transform:translateY(0);}',
-    '.sr-delay-1{transition-delay:.1s;}',
-    '.sr-delay-2{transition-delay:.2s;}',
-    '.sr-delay-3{transition-delay:.3s;}'
-  ].join('');
-  document.head.appendChild(style);
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold:0.1 });
 
-  // 套用到各 section 內的子元素
-  var targets = [
-    '#about .about-grid > div',
+  [
+    '#about .about-inner > div',
     '#coaches .sec-tag, #coaches h2',
     '#coaches .coach-card',
     '#resorts .sec-tag, #resorts h2, #resorts .sec-desc',
     '#resorts .resort-card',
     '#services .sec-tag, #services h2, #services .sec-desc',
     '#services .svc-card',
-    '#contact .sec-tag, #contact h2, #contact .sec-desc',
-    '#contact .contact-wrap',
-  ];
-  targets.forEach(function(sel){
-    document.querySelectorAll(sel).forEach(function(el, i){
+    '#contact .contact-inner > div',
+  ].forEach(function(sel){
+    document.querySelectorAll(sel).forEach(function(el,i){
       el.classList.add('sr');
-      if(i === 1) el.classList.add('sr-delay-1');
-      if(i === 2) el.classList.add('sr-delay-2');
-      if(i >= 3)  el.classList.add('sr-delay-3');
+      if(i===1) el.classList.add('sr-delay-1');
+      if(i===2) el.classList.add('sr-delay-2');
+      if(i>=3)  el.classList.add('sr-delay-3');
+      io.observe(el);
     });
   });
-
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting) {
-        e.target.classList.add('visible');
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.12 });
-
-  document.querySelectorAll('.sr').forEach(function(el){ io.observe(el); });
-
-  // ── Scroll Snap（柔性：接近 section 時自動吸附）────────────────
-  // 只有在桌面且非 modal 打開時啟用
-  var snapStyle = document.createElement('style');
-  snapStyle.textContent = [
-    '@media(min-width:769px){',
-    '  html{scroll-snap-type:y proximity;}',
-    '  #hero,#about,#coaches,#resorts,#services,#contact{scroll-snap-align:start;}',
-    '}'
-  ].join('');
-  document.head.appendChild(snapStyle);
 })();
 </script>
 <script type="module" src="/src/main.js"></script>

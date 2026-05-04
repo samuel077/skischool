@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>手稻滑雪場 — 粉雪道場</title>
+<title>留壽都渡假村 — 粉雪道場</title>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Antique+B1&family=Bebas+Neue&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -17,6 +17,7 @@
   --fog:    #7A6856;
   --border: #C0AB88;
   --white:  #FFFFFF;
+  --pine:   #2A4A2E;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
@@ -58,7 +59,7 @@ nav{
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
 .hamburger span{display:block;width:22px;height:1.5px;background:var(--paper);}
 
-/* ── Hero ─────────────────────────────────────────────────── */
+/* ── Hero (SVG illustration — photo placeholder) ──────── */
 #hero{
   min-height:78vh;
   position:relative;overflow:hidden;
@@ -66,22 +67,25 @@ nav{
   padding:0 5% 0;
   background:var(--ink);
 }
-.hero-photo{
+.hero-mountain{
   position:absolute;inset:0;
-  background:url('/images/hero-teine.jpg') center 40%/cover no-repeat;
-  filter:sepia(.55) contrast(1.08) saturate(.85);
-  opacity:.52;
+  display:flex;align-items:flex-end;justify-content:center;
+  overflow:hidden;
+}
+.hero-mountain svg{
+  width:110%;height:90%;
+  opacity:.28;
+}
+.hero-halftone{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(circle,rgba(28,19,10,.09) 1px,transparent 1px);
+  background-size:8px 8px;
 }
 .hero-overlay{
   position:absolute;inset:0;
   background:
-    linear-gradient(to bottom,rgba(28,19,10,.1) 0%,rgba(28,19,10,.5) 60%,rgba(28,19,10,.92) 100%),
-    linear-gradient(to right,rgba(195,52,42,.12),transparent 60%);
-}
-.hero-halftone{
-  position:absolute;inset:0;pointer-events:none;
-  background-image:radial-gradient(circle,rgba(28,19,10,.07) 1px,transparent 1px);
-  background-size:8px 8px;
+    linear-gradient(to bottom,rgba(28,19,10,.15) 0%,rgba(28,19,10,.4) 50%,rgba(28,19,10,.96) 100%),
+    linear-gradient(to right,rgba(42,74,46,.2),transparent 60%);
 }
 .hero-content{
   position:relative;z-index:2;
@@ -99,13 +103,13 @@ nav{
 .hero-location::before{content:'';width:28px;height:1.5px;background:var(--red);flex-shrink:0;}
 .hero-title{
   font-family:'Shippori Antique B1',serif;
-  font-size:clamp(52px,9vw,100px);
+  font-size:clamp(44px,7.5vw,84px);
   color:var(--paper);line-height:1;letter-spacing:.04em;
 }
 .hero-title-en{
   font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(14px,2vw,20px);letter-spacing:.3em;
-  color:rgba(239,229,204,.38);display:block;margin-top:10px;
+  font-size:clamp(12px,1.6vw,17px);letter-spacing:.35em;
+  color:rgba(239,229,204,.32);display:block;margin-top:10px;
 }
 .hero-rule{
   display:flex;align-items:center;gap:12px;margin:22px 0;
@@ -117,7 +121,6 @@ nav{
 }
 .hero-desc{font-size:14px;color:rgba(239,229,204,.45);line-height:1.9;max-width:380px;}
 
-/* Stats band on right */
 .hero-right{display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:56px;}
 .hero-stats{
   border:1.5px solid rgba(192,171,136,.35);
@@ -134,19 +137,17 @@ nav{
 .stat-num{font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--red);line-height:1;display:block;}
 .stat-lbl{font-family:'Noto Sans TC',sans-serif;font-size:10px;color:rgba(192,171,136,.7);letter-spacing:.06em;margin-top:4px;display:block;}
 
-/* Red bottom band */
 .hero-band{
   position:relative;z-index:2;
-  background:var(--red);
+  background:var(--pine);
   padding:10px 5%;
   display:flex;align-items:center;gap:16px;
-  max-width:none;
 }
 .hero-band-text{
   font-family:'Bebas Neue',sans-serif;
-  font-size:11px;letter-spacing:.24em;color:rgba(239,229,204,.8);
+  font-size:11px;letter-spacing:.24em;color:rgba(239,229,204,.85);
 }
-.hero-band::before{content:'⭐';font-size:12px;}
+.hero-band::before{content:'🌲';font-size:12px;}
 
 /* ── Shared section styles ───────────────────────────────── */
 section{position:relative;z-index:1;}
@@ -164,7 +165,7 @@ section{position:relative;z-index:1;}
 }
 .sec-desc{font-size:14px;color:var(--fog);line-height:2;}
 
-/* ── Feature callout (ink bg) ───────────────────────────── */
+/* ── Feature callout ───────────────────────────────────── */
 #feature{
   background:var(--ink);
   padding:64px 5%;
@@ -187,33 +188,69 @@ section{position:relative;z-index:1;}
 }
 .feature-desc{font-size:14px;color:rgba(239,229,204,.48);line-height:1.95;}
 
-/* ── Overview ────────────────────────────────────────────── */
+/* ── Three Mountains ─────────────────────────────────────── */
 #overview{background:var(--paper);padding:80px 5%;border-bottom:4px solid var(--ink);}
-.overview-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;}
-.overview-text .sec-desc{margin-bottom:12px;}
-.zone-cards{display:flex;flex-direction:column;gap:16px;}
-.zone-card{
-  border:2px solid var(--ink);padding:22px;
+.overview-lead{max-width:580px;margin-bottom:48px;}
+.mountain-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.mountain-card{
+  border:2px solid var(--ink);padding:24px 20px;
   background:var(--cream);position:relative;
   transition:transform .2s,box-shadow .2s;
 }
-.zone-card:hover{transform:translate(-3px,-3px);box-shadow:5px 5px 0 var(--ink);}
-.zone-card::before{
+.mountain-card:hover{transform:translate(-3px,-3px);box-shadow:5px 5px 0 var(--ink);}
+.mountain-card::before{
   content:'';position:absolute;top:4px;left:4px;right:-4px;bottom:-4px;
   border:1px solid var(--border);z-index:-1;pointer-events:none;
 }
-.zone-card-title{
+.mountain-num{
+  font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--red);
+  line-height:1;display:block;margin-bottom:6px;
+}
+.mountain-jp{
+  font-family:'Shippori Antique B1',serif;font-size:11px;
+  color:var(--fog);letter-spacing:.1em;display:block;margin-bottom:14px;
+}
+.mountain-name{
+  font-family:'Shippori Antique B1',serif;font-size:17px;
+  color:var(--ink);margin-bottom:10px;
+}
+.mountain-card p{font-size:13px;color:var(--fog);line-height:1.8;}
+.mountain-badge{
+  display:inline-block;margin-top:14px;
+  font-family:'Bebas Neue',sans-serif;font-size:10px;letter-spacing:.1em;
+  padding:3px 10px;background:var(--ink);color:var(--paper);
+}
+
+/* ── Hotels ─────────────────────────────────────────────── */
+#hotels{background:var(--ink);padding:80px 5%;border-bottom:4px solid var(--ink);}
+.hotels-inner{max-width:820px;margin:0 auto;}
+.hotels-inner .sec-tag{color:var(--mustard);}
+.hotels-inner .sec-tag::before{background:var(--mustard);}
+.hotels-inner .sec-title{color:var(--paper);margin-bottom:8px;}
+.hotels-lead{font-size:14px;color:rgba(239,229,204,.45);line-height:1.9;margin-bottom:36px;}
+.hotel-cards{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.hotel-card{
+  border:1.5px solid rgba(192,171,136,.25);
+  padding:28px 24px;
+  background:rgba(239,229,204,.04);
+  transition:border-color .2s,background .2s;
+}
+.hotel-card:hover{border-color:rgba(195,52,42,.5);background:rgba(239,229,204,.07);}
+.hotel-brand{
+  font-family:'Bebas Neue',sans-serif;font-size:10px;
+  letter-spacing:.25em;color:var(--mustard);margin-bottom:8px;
+}
+.hotel-name{
   font-family:'Shippori Antique B1',serif;
-  font-size:15px;color:var(--ink);margin-bottom:8px;
-  display:flex;align-items:center;gap:10px;
+  font-size:17px;color:var(--paper);margin-bottom:12px;line-height:1.3;
 }
-.zone-badge{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:10px;letter-spacing:.1em;padding:2px 8px;
+.hotel-desc{font-size:13px;color:rgba(239,229,204,.42);line-height:1.8;}
+.hotel-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px;}
+.hotel-tag{
+  font-family:'Bebas Neue',sans-serif;font-size:10px;letter-spacing:.1em;
+  border:1px solid rgba(192,171,136,.25);padding:3px 10px;
+  color:rgba(192,171,136,.55);
 }
-.zone-highland{background:var(--red);color:var(--paper);}
-.zone-olympia{background:var(--ink);color:var(--paper);}
-.zone-card p{font-size:13px;color:var(--fog);line-height:1.8;}
 
 /* ── Stats grid ──────────────────────────────────────────── */
 #stats{background:var(--cream);padding:80px 5%;border-bottom:4px solid var(--ink);}
@@ -269,8 +306,7 @@ section{position:relative;z-index:1;}
 /* ── CTA ─────────────────────────────────────────────────── */
 #cta-section{background:var(--ink);padding:80px 5%;text-align:center;}
 .cta-inner{max-width:540px;margin:0 auto;}
-.cta-inner .sec-tag{justify-content:center;}
-.cta-inner .sec-tag{color:var(--mustard);}
+.cta-inner .sec-tag{justify-content:center;color:var(--mustard);}
 .cta-inner .sec-tag::before{background:var(--mustard);}
 .cta-inner .sec-title{color:var(--paper);}
 .cta-inner p{font-size:14px;color:rgba(239,229,204,.48);line-height:1.95;margin-bottom:28px;}
@@ -322,7 +358,8 @@ footer{
 @media(max-width:900px){
   .hero-content{grid-template-columns:1fr;}
   .hero-right{display:none;}
-  .overview-grid{grid-template-columns:1fr;}
+  .mountain-cards{grid-template-columns:1fr;}
+  .hotel-cards{grid-template-columns:1fr;}
 }
 @media(max-width:768px){
   .nav-links{display:none;}
@@ -334,7 +371,11 @@ footer{
     padding:24px 5%;gap:20px;
     border-bottom:2px solid var(--red);
   }
-  .hero-title{font-size:clamp(44px,13vw,72px);}
+  .hero-title{font-size:clamp(38px,11vw,62px);}
+  .mountain-cards{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:480px){
+  .mountain-cards{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -362,78 +403,131 @@ footer{
 
 <!-- ── Hero ─────────────────────────────────────────────── -->
 <section id="hero">
-  <div class="hero-photo"></div>
+  <!-- SVG 三山插圖，待有實拍照後可替換為 .hero-photo -->
+  <div class="hero-mountain">
+    <svg viewBox="0 0 1200 520" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+      <!-- 西山 West Mt. -->
+      <polygon points="0,520 280,100 540,520" fill="#C3342A"/>
+      <!-- イゾラ Isola (middle) -->
+      <polygon points="300,520 600,40 900,520" fill="#D4961A"/>
+      <!-- 東山 East Mt. -->
+      <polygon points="660,520 940,130 1200,520" fill="#9E2B22"/>
+      <!-- snow caps -->
+      <polygon points="280,100 230,200 330,200" fill="#EFE5CC" opacity=".55"/>
+      <polygon points="600,40 545,160 655,160" fill="#EFE5CC" opacity=".55"/>
+      <polygon points="940,130 890,230 990,230" fill="#EFE5CC" opacity=".55"/>
+      <!-- ridge lines -->
+      <polyline points="0,520 280,100 540,520" fill="none" stroke="#1C130A" stroke-width="1.5" opacity=".4"/>
+      <polyline points="300,520 600,40 900,520" fill="none" stroke="#1C130A" stroke-width="1.5" opacity=".4"/>
+      <polyline points="660,520 940,130 1200,520" fill="none" stroke="#1C130A" stroke-width="1.5" opacity=".4"/>
+    </svg>
+  </div>
   <div class="hero-overlay"></div>
   <div class="hero-halftone"></div>
   <div class="hero-content">
     <div class="hero-left">
-      <div class="hero-location">札幌市西區 · 手稻山</div>
+      <div class="hero-location">虻田郡留壽都村 · 三山連峰</div>
       <h1 class="hero-title">
-        手稻滑雪場
-        <span class="hero-title-en">SAPPORO TEINE SKI AREA</span>
+        留壽都
+        <span class="hero-title-en">RUSUTSU RESORT · HOKKAIDO</span>
       </h1>
-      <div class="hero-rule"><span>1972 SAPPORO WINTER OLYMPICS</span></div>
-      <p class="hero-desc">粉雪道場主要教學場地。距市中心40分鐘，奧運級雪道，粉雪品質絕佳。</p>
+      <div class="hero-rule"><span>WEST · EAST · ISOLA</span></div>
+      <p class="hero-desc">北海道規模最大的三山渡假村。西山、東山、イゾラ三峰相連，37條雪道任你自由穿越，頂級飯店就在雪場正中央。</p>
     </div>
     <div class="hero-right">
       <div class="hero-stats">
         <div class="hero-stat">
-          <span class="stat-num">1,023m</span>
+          <span class="stat-num">994m</span>
           <span class="stat-lbl">最高海拔</span>
         </div>
         <div class="hero-stat">
-          <span class="stat-num">683m</span>
+          <span class="stat-num">360m</span>
           <span class="stat-lbl">垂直落差</span>
         </div>
         <div class="hero-stat">
-          <span class="stat-num">15</span>
+          <span class="stat-num">37條</span>
           <span class="stat-lbl">雪道數量</span>
         </div>
         <div class="hero-stat">
-          <span class="stat-num">12–5月</span>
-          <span class="stat-lbl">雪季</span>
+          <span class="stat-num">18座</span>
+          <span class="stat-lbl">纜車設施</span>
         </div>
       </div>
     </div>
   </div>
   <div class="hero-band">
-    <span class="hero-band-text">1972年札幌冬季奧運 高山滑雪及回轉競技主場地 — 北海道距離市區最近的大型滑雪場</span>
+    <span class="hero-band-text">三山連峰 37條雪道 · 北海道最大滑雪度假村 · Westin & InterContinental · 家庭首選</span>
   </div>
 </section>
 
 <!-- ── Feature callout ───────────────────────────────────── -->
 <section id="feature">
   <div class="feature-inner">
-    <div class="feature-badge">⭐ 1972年冬季奧運主場地</div>
-    <div class="feature-title">北海道最便利的奧運級滑雪場</div>
-    <div class="feature-desc">手稻滑雪場歷史意義深遠，距離札幌市中心僅40分鐘車程。是粉雪道場的主要教學基地，從初學者到競技選手均適合。Highland 高地區的粉雪品質在北海道首屈一指。</div>
+    <div class="feature-badge">🌲 北海道規模最大的一站式雪地度假村</div>
+    <div class="feature-title">三山合一，玩不完的留壽都</div>
+    <div class="feature-desc">留壽都渡假村將西山、東山、イゾラ三座山峰以纜車串聯成一體，37條雪道橫跨三峰，適合各程度滑雪者。頂級飯店就在雪場正中央，步行出門即上板——這是北海道最「完整」的雪場體驗。</div>
   </div>
 </section>
 
-<!-- ── Overview ──────────────────────────────────────────── -->
+<!-- ── Three Mountains ─────────────────────────────────────── -->
 <section id="overview">
   <div class="container">
-    <div class="overview-grid">
-      <div class="overview-text">
-        <div class="sec-tag">雪場介紹</div>
-        <h2 class="sec-title">兩大區域，<br>滿足所有需求</h2>
-        <p class="sec-desc">手稻滑雪場分為 Highland（高地）與 Olympia（奧林匹亞）兩大區域，兩區之間可透過纜車與6公里長的滑道相互連接，從新手到高手都能找到適合自己的雪道。</p>
-        <p class="sec-desc" style="margin-top:12px;">位處海拔千米以上的 Highland 區享有絕佳的粉雪品質，站在山頂天氣晴朗時可遠眺石狩灣與日本海。</p>
+    <div class="overview-lead">
+      <div class="sec-tag">三山介紹</div>
+      <h2 class="sec-title">西山 · 東山 · イゾラ<br>三峰任你縱橫</h2>
+      <p class="sec-desc">留壽都的三座山各有個性，搭配纜車網絡可在一日之內遊歷三峰。粉雪道場教練熟悉每一條路線，帶你找到最適合你的那條雪道。</p>
+    </div>
+    <div class="mountain-cards">
+      <div class="mountain-card">
+        <span class="mountain-num">01</span>
+        <span class="mountain-jp">にしやま · WEST MT.</span>
+        <div class="mountain-name">西山</div>
+        <p>留壽都最大的山區，擁有豐富的雪道選擇，從緩坡到陡斜坡均有分佈。設有多條長距離滑道，是初中級滑雪者的主要遊玩區域。</p>
+        <span class="mountain-badge">BEGINNER — ADVANCED</span>
       </div>
-      <div class="zone-cards">
-        <div class="zone-card">
-          <div class="zone-card-title">
-            <span class="zone-badge zone-highland">HIGHLAND</span>
-            高地區
-          </div>
-          <p>最高海拔1,023m，以高難度滑道與 off-piste 北坡路線聞名。設有雪地公園，曾為奧運回轉男女組競技場地。</p>
+      <div class="mountain-card">
+        <span class="mountain-num">02</span>
+        <span class="mountain-jp">ひがしやま · EAST MT.</span>
+        <div class="mountain-name">東山</div>
+        <p>以多變地形聞名，設有留壽都最陡的黑鑽雪道及優質 off-piste 區域。山頂可眺望洞爺湖，天晴時視野壯闊，是進階滑雪者的首選。</p>
+        <span class="mountain-badge">INTERMEDIATE — EXPERT</span>
+      </div>
+      <div class="mountain-card">
+        <span class="mountain-num">03</span>
+        <span class="mountain-jp">いぞら · ISOLA</span>
+        <div class="mountain-name">イゾラ</div>
+        <p>三座山中最小但最獨特，以開闊的練習坡與家庭友善設施著稱。設有兒童滑雪樂園與雪鞋體驗區，是親子遊的完美選擇。</p>
+        <span class="mountain-badge">BEGINNER — FAMILY</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Hotels ─────────────────────────────────────────────── -->
+<section id="hotels">
+  <div class="hotels-inner">
+    <div class="sec-tag">雪場住宿</div>
+    <h2 class="sec-title" style="color:var(--paper);margin-bottom:8px;">住在雪場的最中央</h2>
+    <p class="hotels-lead">留壽都渡假村的飯店就矗立在三山之間，步行即可前往任一纜車站。兩間世界級品牌飯店，滿足不同旅遊需求。</p>
+    <div class="hotel-cards">
+      <div class="hotel-card">
+        <div class="hotel-brand">MARRIOTT BONVOY · LUXURY</div>
+        <div class="hotel-name">The Westin Rusutsu Resort</div>
+        <div class="hotel-desc">威斯汀品牌旗艦滑雪飯店，以「Heavenly Bed」聞名的奢華住宿體驗。設有頂樓展望餐廳、多個溫水游泳池與Spa，是留壽都最具代表性的飯店。</div>
+        <div class="hotel-tags">
+          <span class="hotel-tag">SKI-IN/SKI-OUT</span>
+          <span class="hotel-tag">HEAVENLY BED</span>
+          <span class="hotel-tag">POOL & SPA</span>
         </div>
-        <div class="zone-card">
-          <div class="zone-card-title">
-            <span class="zone-badge zone-olympia">OLYMPIA</span>
-            奧林匹亞區
-          </div>
-          <p>寬闊平緩的初學者友善雪道，設有兒童滑雪樂園，適合家庭出遊，是初次滑雪的最佳起點。</p>
+      </div>
+      <div class="hotel-card">
+        <div class="hotel-brand">IHG · LUXURY & LIFESTYLE</div>
+        <div class="hotel-name">InterContinental ANA Rusutsu Resort</div>
+        <div class="hotel-desc">洲際飯店集團旗下渡假村，提供歐式城堡風格的住宿環境。設有多間餐廳、大型宴會設施及兒童俱樂部，適合家庭與商務旅遊。</div>
+        <div class="hotel-tags">
+          <span class="hotel-tag">KIDS CLUB</span>
+          <span class="hotel-tag">MULTI-DINING</span>
+          <span class="hotel-tag">BANQUET</span>
         </div>
       </div>
     </div>
@@ -444,14 +538,14 @@ footer{
 <section id="stats">
   <div class="container">
     <div class="sec-tag">雪場數據</div>
-    <h2 class="sec-title" style="margin-bottom:32px;">一眼掌握手稻</h2>
+    <h2 class="sec-title" style="margin-bottom:32px;">一眼掌握留壽都</h2>
     <div class="stats-grid">
-      <div class="stat-card"><span class="stat-card-icon">⛰️</span><span class="stat-card-val">1,023m</span><span class="stat-card-lbl">山頂海拔</span></div>
-      <div class="stat-card"><span class="stat-card-icon">📏</span><span class="stat-card-val">683m</span><span class="stat-card-lbl">垂直落差</span></div>
-      <div class="stat-card"><span class="stat-card-icon">🎿</span><span class="stat-card-val">15條</span><span class="stat-card-lbl">雪道總數</span></div>
-      <div class="stat-card"><span class="stat-card-icon">📐</span><span class="stat-card-val">38°</span><span class="stat-card-lbl">最大坡度</span></div>
-      <div class="stat-card"><span class="stat-card-icon">🏁</span><span class="stat-card-val">6km</span><span class="stat-card-lbl">最長滑道</span></div>
-      <div class="stat-card"><span class="stat-card-icon">📅</span><span class="stat-card-val">12–5月</span><span class="stat-card-lbl">雪季期間</span></div>
+      <div class="stat-card"><span class="stat-card-icon">⛰️</span><span class="stat-card-val">994m</span><span class="stat-card-lbl">山頂海拔</span></div>
+      <div class="stat-card"><span class="stat-card-icon">📏</span><span class="stat-card-val">360m</span><span class="stat-card-lbl">垂直落差</span></div>
+      <div class="stat-card"><span class="stat-card-icon">🎿</span><span class="stat-card-val">37條</span><span class="stat-card-lbl">雪道總數</span></div>
+      <div class="stat-card"><span class="stat-card-icon">🚡</span><span class="stat-card-val">18座</span><span class="stat-card-lbl">纜車設施</span></div>
+      <div class="stat-card"><span class="stat-card-icon">🏔</span><span class="stat-card-val">3座</span><span class="stat-card-lbl">山峰連接</span></div>
+      <div class="stat-card"><span class="stat-card-icon">📅</span><span class="stat-card-val">12–3月</span><span class="stat-card-lbl">雪季期間</span></div>
     </div>
   </div>
 </section>
@@ -460,34 +554,36 @@ footer{
 <section id="transport">
   <div class="container">
     <div class="sec-tag">交通方式</div>
-    <h2 class="sec-title" style="margin-bottom:8px;">如何前往手稻</h2>
-    <p class="sec-desc">手稻是距離札幌市中心最近的大型滑雪場，多種交通方式可選擇。</p>
+    <h2 class="sec-title" style="margin-bottom:8px;">如何前往留壽都</h2>
+    <p class="sec-desc">位於虻田郡留壽都村，距新千歲機場約80–90分鐘，札幌約90–100分鐘車程。</p>
     <div class="transport-grid">
-      <div class="transport-card">
-        <span class="transport-icon">🚃</span>
-        <div class="transport-title">電車 ＋ 巴士（推薦）</div>
-        <div class="transport-steps">
-          <div class="transport-step"><div class="step-dot"></div><span>JR 札幌站搭乘函館本線，約11–18分鐘抵達 JR 手稻站（¥360）</span></div>
-          <div class="transport-step"><div class="step-dot"></div><span>於手稻站南口3號站搭乘北海道中央巴士</span></div>
-          <div class="transport-step"><div class="step-dot"></div><span>往 Olympia 區約15分鐘 / 往 Highland 區約27分鐘（¥1,000）</span></div>
-        </div>
-      </div>
       <div class="transport-card">
         <span class="transport-icon">🚗</span>
         <div class="transport-title">自駕</div>
         <div class="transport-steps">
-          <div class="transport-step"><div class="step-dot"></div><span>從札幌市中心出發，車程約40–45分鐘</span></div>
-          <div class="transport-step"><div class="step-dot"></div><span>雪場設有充足免費停車場</span></div>
+          <div class="transport-step"><div class="step-dot"></div><span>從札幌市中心出發，車程約90–100分鐘</span></div>
+          <div class="transport-step"><div class="step-dot"></div><span>從新千歲機場出發，車程約80–90分鐘</span></div>
+          <div class="transport-step"><div class="step-dot"></div><span>雪場提供大型免費停車場</span></div>
         </div>
         <div class="transport-warn">⚠️ 冬季山路請務必使用雪地輪胎</div>
       </div>
       <div class="transport-card">
         <span class="transport-icon">🚌</span>
-        <div class="transport-title">飯店直達接駁巴士</div>
+        <div class="transport-title">高速巴士（DoNan Bus）</div>
         <div class="transport-steps">
-          <div class="transport-step"><div class="step-dot"></div><span>從札幌市區主要飯店出發，車程約50–100分鐘</span></div>
-          <div class="transport-step"><div class="step-dot"></div><span>Big Runs 套票（含7小時纜車票）：¥10,500</span></div>
-          <div class="transport-step"><div class="step-dot"></div><span>運行期間：12月–3月下旬，需事先預約</span></div>
+          <div class="transport-step"><div class="step-dot"></div><span>從新千歲機場出發，直達留壽都，約90分鐘</span></div>
+          <div class="transport-step"><div class="step-dot"></div><span>從札幌站出發，約100分鐘</span></div>
+          <div class="transport-step"><div class="step-dot"></div><span>雪季期間每日運行，請事先於官網預約</span></div>
+        </div>
+        <div class="transport-note">💡 建議旅客事先在官網確認最新時刻表</div>
+      </div>
+      <div class="transport-card">
+        <span class="transport-icon">✈️</span>
+        <div class="transport-title">機場直達接駁</div>
+        <div class="transport-steps">
+          <div class="transport-step"><div class="step-dot"></div><span>新千歲機場出發，約85分鐘抵達渡假村</span></div>
+          <div class="transport-step"><div class="step-dot"></div><span>飯店房客可洽詢飯店接駁服務</span></div>
+          <div class="transport-step"><div class="step-dot"></div><span>私人包車可點對點接送，適合多人出行</span></div>
         </div>
       </div>
     </div>
@@ -497,9 +593,9 @@ footer{
 <!-- ── CTA ───────────────────────────────────────────────── -->
 <section id="cta-section">
   <div class="cta-inner">
-    <div class="sec-tag">想在手稻滑雪？</div>
-    <h2 class="sec-title">讓粉雪道場陪你征服手稻</h2>
-    <p>我們的教練在手稻長大、對每條雪道瞭若指掌。不論是初學體驗或進階技術精進，都能為你量身安排。</p>
+    <div class="sec-tag">想在留壽都滑雪？</div>
+    <h2 class="sec-title">讓粉雪道場帶你<br>玩轉留壽都三山</h2>
+    <p>三座山、三十七條雪道，不熟悉的話可能整天只在同一個坡打轉。我們的教練帶你走遍三峰精華路線，讓留壽都的每一公里都值得。</p>
     <div class="btn-row">
       <a href="/#coaches" class="btn-primary">認識我們的教練</a>
       <a href="/#contact" class="btn-outline">預約諮詢</a>
@@ -512,7 +608,7 @@ footer{
     <div class="foot-stamp"><span>粉</span></div>
     <div class="foot-text">
       <strong>粉雪道場 Powder Dojo</strong><br>
-      北海道 手稻滑雪場 滑雪學校
+      留壽都渡假村 滑雪學校
     </div>
   </div>
   <div class="foot-copy">© 2025 POWDER DOJO. ALL RIGHTS RESERVED.</div>
